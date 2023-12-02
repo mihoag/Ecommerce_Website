@@ -35,4 +35,11 @@ module.exports = {
     );
     return rs;
   },
+  update: async (data) => {
+    const rs = await db.one(
+      'UPDATE "User" SET "name"=$1, "phoneNumber"=$2, "avatar"=$3, "public_id"=$4  WHERE "userId"=$5 RETURNING *',
+      [data.name, data.phoneNumber, data.avatar, data.public_id, data.userId]
+    );
+    return rs;
+  },
 };

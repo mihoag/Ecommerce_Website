@@ -16,7 +16,7 @@ module.exports = {
   },
   dontLogin: async (req, res, next) => {
     try {
-      if (req.session?.uid && req.session?.username) {
+      if (req.session?.uid && req.session?.email) {
         await userM.getByID(req.session.uid).then((user) => {
           if (user.length > 0 && user[0].email === req.session.email) {
             return res.redirect("/");

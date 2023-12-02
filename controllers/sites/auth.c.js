@@ -4,11 +4,12 @@ const hashLength = 64;
 const sendMail = require("../../utils/sendEmail.u");
 const tokenM = require("../../models/token.m");
 const jwt = require("jsonwebtoken");
+const my_cloudinary = require("../../configs/myCloudinary");
 
 module.exports = {
   render: async (req, res, next) => {
     try {
-      return res.render("");
+      return res.render("test");
     } catch (error) {
       next(error);
     }
@@ -115,6 +116,30 @@ module.exports = {
           res.send("Verified email");
         }
       }
+    } catch (error) {
+      next(error);
+    }
+  },
+  edit: async (req, res, next) => {
+    try {
+      const user = (await userM.getByEmail("haonhat2729@gmail.com"))[0];
+      const { name, phoneNumber } = req.body;
+      user.name = name;
+      user.phoneNumber = phoneNumber;
+      if (req.file?.path) {
+        if (user.public_id) {
+          await my_cloudinary.destroy(user.public_id);
+        }
+        try {
+          const { url, public_id } = await my_cloudinary.push(req.file.path);
+          user.avatar = url;
+          user.public_id = public_id;
+        } catch (error) {
+          next(error);
+        }
+      }
+      await userM.update(user);
+      return res.json({ succes: true, message: "Updated user successfully" });
     } catch (error) {
       next(error);
     }
