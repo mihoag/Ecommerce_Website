@@ -6,9 +6,11 @@ function route(app) {
       title: "Admin Dashboard",
     });
   });
-  app.get("/user/home", (req, res) => {
-    res.render("user/home", { layout: "userLayout", title: "User Home" });
-  });
+
+  // user routes
+  app.use("/user", require("./sites/home.r"));
+  app.use("/auth", require("./sites/auth.r"));
+
   app.get("/", (req, res) => {
     res.render("common/index");
   });
