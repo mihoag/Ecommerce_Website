@@ -15,7 +15,7 @@ module.exports = {
   },
   add: async (data) => {
     const rs = await db.one(
-      'INSERT INTO "User"("name","phoneNumber","email","password", "avatar", "public_id", "gender") VALUES($1, $2, $3, $4, $5) RETURNING *',
+      'INSERT INTO "User"("name","phoneNumber","email","password", "avatar", "public_id", "gender") VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *',
       [
         data.name,
         data.phoneNumber,
@@ -25,6 +25,13 @@ module.exports = {
         data.public_id,
         data.gender,
       ]
+    );
+    return rs;
+  },
+  updateActiveAccount: async (id) => {
+    const rs = await db.one(
+      'UPDATE "User" SET "active"=true WHERE "userId"=$1 RETURNING *',
+      [id]
     );
     return rs;
   },

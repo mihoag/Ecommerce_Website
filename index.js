@@ -1,9 +1,21 @@
 require("dotenv").config();
 const express = require("express");
 const exphbs = require("express-handlebars");
+const session = require("express-session");
 const path = require("path");
 const app = express();
 const route = require("./routes");
+
+//Use Session
+app.set("trust proxy", 1); // trust first proxy
+app.use(
+  session({
+    secret: "secret-key-123",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 },
+  })
+);
 
 const handlebars = exphbs.create({
   // tạo handlebars với những config
