@@ -78,6 +78,12 @@ CREATE TABLE "User" (
     active boolean NOT NULL DEFAULT false
 );
 
+DROP TABLE IF EXISTS "VerifyCode";
+CREATE TABLE "VerifyCode" (
+    "codeId" serial NOT NULL,
+    token text NOT NULL
+);
+
 ALTER TABLE "Cart" ADD CONSTRAINT "Cart_pkey" PRIMARY KEY ("userId", "productId");
 ALTER TABLE "Comment" ADD CONSTRAINT "Commnet_pkey" PRIMARY KEY ("productId", "userId");
 ALTER TABLE "OrderDetail" ADD CONSTRAINT "OrderDetail_pkey" PRIMARY KEY ("orderId", "productId");

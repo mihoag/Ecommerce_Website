@@ -31,15 +31,22 @@ module.exports = {
           }).toString(CryptoJS.enc.Hex);
           if (pwDb !== pwHashed + salt) {
             //TODO: show error message
+            return res.json({ message: "Email or password incorrect" });
+          }
+
+          // check account is valid
+          if (rs[0].active == false) {
+            //TODO: show error message
+            return res.json({ message: "Your account is not active" });
           }
 
           // all good
           req.session.uid = rs[0].userId;
           req.session.email = rs[0].email;
 
-          res.json({ message: "Login successful" });
           // TODO: redirect to home page
           // return res.redirect("/");
+          return res.json({ message: "Login successful" });
         }
       });
     } catch (error) {
