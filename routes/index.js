@@ -15,7 +15,7 @@ function route(app) {
   app.use("/type", require("./sites/type.r"));
 
   // product routes
-  // app.use("/product", require("./sites/product.r"));
+  app.use("/product", require("./sites/product.r"));
 
   app.get("/", (req, res) => {
     res.render("common/index");

@@ -28,9 +28,21 @@ module.exports = {
       updateType.typeId = req.params?.id;
       const haveType = await typeM.getById(updateType.typeId);
       if (haveType.length <= 0) {
-        return res.status(400).json({ message: "Type invalid" });
+        return res.status(400).json({ message: "Type Id invalid" });
       }
       const rs = await typeM.update(updateType);
+      return res.json(rs);
+    } catch (error) {
+      next(error);
+    }
+  },
+  delete: async (req, res, next) => {
+    try {
+      const haveType = await typeM.getById(req.params?.id);
+      if (haveType.length <= 0) {
+        return res.status(400).json({ message: "Type Id invalid" });
+      }
+      const rs = await typeM.delete(req.params.id);
       return res.json(rs);
     } catch (error) {
       next(error);

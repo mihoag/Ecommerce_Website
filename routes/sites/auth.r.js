@@ -10,9 +10,10 @@ router.post("/signout", authMiddleware.mustLogin, controller.signOut);
 router.get("/verify/:token", controller.verifyAccount);
 router.post(
   "/edit",
-  //authMiddleware.mustLogin,
+  authMiddleware.mustLogin,
   upload.single("image"),
   controller.edit
 );
+router.post("/delete/:id", authMiddleware.isAdmin, controller.delete);
 
 module.exports = router;

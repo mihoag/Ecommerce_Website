@@ -42,4 +42,11 @@ module.exports = {
     );
     return rs;
   },
+  delete: async (id) => {
+    const rs = await db.one(
+      'DELETE FROM "User" WHERE "userId"=$1 RETURNING *',
+      [id]
+    );
+    return rs;
+  },
 };

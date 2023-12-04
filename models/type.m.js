@@ -34,4 +34,11 @@ module.exports = {
     );
     return rs;
   },
+  delete: async (id) => {
+    const rs = await db.one(
+      'DELETE FROM "Type" WHERE "typeId"=$1 RETURNING *',
+      [id]
+    );
+    return rs;
+  },
 };

@@ -144,4 +144,19 @@ module.exports = {
       next(error);
     }
   },
+  delete: async (req, res, next) => {
+    try {
+      const haveUser = await userM.getByID(req.params?.id);
+      // check if product don't already exist
+      if (haveUser.length <= 0) {
+        return res.status(400).json({ message: "User ID invalid" });
+      }
+
+      await my_cloudinary.destroy(haveUser[0].public_id);
+      const rs = await userM.delete(req.params?.id);
+      return res.json(rs);
+    } catch (error) {
+      next(error);
+    }
+  },
 };

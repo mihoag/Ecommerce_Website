@@ -43,9 +43,12 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3001/type/update/2
+POST http://localhost:3001/type/update/3
 Content-Type: application/json
 
 {
-  "name":"Samsung2"
+  "name":"Samsung"
 }
+
+###
+GET http://localhost:3001/product/all
