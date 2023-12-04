@@ -39,7 +39,8 @@ CREATE TABLE "Order" (
 DROP TABLE IF EXISTS "Product";
 CREATE TABLE "Product" (
     "productId" serial NOT NULL,
-    total int4,
+	name character varying(255),
+    quantity int4,
     "typeId" int4 NOT NULL,
     image character varying(255),
 	public_id character varying(255),

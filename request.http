@@ -30,3 +30,22 @@ Content-Type: application/json
 {
   "email":"haonhat2729@gmail.com"
 }
+
+###
+GET http://localhost:3001/type/all
+
+###
+POST http://localhost:3001/type/create
+Content-Type: application/json
+
+{
+  "name":"Samsung"
+}
+
+###
+POST http://localhost:3001/type/update/2
+Content-Type: application/json
+
+{
+  "name":"Samsung2"
+}
