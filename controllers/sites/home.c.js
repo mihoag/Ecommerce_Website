@@ -2,13 +2,13 @@ const userM = require("../../models/users.m");
 
 module.exports = {
   signIn: async (req, res) => {
-    const user = await userM.getByEmail("haonhat2729@gmail.com");
-    res.render("test/test", { layout: false, user: user[0] });
+    //const user = await userM.getByEmail("haonhat2729@gmail.com");
+    res.render("common/login", { layout: false });
   },
   signUp: (req, res) => {
-    res.render("");
+    res.render("common/signup", { layout: false });
   },
   renderHome: (req, res) => {
-    res.render("user/home", { layout: "userLayout", title: "User Home" });
+    res.render("", { layout: "userLayout", title: "User Home" });
   },
 };

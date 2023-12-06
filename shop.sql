@@ -8,19 +8,12 @@ CREATE TABLE "Cart" (
 
 DROP TABLE IF EXISTS "Comment";
 CREATE TABLE "Comment" (
+    "commentId" int4 NOT NULL,
     "productId" int4 NOT NULL,
     "userId" int4 NOT NULL,
     content text,
     date date,
     rate integer DEFAULT 0
-);
-
-
-DROP TABLE IF EXISTS "OrderDetail";
-CREATE TABLE "OrderDetail" (
-    "orderId" int4 NOT NULL,
-    "productId" int4 NOT NULL,
-    quantity int4
 );
 
 DROP TABLE IF EXISTS "Order";
@@ -35,12 +28,17 @@ CREATE TABLE "Order" (
     status character varying(100)
 );
 
+DROP TABLE IF EXISTS "OrderDetail";
+CREATE TABLE "OrderDetail" (
+    "orderId" int4 NOT NULL,
+    "productId" int4 NOT NULL,
+    quantity int4
+);
 
 DROP TABLE IF EXISTS "Product";
 CREATE TABLE "Product" (
     "productId" serial NOT NULL,
-	name character varying(255),
-    quantity int4,
+    total int4,
     "typeId" int4 NOT NULL,
     image character varying(255),
 	public_id character varying(255),
@@ -75,18 +73,12 @@ CREATE TABLE "User" (
     avatar character varying(255),
 	public_id character varying(255),
     gender boolean,
-    role boolean DEFAULT false NOT NULL,
-    active boolean NOT NULL DEFAULT false
-);
-
-DROP TABLE IF EXISTS "VerifyCode";
-CREATE TABLE "VerifyCode" (
-    "codeId" serial NOT NULL,
-    token text NOT NULL
+    role character varying(100) DEFAULT USER NOT NULL,
+    active boolean NOT NULL
 );
 
 ALTER TABLE "Cart" ADD CONSTRAINT "Cart_pkey" PRIMARY KEY ("userId", "productId");
-ALTER TABLE "Comment" ADD CONSTRAINT "Commnet_pkey" PRIMARY KEY ("productId", "userId");
+ALTER TABLE "Comment" ADD CONSTRAINT "Commnet_pkey" PRIMARY KEY ("commentId");
 ALTER TABLE "OrderDetail" ADD CONSTRAINT "OrderDetail_pkey" PRIMARY KEY ("orderId", "productId");
 ALTER TABLE "Order" ADD CONSTRAINT "Order_pkey" PRIMARY KEY ("orderId");
 ALTER TABLE "Product" ADD CONSTRAINT "Product_pkey" PRIMARY KEY ("productId");

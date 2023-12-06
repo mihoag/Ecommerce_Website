@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <style>
+        .rating {
+            display: flex;
+            margin-top: -5px;
+            flex-direction: row;
+
+            float: left;
+        }
+
+
+        .rating1 {
+            display: flex;
+            margin-top: -5px;
+            flex-direction: row-reverse;
+            float: left;
+        }
+
+        .rating1>label {
+            position: relative;
+            width: 19px;
+            font-size: 25px;
+            color: yellow;
+
+        }
+
+        .rating1>label::before {
+            content: "\2605";
+            position: absolute;
+            opacity: 1
+        }
+
+        .rating1>input {
+            display: none
+        }
+
+        .rating>label {
+            position: relative;
+            width: 19px;
+            font-size: 25px;
+            color: yellow;
+            cursor: pointer;
+        }
+
+        .rating>label::before {
+            content: "\2605";
+            position: absolute;
+            opacity: 0
+        }
+
+        .rating>label:hover:before,
+        .rating>label:hover~label:before {
+            opacity: 1 !important
+        }
+
+        .rating>input:checked~label:before {
+            opacity: 1
+        }
+
+        .rating:hover>input:checked~label:before {
+            opacity: 0.4
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="gradient-custom">
+        <div class="container my-5 py-5">
+            <div class="row d-flex justify-content-center">
+                <div>
+                    <form action="" method="post">
+                        <div class="d-flex flex-start w-100">
+                            <img class="rounded-circle shadow-1-strong me-3"
+                                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar"
+                                width="40" height="40" />
+                            <div class="form-outline w-100">
+                                <textarea class="form-control" name="content" id="textAreaExample" rows="4"
+                                    style="background: #fff;"></textarea>
+                                <div class="rating">
+                                    <input type="radio" name="rating" value="5" id="5">5☆ &nbsp;
+                                    <input type="radio" name="rating" value="4" id="4">4☆ &nbsp;
+                                    <input type="radio" name="rating" value="3" id="3">3☆&nbsp;
+                                    <input type="radio" name="rating" value="2" id="2">2☆ &nbsp;
+                                    <input type="radio" name="rating" value="1" id="1">1☆&nbsp;
+                                </div>
+                            </div>
+                        </div>
+                        <div class="float-end mt-2 pt-1">
+                            <button type="submit" id="send" class="btn btn-primary btn-sm">Post comment</button>
+                        </div>
+                    </form>
+                </div>
+
+
+                <div class="row">
+                    <div class="col" id="listCmt">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script>
+    var listCmt = document.getElementById("listCmt");
+    var send = document.getElementById("send");
+    function getAllComment() {
+        data = { id: 1000 }
+        $.ajax({
+            type: "GET",
+            url: `/comment/${1000}`,
+            data: data,
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+                //console.log(data);
+                renderComment(data.listComments);
+            },
+            error: function (result) {
+
+            }
+        });
+    }
+
+    function renderComment(data) {
+        let content = '';
+        //  console.log(data)
+        for (let i = 0; i < data.length; i++) {
+            console.log(data[i].rate);
+            // let str = 'renderRate ' + "'" + data[i].rate + "'";
+            //console.log(str);
+            content += `<div class="d-flex flex-start mt-4">
+                            <img class="rounded-circle shadow-1-strong me-3"
+                                src="${data[i].avatar}" alt="avatar"
+                                width="50" height="50" />
+                            <div class="flex-grow-1 flex-shrink-1">
+                                <div>
+                                    <div class="d-flex flex-start align-items-center">
+                                        <p class="mb-1">
+                                            ${data[i].name} <span class="small">- ${data[i].date} - </span>
+                                        </p>
+                                        <div class="rating1">`;
+
+            for (let j = 0; j < data[i].rate; j++) {
+                content += `<input type="radio"><label>☆</label> `
+            }
+
+            content +=
+                `</div>  </div>
+                                    <p class="small mb-0">
+                                       ${data[i].content}
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>`;
+
+        }
+        // console.log(content)
+        listCmt.innerHTML = content;
+    }
+    // gia su id product la 1000
+    document.addEventListener("DOMContentLoaded", () => {
+        getAllComment();
+    })
+
+
+
+    send.addEventListener("click", (e) => {
+        e.preventDefault();
+        //console.log(content.val())
+        let content = $("textarea[name='content']").val();
+        let rate = $("input[name='rating']:checked").val();
+        //console.log(rate); 
+        //
+        var currentDate = new Date();
+        // Get the components of the date (year, month, day)
+        var year = currentDate.getFullYear();
+        var month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Adding 1 because months are zero-based
+        var day = currentDate.getDate().toString().padStart(2, '0');
+
+        // Construct the formatted date string
+        var formattedDate = year + '-' + month + '-' + day;
+        console.log(formattedDate);
+        // gia su id product la 1000, id nguoi dung la 1000
+        data = { productId: 1000 + '', userId: 1000 + '', content: content, rate: rate, date: formattedDate }
+        // console.log(new Date())
+        console.log(data);
+        $.ajax({
+            type: "get",
+            url: `/comment/insert`,
+            data: data,
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+                getAllComment();
+            },
+            error: function (result) {
+                console.log(result)
+            }
+        });
+    })
+</script>

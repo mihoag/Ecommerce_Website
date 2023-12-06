@@ -1,95 +1,49 @@
-<div class="header group">
-    <div class="logo">
-        <a href="index.html">
-            <img src="img/logo.jpg" alt="Trang chủ Smartphone Store" title="Trang chủ Smartphone Store">
-        </a>
-    </div> <!-- End Logo -->
-
-    <div class="content">
-        <div class="search-header" style="position: relative; left: 162px; top: 1px;">
-            <form class="input-search" method="get" action="index.html">
-                <div class="autocomplete">
-                    <input id="search-box" name="search" autocomplete="off" type="text"
-                        placeholder="Nhập từ khóa tìm kiếm...">
-                    <button type="submit">
-                        <i class="fa fa-search"></i>
-                        Tìm kiếm
-                    </button>
-                </div>
-            </form> <!-- End Form search -->
-            <div class="tags">
-                <strong>Từ khóa: </strong>
-                <a href="index.html?search=Samsung">Samsung</a><a href="index.html?search=iPhone">iPhone</a><a
-                    href="index.html?search=Huawei">Huawei</a><a href="index.html?search=Oppo">Oppo</a><a
-                    href="index.html?search=Mobi">Mobi</a>
-            </div>
-        </div> <!-- End Search header -->
-        <div class="tools-member">
-            <div class="member">
-                <a onclick="checkTaiKhoan()">
-                    <i class="fa fa-user"></i>
-                    Tài khoản
-                </a>
-                <div class="menuMember hide">
-                    <a href="nguoidung.html">Trang người dùng</a>
-                    <a onclick="if(window.confirm('Xác nhận đăng xuất ?')) logOut();">Đăng xuất</a>
-                </div>
-
-            </div> <!-- End Member -->
-            <div class="cart">
-                <a href="giohang.html">
-                    <i class="fa fa-shopping-cart"></i>
-                    <span>Giỏ hàng</span>
-                    <span class="cart-number"></span>
-                </a>
-            </div> <!-- End Cart -->
-        </div><!-- End Tools Member -->
-    </div> <!-- End Content -->
-</div> <!-- End Header -->
-<div class="body-tintuc">
-    <div class="tintuc-info">
-        <a href="http://doanhnghiepvn.vn/cong-nghe/danh-gia-smartphone-chip-s660-ram-8-gb-gia-6-99-trieu-tai-viet-nam/2018112603315443"
-            target="_blank">
-            <img src="img/tintuc/tintuc1.png">
-            <h2>Đánh giá smartphone chip S660, RAM 8 GB, giá 6,99 triệu tại Việt Nam</h2>
-        </a>
-        <br>
-        <h5>Doanh ngiệp  3 giờ</h5>
+<section>
+    <div class="body-tintuc">
+        <div class="tintuc-info">
+            <a href="http://doanhnghiepvn.vn/cong-nghe/danh-gia-smartphone-chip-s660-ram-8-gb-gia-6-99-trieu-tai-viet-nam/2018112603315443"
+                target="_blank">
+                <img src="img/tintuc/tintuc1.png">
+                <h2>Đánh giá smartphone chip S660, RAM 8 GB, giá 6,99 triệu tại Việt Nam</h2>
+            </a>
+            <br>
+            <h5>Doanh ngiệp  3 giờ</h5>
+        </div>
+        <div class="tintuc-info">
+            <a href="https://thanhnien.vn/cong-nghe/kham-pha-smartphone-man-hinh-gap-duoc-dau-tien-cua-samsung-1027111.html"
+                target="_blank">
+                <img src="img/tintuc/tintuc2.png">
+                <h2>Khám phá smartphone màn hình gập được đầu tiên của Samsung</h2>
+            </a>
+            <br>
+            <h5>Thanh niên   6 giờ</h5>
+        </div>
+        <div class="tintuc-info">
+            <a href="https://vov.vn/cong-nghe/doanh-so-iphone-xs-va-iphone-xr-tham-hai-apple-san-xuat-lai-iphone-x-843717.vov"
+                target="_blank">
+                <img src="img/tintuc/tintuc3.png">
+                <h2>Doanh số iPhone XS và iPhone XR thảm hại, Apple sản xuất lại iPhone X</h2>
+            </a>
+            <br>
+            <h5>VOV   6 giờ</h5>
+        </div>
+        <div class="tintuc-info">
+            <a href="http://vietq.vn/chiec-dien-thoai-thong-minh-nay-cua-lg-se-co-toi-16-camera-d151674.html"
+                target="_blank">
+                <img src="img/tintuc/tintuc4.png">
+                <h2>Chiếc điện thoại thông minh này của LG sẽ có tới 16 Camera</h2>
+            </a>
+            <br>
+            <h5>VietQ   13 giờ</h5>
+        </div>
+        <div class="tintuc-info" style="border-bottom: 0;">
+            <a href="https://news.zing.vn/nhung-tieu-chi-ban-khong-nen-bo-qua-khi-mua-smartphone-2018-post894509.html"
+                target="_blank">
+                <img src="img/tintuc/tintuc5.png" height="148px" width="224px;">
+                <h2>Những tiêu chí bạn không nên bỏ qua khi mua smartphone 2018</h2>
+            </a>
+            <br>
+            <h5>Zing   9 giờ</h5>
+        </div>
     </div>
-    <div class="tintuc-info">
-        <a href="https://thanhnien.vn/cong-nghe/kham-pha-smartphone-man-hinh-gap-duoc-dau-tien-cua-samsung-1027111.html"
-            target="_blank">
-            <img src="img/tintuc/tintuc2.png">
-            <h2>Khám phá smartphone màn hình gập được đầu tiên của Samsung</h2>
-        </a>
-        <br>
-        <h5>Thanh niên   6 giờ</h5>
-    </div>
-    <div class="tintuc-info">
-        <a href="https://vov.vn/cong-nghe/doanh-so-iphone-xs-va-iphone-xr-tham-hai-apple-san-xuat-lai-iphone-x-843717.vov"
-            target="_blank">
-            <img src="img/tintuc/tintuc3.png">
-            <h2>Doanh số iPhone XS và iPhone XR thảm hại, Apple sản xuất lại iPhone X</h2>
-        </a>
-        <br>
-        <h5>VOV   6 giờ</h5>
-    </div>
-    <div class="tintuc-info">
-        <a href="http://vietq.vn/chiec-dien-thoai-thong-minh-nay-cua-lg-se-co-toi-16-camera-d151674.html"
-            target="_blank">
-            <img src="img/tintuc/tintuc4.png">
-            <h2>Chiếc điện thoại thông minh này của LG sẽ có tới 16 Camera</h2>
-        </a>
-        <br>
-        <h5>VietQ   13 giờ</h5>
-    </div>
-    <div class="tintuc-info" style="border-bottom: 0;">
-        <a href="https://news.zing.vn/nhung-tieu-chi-ban-khong-nen-bo-qua-khi-mua-smartphone-2018-post894509.html"
-            target="_blank">
-            <img src="img/tintuc/tintuc5.png" height="148px" width="224px;">
-            <h2>Những tiêu chí bạn không nên bỏ qua khi mua smartphone 2018</h2>
-        </a>
-        <br>
-        <h5>Zing   9 giờ</h5>
-    </div>
-</div>
+</section>

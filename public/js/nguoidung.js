@@ -26,7 +26,7 @@ window.onload = function () {
 
         addTatCaDonHang(currentUser); // hàm này cần chạy trước để tính được tổng tiền tất cả đơn hàng 
         addInfoUser(currentUser);
-    
+
     } else {
         var warning = `<h2 style="color: red; font-weight:bold; text-align:center; font-size: 2em; padding: 50px;">
                             Bạn chưa đăng nhập !!

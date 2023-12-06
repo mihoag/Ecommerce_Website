@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <title>Thế giới điện thoại</title>
+    <!-- Load font awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous">
+    <!-- our files -->
+    <!-- css -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/topnav.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/taikhoan.css">
+    <link rel="stylesheet" href="css/gioHang.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <!-- js -->
+    <script src="data/products.js"></script>
+    <script src="js/classes.js"></script>
+    <script src="js/dungchung.js"></script>
+    <script src="js/giohang.js"></script>
+</head>
+
+<body>
+    <div class="top-nav group">
+        <section>
+            <div class="social-top-nav">
+                <a class="fa fa-facebook"></a>
+                <a class="fa fa-twitter"></a>
+                <a class="fa fa-google"></a>
+                <a class="fa fa-youtube"></a>
+            </div> <!-- End Social Topnav -->
+            <ul class="top-nav-quicklink flexContain">
+                <li><a href="/"><i class="fa fa-home"></i> Trang chủ</a></li>
+                <li><a href="/news"><i class="fa fa-newspaper-o"></i> Tin tức</a></li>
+                <li><a href="/hiring"><i class="fa fa-handshake-o"></i> Tuyển dụng</a></li>
+                <li><a href="/about"><i class="fa fa-info-circle"></i> Giới thiệu</a></li>
+                <li><a href="/maintenance"><i class="fa fa-wrench"></i> Bảo hành</a></li>
+                <li><a href="/contact"><i class="fa fa-phone"></i> Liên hệ</a></li>
+            </ul> <!-- End Quick link -->
+        </section><!-- End Section -->
+    </div><!-- End Top Nav  -->
+
+    <section>
+        <div class="header group">
+            <div class="logo">
+                <a href="/">
+                    <img src="img/logo.jpg" alt="Trang chủ Smartphone Store" title="Trang chủ Smartphone Store">
+                </a>
+            </div> <!-- End Logo -->
+
+            <div class="content">
+                <div class="search-header" style="position: relative; left: 162px; top: 1px;">
+                    <form class="input-search" method="get" action="/">
+                        <div class="autocomplete">
+                            <input id="search-box" name="search" autocomplete="off" type="text"
+                                placeholder="Nhập từ khóa tìm kiếm...">
+                            <button type="submit">
+                                <i class="fa fa-search"></i>
+                                Tìm kiếm
+                            </button>
+                        </div>
+                    </form> <!-- End Form search -->
+                    <div class="tags">
+                        <strong>Từ khóa: </strong>
+                        <a href="index.html?search=Samsung">Samsung</a><a href="index.html?search=iPhone">iPhone</a><a
+                            href="index.html?search=Huawei">Huawei</a><a href="index.html?search=Oppo">Oppo</a><a
+                            href="index.html?search=Mobi">Mobi</a>
+                    </div>
+                </div> <!-- End Search header -->
+
+                <div class="tools-member">
+                    <div class="member">
+                        <a href="/login">
+                            <i class="fa fa-user"></i>
+                            Tài khoản
+                        </a>
+                        <div class="menuMember">
+                            <a href="/detailUser">Trang người dùng</a>
+                            <a href="/logout">Đăng xuất</a>
+                        </div>
+
+                    </div> <!-- End Member -->
+
+                    <div class="cart">
+                        <a href="/cart">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>Giỏ hàng</span>
+                            <span class="cart-number"></span>
+                        </a>
+                    </div> <!-- End Cart -->
+                </div><!-- End Tools Member -->
+            </div> <!-- End Content -->
+        </div> <!-- End Header -->
+    </section>
+
+
+
+    <section style="min-height: 85vh">
+
+
+        <table class="listSanPham">
+            <tbody>
+                <tr>
+                    <th>STT</th>
+                    <th>Sản phẩm</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                    <th>Thời gian</th>
+                    <th>Xóa</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td class="noPadding imgHide">
+                        <a target="_blank" href="chitietsanpham.html?Xiaomi-Redmi-Note-5" title="Xem chi tiết">
+                            Xiaomi Redmi Note 5
+                            <img src="img/products/xiaomi-redmi-note-5-pro-600x600.jpg">
+                        </a>
+                    </td>
+                    <td class="alignRight">5.690.000 ₫</td>
+                    <td class="soluong">
+                        <button onclick="giamSoLuong('Xia2')"><i class="fa fa-minus"></i></button>
+                        <input size="1" onchange="capNhatSoLuongFromInput(this, 'Xia2')" value="1">
+                        <button onclick="tangSoLuong('Xia2')"><i class="fa fa-plus"></i></button>
+                    </td>
+                    <td class="alignRight">5.690.000 ₫</td>
+                    <td style="text-align: center">12/6/2023, 7:27:46 PM</td>
+                    <td class="noPadding"> <i class="fa fa-trash" onclick="xoaSanPhamTrongGioHang(0)"></i> </td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td class="noPadding imgHide">
+                        <a target="_blank" href="chitietsanpham.html?Xiaomi-Redmi-5-Plus-4GB" title="Xem chi tiết">
+                            Xiaomi Redmi 5 Plus 4GB
+                            <img src="img/products/xiaomi-redmi-5-plus-600x600.jpg">
+                        </a>
+                    </td>
+                    <td class="alignRight">4.790.000 ₫</td>
+                    <td class="soluong">
+                        <button onclick="giamSoLuong('Xia3')"><i class="fa fa-minus"></i></button>
+                        <input size="1" onchange="capNhatSoLuongFromInput(this, 'Xia3')" value="1">
+                        <button onclick="tangSoLuong('Xia3')"><i class="fa fa-plus"></i></button>
+                    </td>
+                    <td class="alignRight">4.790.000 ₫</td>
+                    <td style="text-align: center">12/6/2023, 7:27:53 PM</td>
+                    <td class="noPadding"> <i class="fa fa-trash" onclick="xoaSanPhamTrongGioHang(1)"></i> </td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td class="noPadding imgHide">
+                        <a target="_blank" href="chitietsanpham.html?Nokia-black-future" title="Xem chi tiết">
+                            Nokia black future
+                            <img
+                                src="https://cdn.tgdd.vn/Products/Images/42/22701/dien-thoai-di-dong-Nokia-1280-dienmay.com-l.jpg">
+                        </a>
+                    </td>
+                    <td class="alignRight">999.999.000 ₫</td>
+                    <td class="soluong">
+                        <button onclick="giamSoLuong('Nok1')"><i class="fa fa-minus"></i></button>
+                        <input size="1" onchange="capNhatSoLuongFromInput(this, 'Nok1')" value="1">
+                        <button onclick="tangSoLuong('Nok1')"><i class="fa fa-plus"></i></button>
+                    </td>
+                    <td class="alignRight">999.999.000 ₫</td>
+                    <td style="text-align: center">12/6/2023, 7:27:56 PM</td>
+                    <td class="noPadding"> <i class="fa fa-trash" onclick="xoaSanPhamTrongGioHang(2)"></i> </td>
+                </tr>
+
+                <tr style="font-weight:bold; text-align:center">
+                    <td colspan="4">TỔNG TIỀN: </td>
+                    <td class="alignRight">1.010.479.000 ₫</td>
+                    <td class="thanhtoan" onclick="thanhToan()"> Thanh Toán </td>
+                    <td class="xoaHet" onclick="xoaHet()"> Xóa hết </td>
+                </tr>
+            </tbody>
+        </table>
+    </section> <!-- End Section -->
+
+    <div class="footer">
+        <!-- ============== Alert Box ============= -->
+        <div id="alert">
+            <span id="closebtn">⊗</span>
+        </div>
+
+        <!-- ============== Footer ============= -->
+        <div class="copy-right">
+            <p><a href="index.html">LDD Phone Store</a> - All rights reserved © 2021 - Designed by
+                <span style="color: #eee; font-weight: bold">group 15th</span>
+            </p>
+        </div>
+    </div>
+
+    <i class="fa fa-arrow-up" id="goto-top-page" onclick="gotoTop()"></i>
+</body>
+
+</html>
