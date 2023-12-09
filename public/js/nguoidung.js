@@ -35,99 +35,140 @@ window.onload = function () {
 };
 
 // Phần Thông tin người dùng
-function addInfoUser(user) {
-  if (!user) return;
-  document.getElementsByClassName("infoUser")[0].innerHTML =
-    `
-    <hr>
-    <table>
-        <tr>
-            <th colspan="3">THÔNG TIN KHÁCH HÀNG</th>
-        </tr>
-        <tr>
-            <td>Tài khoản: </td>
-            <td> <input type="text" value="` +
-    user.username +
-    `" readonly> </td>
-            <td> <i class="fa fa-pencil" onclick="changeInfo(this, 'username')"></i> </td>
-        </tr>
-        <tr>
-            <td>Mật khẩu: </td>
-            <td style="text-align: center;"> 
-                <i class="fa fa-pencil" id="butDoiMatKhau" onclick="openChangePass()"> Đổi mật khẩu</i> 
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="3" id="khungDoiMatKhau">
-                <table>
-                    <tr>
-                        <td> <div>Mật khẩu cũ:</div> </td>
-                        <td> <div><input type="password"></div> </td>
-                    </tr>
-                    <tr>
-                        <td> <div>Mật khẩu mới:</div> </td>
-                        <td> <div><input type="password"></div> </td>
-                    </tr>
-                    <tr>
-                        <td> <div>Xác nhận mật khẩu:</div> </td>
-                        <td> <div><input type="password"></div> </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td> 
-                            <div><button onclick="changePass()">Đồng ý</button></div> 
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>Họ: </td>
-            <td> <input type="text" value="` +
-    user.ho +
-    `" readonly> </td>
-            <td> <i class="fa fa-pencil" onclick="changeInfo(this, 'ho')"></i> </td>
-        </tr>
-        <tr>
-            <td>Tên: </td>
-            <td> <input type="text" value="` +
-    user.ten +
-    `" readonly> </td>
-            <td> <i class="fa fa-pencil" onclick="changeInfo(this, 'ten')"></i> </td>
-        </tr>
-        <tr>
-            <td>Email: </td>
-            <td> <input type="text" value="` +
-    user.email +
-    `" readonly> </td>
-            <td> <i class="fa fa-pencil" onclick="changeInfo(this, 'email')"></i> </td>
-        </tr>
-        <tr>
-            <td colspan="3" style="padding:5px; border-top: 2px solid #ccc;"></td>
-        </tr>
-        <tr>
-            <td>Tổng tiền đã mua: </td>
-            <td> <input type="text" value="` +
-    numToString(tongTienTatCaDonHang) +
-    `₫" readonly> </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Số lượng sản phẩm đã mua: </td>
-            <td> <input type="text" value="` +
-    tongSanPhamTatCaDonHang +
-    `" readonly> </td>
-            <td></td>
-        </tr>
-    </table>`;
-}
+// function addInfoUser(user) {
+//   if (!user) return;
+//   document.getElementsByClassName("infoUser")[0].innerHTML =
+//     `
+//     <hr>
+//     <table>
+//         <tr>
+//             <th colspan="3">THÔNG TIN KHÁCH HÀNG</th>
+//         </tr>
+//         <tr>
+//             <td>Tài khoản: </td>
+//             <td> <input type="text" value="` +
+//     user.username +
+//     `" readonly> </td>
+//             <td> <i class="fa fa-pencil" onclick="changeInfo(this, 'username')"></i> </td>
+//         </tr>
+//         <tr>
+//             <td>Mật khẩu: </td>
+//             <td style="text-align: center;">
+//                 <i class="fa fa-pencil" id="butDoiMatKhau" onclick="openChangePass()"> Đổi mật khẩu</i>
+//             </td>
+//             <td></td>
+//         </tr>
+//         <tr>
+//             <td colspan="3" id="khungDoiMatKhau">
+//                 <table>
+//                     <tr>
+//                         <td> <div>Mật khẩu cũ:</div> </td>
+//                         <td> <div><input type="password"></div> </td>
+//                     </tr>
+//                     <tr>
+//                         <td> <div>Mật khẩu mới:</div> </td>
+//                         <td> <div><input type="password"></div> </td>
+//                     </tr>
+//                     <tr>
+//                         <td> <div>Xác nhận mật khẩu:</div> </td>
+//                         <td> <div><input type="password"></div> </td>
+//                     </tr>
+//                     <tr>
+//                         <td></td>
+//                         <td>
+//                             <div><button onclick="changePass()">Đồng ý</button></div>
+//                         </td>
+//                     </tr>
+//                 </table>
+//             </td>
+//         </tr>
+//         <tr>
+//             <td>Họ: </td>
+//             <td> <input type="text" value="` +
+//     user.ho +
+//     `" readonly> </td>
+//             <td> <i class="fa fa-pencil" onclick="changeInfo(this, 'ho')"></i> </td>
+//         </tr>
+//         <tr>
+//             <td>Tên: </td>
+//             <td> <input type="text" value="` +
+//     user.ten +
+//     `" readonly> </td>
+//             <td> <i class="fa fa-pencil" onclick="changeInfo(this, 'ten')"></i> </td>
+//         </tr>
+//         <tr>
+//             <td>Email: </td>
+//             <td> <input type="text" value="` +
+//     user.email +
+//     `" readonly> </td>
+//             <td> <i class="fa fa-pencil" onclick="changeInfo(this, 'email')"></i> </td>
+//         </tr>
+//         <tr>
+//             <td colspan="3" style="padding:5px; border-top: 2px solid #ccc;"></td>
+//         </tr>
+//         <tr>
+//             <td>Tổng tiền đã mua: </td>
+//             <td> <input type="text" value="` +
+//     numToString(tongTienTatCaDonHang) +
+//     `₫" readonly> </td>
+//             <td></td>
+//         </tr>
+//         <tr>
+//             <td>Số lượng sản phẩm đã mua: </td>
+//             <td> <input type="text" value="` +
+//     tongSanPhamTatCaDonHang +
+//     `" readonly> </td>
+//             <td></td>
+//         </tr>
+//     </table>`;
+// }
 
 function openChangePass() {
   var khungChangePass = document.getElementById("khungDoiMatKhau");
   var actived = khungChangePass.classList.contains("active");
   if (actived) khungChangePass.classList.remove("active");
   else khungChangePass.classList.add("active");
+}
+
+async function changePass() {
+  var inps = $("#khungDoiMatKhau input");
+  if ($(inps[0]).val() == "") {
+    inps[0].focus();
+    showToastError("Chưa nhập mật khẩu hiện tại !");
+    return;
+  }
+  if ($(inps[1]).val() == "") {
+    inps[1].focus();
+    showToastError("Chưa nhập mật khẩu mới !");
+    return;
+  }
+  if ($(inps[1]).val() != $(inps[2]).val()) {
+    inps[2].focus();
+    showToastError("Xác nhận mật khẩu không khớp");
+    return;
+  }
+  if ($(inps[1]).val().length < 6) {
+    inps[1].focus();
+    showToastError("Mật khẩu phải có độ dài ít nhất là 6");
+    return;
+  }
+  const formData = new FormData();
+  formData.set("password", $(inps[0]).val());
+  formData.set("newPassword", $(inps[1]).val());
+  const response = await fetch("/auth/change", {
+    method: "POST",
+    body: formData,
+  });
+  const res = await response.json();
+  $(inps[1]).val("");
+  $(inps[2]).val("");
+  if (res.success) {
+    $(inps[0]).val("");
+    openChangePass();
+    showToastError(res.message, "success");
+  } else {
+    showToastError(res.message);
+  }
 }
 
 function changeInfo(iTag, info) {
@@ -269,7 +310,6 @@ $(document).ready(function () {
   });
 
   $("#changeInfo").on("click", async function () {
-    console.log("a");
     let [file] = $("#fileUser")[0].files;
     const formData = new FormData();
     formData.set("image", file);
@@ -283,4 +323,20 @@ $(document).ready(function () {
       window.location.reload();
     }, 2000);
   });
+
+  $("#changePass").on("click", async function () {
+    changePass();
+  });
 });
+
+function showToastError(message, type = "danger") {
+  var toast = document.getElementById("errorPass");
+  toast.classList.remove("bg-danger");
+  toast.classList.add(`bg-${type}`);
+  $("#errorPass .toast-body").text(message);
+  var bsToast = new bootstrap.Toast(toast);
+  bsToast.show();
+  setTimeout(function () {
+    bsToast.hide();
+  }, 2000);
+}

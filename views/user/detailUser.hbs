@@ -128,7 +128,7 @@
                     <tr>
                       <td></td>
                       <td>
-                        <div><button onclick="changePass()">Đồng ý</button></div>
+                        <div><button id="changePass">Đồng ý</button></div>
                       </td>
                     </tr>
                   </tbody>
@@ -243,6 +243,30 @@
     <div class="toast-body">
       Update profile successfull
       <br />Refresh in 2 seconds...
+    </div>
+  </div>
+</div>
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div
+    id="errorPass"
+    class="toast hide bg-danger text-white"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+    data-bs-autohide="false"
+  >
+    <div class="toast-header">
+      <strong class="me-auto">Notification</strong>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="toast"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="toast-body">
+      
     </div>
   </div>
 </div>

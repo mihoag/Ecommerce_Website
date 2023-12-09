@@ -158,9 +158,49 @@ module.exports = {
       next(error);
     }
   },
+  change: async (req, res, next) => {
+    try {
+      const { password, newPassword } = req.body;
+      userM.getByEmail(req.session.email).then((rs) => {
+        if (rs.length === 0) {
+          // check username
+          res.redirect("/auth/login");
+        } else {
+          // check current password
+          const pwDb = rs[0].password;
+          const salt = pwDb.slice(hashLength);
+          const pwSalt = password + salt;
+          const pwHashed = CryptoJS.SHA3(pwSalt, {
+            outputLength: hashLength * 4,
+          }).toString(CryptoJS.enc.Hex);
+          if (pwDb !== pwHashed + salt) {
+            return res.json({
+              success: false,
+              message: "Password hiện tại không khớp",
+            });
+          }
+
+          // change password
+          const salt2 = Date.now().toString(16);
+          const pwSalt2 = newPassword + salt2;
+          const pwHashed2 = CryptoJS.SHA3(pwSalt2, {
+            outputLength: hashLength * 4,
+          }).toString(CryptoJS.enc.Hex);
+          userM.changePass(req.session.uid, pwHashed2 + salt2);
+
+          return res.json({
+            success: true,
+            message: "Cập nhật password thành công",
+          });
+        }
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
   edit: async (req, res, next) => {
     try {
-      const user = (await userM.getByEmail("haonhat2729@gmail.com"))[0];
+      const user = (await userM.getByEmail(req.session.email))[0];
       const { name, phoneNumber } = req.body;
       user.name = name;
       user.phoneNumber = phoneNumber;
