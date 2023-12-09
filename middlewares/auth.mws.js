@@ -6,10 +6,10 @@ module.exports = {
       if (req.session.uid && req.session.email) {
         userM.getByID(req.session.uid).then((user) => {
           if (user.length < 0 || user[0].email != req.session.email) {
-            return res.redirect("/signin");
+            return res.redirect("/auth/login");
           } else next();
         });
-      } else return res.redirect("/signin");
+      } else return res.redirect("/auth/login");
     } catch (error) {
       next(error);
     }
@@ -32,12 +32,12 @@ module.exports = {
       if (req.session.uid && req.session.email) {
         userM.getByID(req.session.uid).then((user) => {
           if (user.length < 0 || user[0].email != req.session.email) {
-            return res.redirect("/signin");
+            return res.redirect("/auth/login");
           } else if (!user[0].role) {
             return res.redirect("/");
           } else next();
         });
-      } else return res.redirect("/signin");
+      } else return res.redirect("/auth/login");
     } catch (error) {
       next(error);
     }
