@@ -4,9 +4,12 @@ const controller = require("../../controllers/sites/auth.c");
 const authMiddleware = require("../../middlewares/auth.mws");
 const upload = require("../../utils/parseFile");
 
+router.get("/success", authMiddleware.dontLogin, controller.renderSuccess);
+router.get("/signup", authMiddleware.dontLogin, controller.renderSignUp);
+router.get("/login", authMiddleware.dontLogin, controller.renderSignIn);
 router.post("/signup", authMiddleware.dontLogin, controller.signup);
-router.post("/signin", authMiddleware.dontLogin, controller.signIn);
-router.post("/signout", authMiddleware.mustLogin, controller.signOut);
+router.post("/login", authMiddleware.dontLogin, controller.signIn);
+router.post("/logout", authMiddleware.mustLogin, controller.signOut);
 router.get("/verify/:token", controller.verifyAccount);
 router.post(
   "/edit",

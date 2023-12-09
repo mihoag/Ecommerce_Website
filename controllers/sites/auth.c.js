@@ -7,6 +7,27 @@ const jwt = require("jsonwebtoken");
 const my_cloudinary = require("../../configs/myCloudinary");
 
 module.exports = {
+  renderSuccess: async (req, res, next) => {
+    try {
+      res.render("common/success", { layout: false });
+    } catch (error) {
+      next(error);
+    }
+  },
+  renderSignIn: async (req, res, next) => {
+    try {
+      res.render("common/login", { layout: false });
+    } catch (error) {
+      next(error);
+    }
+  },
+  renderSignUp: async (req, res, next) => {
+    try {
+      res.render("common/signup", { layout: false });
+    } catch (error) {
+      next(error);
+    }
+  },
   render: async (req, res, next) => {
     try {
       return res.render("test");
@@ -20,7 +41,11 @@ module.exports = {
       userM.getByEmail(user.email).then((rs) => {
         if (rs.length === 0) {
           // check username
-          res.json({ message: "Email or password incorrect" });
+          res.render("common/login", {
+            layout: false,
+            message: "Username or password is incorrect",
+            user,
+          });
           //TODO: show error message
         } else {
           // check password
@@ -32,13 +57,21 @@ module.exports = {
           }).toString(CryptoJS.enc.Hex);
           if (pwDb !== pwHashed + salt) {
             //TODO: show error message
-            return res.json({ message: "Email or password incorrect" });
+            return res.render("common/login", {
+              layout: false,
+              message: "Username or password is incorrect",
+              user,
+            });
           }
 
           // check account is valid
           if (rs[0].active == false) {
             //TODO: show error message
-            return res.json({ message: "Your account is not active" });
+            return res.render("common/login", {
+              layout: false,
+              message: "Your account is not active",
+              user,
+            });
           }
 
           // all good
@@ -46,8 +79,8 @@ module.exports = {
           req.session.email = rs[0].email;
 
           // TODO: redirect to home page
-          // return res.redirect("/");
-          return res.json({ message: "Login successful" });
+          return res.redirect("/");
+          // return res.json({ message: "Login successful" });
         }
       });
     } catch (error) {
@@ -59,7 +92,7 @@ module.exports = {
       req.session.uid = null;
       req.session.email = null;
       // TODO: redirect to login page
-      res.redirect("/");
+      res.redirect("/auth/login");
     } catch (error) {
       next(error);
     }
@@ -78,6 +111,7 @@ module.exports = {
           }).toString(CryptoJS.enc.Hex);
           newUser.password = pwHashed + salt;
           newUser.avatar = `https://robohash.org/${newUser.email}.png?set=set4`;
+          newUser.public_id = null;
 
           // new user
           userM.add(newUser);
@@ -85,12 +119,16 @@ module.exports = {
           await sendMail.sendMail(newUser.email);
 
           // TODO: render success page
-          return res.json({ message: "User created successfully" });
+          return res.redirect("/auth/success");
         } else {
           newUser.password = pw;
 
           // TODO: re-render register page with error
-          return res.json({ message: "Email is existing" });
+          return res.render("common/signup", {
+            layout: false,
+            message: "Email is existing",
+            user: newUser,
+          });
         }
       });
     } catch (error) {
