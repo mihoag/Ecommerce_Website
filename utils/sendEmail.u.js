@@ -37,4 +37,31 @@ module.exports = {
       }
     });
   },
+  sendCode: async function (toEmail, code) {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      host: "smtp.gamil.com",
+      port: 587,
+      secure: false,
+      auth: {
+        user: "nguyennhathao01012003@gmail.com",
+        pass: "jvvs tjjh vgbb jekt",
+      },
+    });
+
+    const mailOptions = {
+      from: "admin@gmail.com",
+      to: toEmail,
+      subject: "Code reset password",
+      html: require("./contentEmailCode")(code),
+    };
+
+    await transporter.sendMail(mailOptions, async function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    });
+  },
 };

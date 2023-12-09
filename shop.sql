@@ -8,12 +8,19 @@ CREATE TABLE "Cart" (
 
 DROP TABLE IF EXISTS "Comment";
 CREATE TABLE "Comment" (
-    "commentId" int4 NOT NULL,
+    "commentId" serial NOT NULL,
     "productId" int4 NOT NULL,
     "userId" int4 NOT NULL,
     content text,
     date date,
     rate integer DEFAULT 0
+);
+
+DROP TABLE IF EXISTS "OrderDetail";
+CREATE TABLE "OrderDetail" (
+    "orderId" int4 NOT NULL,
+    "productId" int4 NOT NULL,
+    quantity int4
 );
 
 DROP TABLE IF EXISTS "Order";
@@ -28,12 +35,6 @@ CREATE TABLE "Order" (
     status character varying(100)
 );
 
-DROP TABLE IF EXISTS "OrderDetail";
-CREATE TABLE "OrderDetail" (
-    "orderId" int4 NOT NULL,
-    "productId" int4 NOT NULL,
-    quantity int4
-);
 
 DROP TABLE IF EXISTS "Product";
 CREATE TABLE "Product" (
@@ -63,6 +64,21 @@ CREATE TABLE "Type" (
     active boolean DEFAULT true
 );
 
+
+
+DROP TABLE IF EXISTS "VerifyCode";
+CREATE TABLE "VerifyCode" (
+    "codeId" serial NOT NULL,
+    token text NOT NULL
+);
+
+DROP TABLE IF EXISTS "ForgotCode";
+CREATE TABLE "ForgotCode" (
+    "codeId" serial NOT NULL,
+    code text NOT NULL,
+    "userId" int4 NOT NULL
+);
+
 DROP TABLE IF EXISTS "User";
 CREATE TABLE "User" (
     "userId" serial NOT NULL,
@@ -85,6 +101,8 @@ ALTER TABLE "Product" ADD CONSTRAINT "Product_pkey" PRIMARY KEY ("productId");
 ALTER TABLE "Slide" ADD CONSTRAINT "Slide_pkey" PRIMARY KEY ("slideId");
 ALTER TABLE "Type" ADD CONSTRAINT "Type_pkey" PRIMARY KEY ("typeId");
 ALTER TABLE "User" ADD CONSTRAINT "User_pkey" PRIMARY KEY ("userId");
+ALTER TABLE "ForgotCode" ADD CONSTRAINT "ForgotCode_pkey" PRIMARY KEY ("codeId");
+ALTER TABLE "VerifyCode" ADD CONSTRAINT "VerifyCode_pkey" PRIMARY KEY ("codeId");
 --- 
 
 ALTER TABLE "Cart" ADD CONSTRAINT "FK_Cart_Pro" 
@@ -107,3 +125,6 @@ ALTER TABLE "OrderDetail" ADD CONSTRAINT "FK_OrderDetail_Pro"
 
 ALTER TABLE "Product" ADD CONSTRAINT "FK_Product_Type" 
 	FOREIGN KEY ("typeId") REFERENCES "Type" ("typeId");
+
+ALTER TABLE "ForgotCode" ADD CONSTRAINT "FK_ForgotCode_User" 
+	FOREIGN KEY ("userId") REFERENCES "User" ("userId");

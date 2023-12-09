@@ -7,6 +7,16 @@ const upload = require("../../utils/parseFile");
 router.get("/success", authMiddleware.dontLogin, controller.renderSuccess);
 router.get("/signup", authMiddleware.dontLogin, controller.renderSignUp);
 router.get("/login", authMiddleware.dontLogin, controller.renderSignIn);
+router.get(
+  "/forgotPassword",
+  authMiddleware.dontLogin,
+  controller.forgotPassword
+);
+router.post(
+  "/forgotPassword",
+  authMiddleware.dontLogin,
+  controller.handleForgotPassword
+);
 
 router.post("/signup", authMiddleware.dontLogin, controller.signup);
 router.post("/login", authMiddleware.dontLogin, controller.signIn);

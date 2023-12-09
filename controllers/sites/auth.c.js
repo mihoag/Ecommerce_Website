@@ -3,8 +3,10 @@ const CryptoJS = require("crypto-js");
 const hashLength = 64;
 const sendMail = require("../../utils/sendEmail.u");
 const tokenM = require("../../models/token.m");
+const forgotCodeM = require("../../models/forgotCode.m");
 const jwt = require("jsonwebtoken");
 const my_cloudinary = require("../../configs/myCloudinary");
+const randomCode = require("../../utils/randomCode");
 
 module.exports = {
   renderSuccess: async (req, res, next) => {
@@ -161,7 +163,7 @@ module.exports = {
   change: async (req, res, next) => {
     try {
       const { password, newPassword } = req.body;
-      userM.getByEmail(req.session.email).then((rs) => {
+      userM.getByEmail(req.session.email).then(async (rs) => {
         if (rs.length === 0) {
           // check username
           res.redirect("/auth/login");
@@ -186,7 +188,7 @@ module.exports = {
           const pwHashed2 = CryptoJS.SHA3(pwSalt2, {
             outputLength: hashLength * 4,
           }).toString(CryptoJS.enc.Hex);
-          userM.changePass(req.session.uid, pwHashed2 + salt2);
+          await userM.changePass(req.session.uid, pwHashed2 + salt2);
 
           return res.json({
             success: true,
@@ -233,6 +235,66 @@ module.exports = {
       await my_cloudinary.destroy(haveUser[0].public_id);
       const rs = await userM.delete(req.params?.id);
       return res.json(rs);
+    } catch (error) {
+      next(error);
+    }
+  },
+  forgotPassword: async (req, res, next) => {
+    try {
+      res.render("common/forgotPassword", { layout: false, show: false });
+    } catch (error) {
+      next(error);
+    }
+  },
+  handleForgotPassword: async (req, res, next) => {
+    try {
+      if (req.body?.email && !req.body?.code) {
+        const { email } = req.body;
+        const rs = await userM.getByEmail(email);
+        if (rs.length > 0) {
+          await forgotCodeM.delete(rs[0].userId);
+          const code = randomCode();
+          await forgotCodeM.add(code, rs[0].userId);
+
+          // send mail
+          await sendMail.sendCode(rs[0].email, code);
+        }
+        res.render("common/forgotPassword", {
+          layout: false,
+          show: true,
+          email,
+        });
+      } else {
+        const { code, password, email } = req.body;
+        const rs = await forgotCodeM.getToken(code);
+        if (rs.length > 0) {
+          // change password
+
+          const salt = Date.now().toString(16);
+          const pwSalt = password + salt;
+          const pwHashed = CryptoJS.SHA3(pwSalt, {
+            outputLength: hashLength * 4,
+          }).toString(CryptoJS.enc.Hex);
+          await userM.changePass(rs[0].userId, pwHashed + salt);
+          await forgotCodeM.delete(rs[0].userId);
+          return res.render("common/forgotPassword", {
+            layout: false,
+            show: true,
+            email,
+            code,
+            password,
+            toast: true,
+          });
+        }
+        res.render("common/forgotPassword", {
+          layout: false,
+          show: true,
+          email,
+          code,
+          password,
+          message: "Invalid code, please check your mail",
+        });
+      }
     } catch (error) {
       next(error);
     }
