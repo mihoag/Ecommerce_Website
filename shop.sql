@@ -45,7 +45,10 @@ CREATE TABLE "Product" (
 	public_id character varying(255),
     active boolean DEFAULT true,
     cost int4,
-    price int4
+    price int4,
+	discount float default 0,
+	rate int4 default -1,
+	"releaseDate" Date
 );
 
 DROP TABLE IF EXISTS "Slide";
@@ -90,7 +93,7 @@ CREATE TABLE "User" (
 	public_id character varying(255),
     gender boolean,
     role character varying(100) DEFAULT USER NOT NULL,
-    active boolean NOT NULL
+    active boolean default false 
 );
 
 ALTER TABLE "Cart" ADD CONSTRAINT "Cart_pkey" PRIMARY KEY ("userId", "productId");
