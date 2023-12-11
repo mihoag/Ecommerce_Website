@@ -49,4 +49,11 @@ module.exports = {
     );
     return rs;
   },
+  changePass: async (id, password) => {
+    const rs = await db.one(
+      'UPDATE "User" SET "password"=$1 WHERE "userId"=$2 RETURNING *',
+      [password, id]
+    );
+    return rs;
+  },
 };
