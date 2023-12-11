@@ -7,11 +7,14 @@ function route(app) {
     });
   });
 
-
+  // Order routes
+  app.use('/order', require('./sites/order.r'));
+  // Order Detail routes
+  app.use('/orderDetail', require('./sites/orderDetail.r'));
   // Comments routes
-  app.use('/comment', require('./sites/comment.r'))
+  app.use('/comment', require('./sites/comment.r'));
   //Slide routes
-  app.use('/slide', require('./sites/slide.r'))
+  app.use('/slide', require('./sites/slide.r'));
   // user routes
   app.use("/user", require("./sites/home.r"));
   app.use("/auth", require("./sites/auth.r"));
