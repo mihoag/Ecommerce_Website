@@ -101,5 +101,22 @@ module.exports =
         finally {
             dbcn.done();
         }
-    }
+    },
+    update2: async (tbName, entity, fieldName1, fieldName2, value1, value2) => {
+        try {
+            const query = pgp.helpers.update(entity, null, tbName) + ` where "${fieldName1}" = $1` + ` and "${fieldName2}" = $2`;
+            const rs = await db.none(query, [value1], [value2]);
+            return rs;
+        } catch (error) {
+            throw error;
+        }
+    },
+    delete2: async (tbName, fieldname1, fieldname2, value1, value2) => {
+        try {
+            const rs = await db.none(`delete from "${tbName}" where "${fieldname1}" = $1 and "${fieldname2}" = $2`, [value1], [value2]);
+            return rs;
+        } catch (error) {
+            throw error;
+        }
+    },
 }

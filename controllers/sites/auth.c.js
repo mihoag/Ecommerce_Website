@@ -3,10 +3,33 @@ const CryptoJS = require("crypto-js");
 const hashLength = 64;
 const sendMail = require("../../utils/sendEmail.u");
 const tokenM = require("../../models/token.m");
+const forgotCodeM = require("../../models/forgotCode.m");
 const jwt = require("jsonwebtoken");
 const my_cloudinary = require("../../configs/myCloudinary");
+const randomCode = require("../../utils/randomCode");
 
 module.exports = {
+  renderSuccess: async (req, res, next) => {
+    try {
+      res.render("common/success", { layout: false });
+    } catch (error) {
+      next(error);
+    }
+  },
+  renderSignIn: async (req, res, next) => {
+    try {
+      res.render("common/login", { layout: false });
+    } catch (error) {
+      next(error);
+    }
+  },
+  renderSignUp: async (req, res, next) => {
+    try {
+      res.render("common/signup", { layout: false });
+    } catch (error) {
+      next(error);
+    }
+  },
   render: async (req, res, next) => {
     try {
       return res.render("test");
@@ -20,7 +43,11 @@ module.exports = {
       userM.getByEmail(user.email).then((rs) => {
         if (rs.length === 0) {
           // check username
-          res.json({ message: "Email or password incorrect" });
+          res.render("common/login", {
+            layout: false,
+            message: "Username or password is incorrect",
+            user,
+          });
           //TODO: show error message
         } else {
           // check password
@@ -32,13 +59,21 @@ module.exports = {
           }).toString(CryptoJS.enc.Hex);
           if (pwDb !== pwHashed + salt) {
             //TODO: show error message
-            return res.json({ message: "Email or password incorrect" });
+            return res.render("common/login", {
+              layout: false,
+              message: "Username or password is incorrect",
+              user,
+            });
           }
 
           // check account is valid
           if (rs[0].active == false) {
             //TODO: show error message
-            return res.json({ message: "Your account is not active" });
+            return res.render("common/login", {
+              layout: false,
+              message: "Your account is not active",
+              user,
+            });
           }
 
           // all good
@@ -46,8 +81,8 @@ module.exports = {
           req.session.email = rs[0].email;
 
           // TODO: redirect to home page
-          // return res.redirect("/");
-          return res.json({ message: "Login successful" });
+          return res.redirect("/");
+          // return res.json({ message: "Login successful" });
         }
       });
     } catch (error) {
@@ -59,7 +94,7 @@ module.exports = {
       req.session.uid = null;
       req.session.email = null;
       // TODO: redirect to login page
-      res.redirect("/");
+      res.redirect("/auth/login");
     } catch (error) {
       next(error);
     }
@@ -78,6 +113,7 @@ module.exports = {
           }).toString(CryptoJS.enc.Hex);
           newUser.password = pwHashed + salt;
           newUser.avatar = `https://robohash.org/${newUser.email}.png?set=set4`;
+          newUser.public_id = null;
 
           // new user
           userM.add(newUser);
@@ -85,12 +121,16 @@ module.exports = {
           await sendMail.sendMail(newUser.email);
 
           // TODO: render success page
-          return res.json({ message: "User created successfully" });
+          return res.redirect("/auth/success");
         } else {
           newUser.password = pw;
 
           // TODO: re-render register page with error
-          return res.json({ message: "Email is existing" });
+          return res.render("common/signup", {
+            layout: false,
+            message: "Email is existing",
+            user: newUser,
+          });
         }
       });
     } catch (error) {
@@ -120,9 +160,49 @@ module.exports = {
       next(error);
     }
   },
+  change: async (req, res, next) => {
+    try {
+      const { password, newPassword } = req.body;
+      userM.getByEmail(req.session.email).then(async (rs) => {
+        if (rs.length === 0) {
+          // check username
+          res.redirect("/auth/login");
+        } else {
+          // check current password
+          const pwDb = rs[0].password;
+          const salt = pwDb.slice(hashLength);
+          const pwSalt = password + salt;
+          const pwHashed = CryptoJS.SHA3(pwSalt, {
+            outputLength: hashLength * 4,
+          }).toString(CryptoJS.enc.Hex);
+          if (pwDb !== pwHashed + salt) {
+            return res.json({
+              success: false,
+              message: "Password hiện tại không khớp",
+            });
+          }
+
+          // change password
+          const salt2 = Date.now().toString(16);
+          const pwSalt2 = newPassword + salt2;
+          const pwHashed2 = CryptoJS.SHA3(pwSalt2, {
+            outputLength: hashLength * 4,
+          }).toString(CryptoJS.enc.Hex);
+          await userM.changePass(req.session.uid, pwHashed2 + salt2);
+
+          return res.json({
+            success: true,
+            message: "Cập nhật password thành công",
+          });
+        }
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
   edit: async (req, res, next) => {
     try {
-      const user = (await userM.getByEmail("haonhat2729@gmail.com"))[0];
+      const user = (await userM.getByEmail(req.session.email))[0];
       const { name, phoneNumber } = req.body;
       user.name = name;
       user.phoneNumber = phoneNumber;
@@ -155,6 +235,66 @@ module.exports = {
       await my_cloudinary.destroy(haveUser[0].public_id);
       const rs = await userM.delete(req.params?.id);
       return res.json(rs);
+    } catch (error) {
+      next(error);
+    }
+  },
+  forgotPassword: async (req, res, next) => {
+    try {
+      res.render("common/forgotPassword", { layout: false, show: false });
+    } catch (error) {
+      next(error);
+    }
+  },
+  handleForgotPassword: async (req, res, next) => {
+    try {
+      if (req.body?.email && !req.body?.code) {
+        const { email } = req.body;
+        const rs = await userM.getByEmail(email);
+        if (rs.length > 0) {
+          await forgotCodeM.delete(rs[0].userId);
+          const code = randomCode();
+          await forgotCodeM.add(code, rs[0].userId);
+
+          // send mail
+          await sendMail.sendCode(rs[0].email, code);
+        }
+        res.render("common/forgotPassword", {
+          layout: false,
+          show: true,
+          email,
+        });
+      } else {
+        const { code, password, email } = req.body;
+        const rs = await forgotCodeM.getToken(code);
+        if (rs.length > 0) {
+          // change password
+
+          const salt = Date.now().toString(16);
+          const pwSalt = password + salt;
+          const pwHashed = CryptoJS.SHA3(pwSalt, {
+            outputLength: hashLength * 4,
+          }).toString(CryptoJS.enc.Hex);
+          await userM.changePass(rs[0].userId, pwHashed + salt);
+          await forgotCodeM.delete(rs[0].userId);
+          return res.render("common/forgotPassword", {
+            layout: false,
+            show: true,
+            email,
+            code,
+            password,
+            toast: true,
+          });
+        }
+        res.render("common/forgotPassword", {
+          layout: false,
+          show: true,
+          email,
+          code,
+          password,
+          message: "Invalid code, please check your mail",
+        });
+      }
     } catch (error) {
       next(error);
     }
