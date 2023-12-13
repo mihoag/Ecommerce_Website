@@ -1,4 +1,31 @@
-<header>
-    <!-- Admin header content goes here -->
-    <h1>Admin Header</h1>
-</header>
+<div class="header container-fluid w-100 m-0">
+    <div class="row w-100">
+        <div class="col-md-3">
+            <div class="logo ms-4 position-fixed">
+                <a href="/admin/dashboard">
+                    <img src="../img/logo-removebg.png"
+                        alt="Trang chủ Smartphone Store"
+                        title="Trang chủ Smartphone Store">
+                </a>
+            </div>
+        </div>
+        <div class="col-md-9 d-flex justify-content-end fs-5">
+            <div class="form-check form-switch d-inline-block me-5">
+                <input class="form-check-input" type="checkbox" id="modeSwitch" />
+                <label class="form-check-label" for="modeSwitch">
+                    <i class="fa-regular fa-sun"></i>
+                    {{!-- <i class="fa-solid fa-moon" style="color: #576070;"></i> --}}
+                </label>
+            </div>
+            <div class="row">
+                <div class="col-md-9 fs-6 text-end">
+                    <p class="m-0">Hey, <b>phuonghieuto</b></p>
+                    <p>Admin </p>
+                </div>
+                <div class="col-md-3">
+                    avatar
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

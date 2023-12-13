@@ -1,12 +1,6 @@
 function route(app) {
-  // Admin side routes
-  app.get("/admin/dashboard", (req, res) => {
-    res.render("admin/dashboard", {
-      layout: "adminLayout",
-      title: "Admin Dashboard",
-    });
-  });
-
+  // Admin routes
+  app.use('/admin', require('./sites/admin/admin.r'))
 
   // Comments routes
   app.use('/comment', require('./sites/comment.r'))

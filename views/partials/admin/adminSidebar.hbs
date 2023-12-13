@@ -1,0 +1,75 @@
+<aside class=" navbar navbar-vertical rounded-4 my-3 ms-4 me-4 position-fixed" style="width: 20%;"
+  id="sidenav-main">
+  <div class="w-100">
+    <ul class="navbar-nav">
+      <li class="nav-item my-2 {{#if isDashboard}}active{{/if}}">
+        <a class="nav-link active ps-4 py-3 py-3" href="/admin/dashboard">
+          <span class="nav-icon">
+            <i class="fa-solid fa-display" style="color: #47ea1a; max-width: 20px;"></i>
+          </span>
+          <span class="nav-link-text ps-3">Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item my-2 {{#if isCustomers}}active{{/if}}">
+        <a class="nav-link active ps-4 py-3" href="/admin/customers">
+          <span class="nav-icon">
+            <i class="fa-solid fa-users" style="color: #3fd9b3; max-width: 20px;"></i>
+          </span>
+          <span class="nav-link-text ms-3">Customers</span>
+        </a>
+      </li>
+      <li class="nav-item my-2 {{#if isBrands}}active{{/if}}">
+        <a class="nav-link active ps-4 py-3" href="/admin/brands">
+          <span class="nav-icon">
+            <i class="fa-solid fa-tags" style="color: #c07777; max-width: 20px;"></i>
+          </span>
+          <span class="nav-link-text ms-3">Brands</span>
+        </a>
+      </li>
+      <li class="nav-item my-2 {{#if isProducts}}active{{/if}}">
+        <a class="nav-link active ps-4 py-3" href="/admin/products">
+          <span class="nav-icon">
+            <i class="fa-solid fa-mobile-screen-button"
+              style="color: #12799b; max-width: 20px;"></i>
+          </span>
+          <span class="nav-link-text ms-3">Products</span>
+        </a>
+      </li>
+      <li class="nav-item my-2 {{#if isOrders}}active{{/if}}">
+        <a class="nav-link active ps-4 py-3" href="/admin/orders">
+          <span class="nav-icon">
+            <i class="fa-solid fa-boxes-packing"
+              style="color: #368e10; width: 20px"></i>
+          </span>
+          <span class="nav-link-text ms-3">Orders</span>
+        </a>
+      </li>
+      <li class="nav-item my-2 {{#if isStatistics}}active{{/if}}">
+        <a class="nav-link active ps-4 py-3" href="/admin/statistics">
+          <span class="nav-icon">
+            <i class="fa-solid fa-chart-pie"
+              style="color: #ff0000; max-width: 20px;"></i>
+          </span>
+          <span class="nav-link-text ms-3">Statistics</span>
+        </a>
+      </li>
+      <hr>
+      <li class="nav-item my-2 mt-3 {{#if isSettings}}active{{/if}}">
+        <a class="nav-link active ps-4 py-3" href="/admin/settings">
+          <div class="nav-icon">
+            <i class="fa-solid fa-gear" style="color: #1e2a43; max-width: 20px;"></i>
+          </div>
+          <span class="nav-link-text ms-3">Settings</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active ps-4 py-3" href="/login">
+          <div class="nav-icon">
+            <i class="fa-solid fa-arrow-right-from-bracket" style="color: #3cc376; max-width:20px;"></i>
+          </div>
+          <span class="nav-link-text ms-3">Sign out</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</aside>
