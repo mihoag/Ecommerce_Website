@@ -1,0 +1,365 @@
+<section>
+    <div class="banner">
+    </div> <!-- End Banner -->
+    <br>
+    <div class="companyMenu group flexContain"><a href="index.html?company=Apple"><img
+                src="img/company/Apple.jpg"></a><a href="index.html?company=Samsung"><img
+                src="img/company/Samsung.jpg"></a><a href="index.html?company=Oppo"><img
+                src="img/company/Oppo.jpg"></a><a href="index.html?company=Nokia"><img
+                src="img/company/Nokia.jpg"></a><a href="index.html?company=Huawei"><img
+                src="img/company/Huawei.jpg"></a><a href="index.html?company=Xiaomi"><img
+                src="img/company/Xiaomi.png"></a><a href="index.html?company=Realme"><img
+                src="img/company/Realme.png"></a><a href="index.html?company=Vivo"><img
+                src="img/company/Vivo.jpg"></a><a href="index.html?company=Philips"><img
+                src="img/company/Philips.jpg"></a><a href="index.html?company=Mobell"><img
+                src="img/company/Mobell.jpg"></a><a href="index.html?company=Mobiistar"><img
+                src="img/company/Mobiistar.jpg"></a><a href="index.html?company=Itel"><img
+                src="img/company/Itel.jpg"></a><a href="index.html?company=Coolpad"><img
+                src="img/company/Coolpad.png"></a><a href="index.html?company=HTC"><img src="img/company/HTC.jpg"></a><a
+            href="index.html?company=Motorola"><img src="img/company/Motorola.jpg"></a></div>
+
+    <div class="flexContain">
+
+        <div class="pricesRangeFilter dropdown">
+            <button class="dropbtn">Giá tiền</button>
+            <div class="dropdown-content"><a href="index.html?price=0-2000000">Dưới 2 triệu</a><a
+                    href="index.html?price=2000000-4000000">Từ 2 - 4 triệu</a><a
+                    href="index.html?price=4000000-7000000">Từ
+                    4 - 7 triệu</a><a href="index.html?price=7000000-13000000">Từ 7 - 13 triệu</a><a
+                    href="index.html?price=13000000-0">Trên 13 triệu</a></div>
+        </div>
+
+        <div class="promosFilter dropdown">
+            <button class="dropbtn">Khuyến mãi</button>
+            <div class="dropdown-content"><a href="index.html?promo=giamgia">Giảm giá</a><a
+                    href="index.html?promo=tragop">Trả góp</a><a href="index.html?promo=moiramat">Mới ra mắt</a><a
+                    href="index.html?promo=giareonline">Giá rẻ online</a></div>
+        </div>
+
+        <div class="starFilter dropdown">
+            <button class="dropbtn">Số lượng sao</button>
+            <div class="dropdown-content"><a href="index.html?star=3">Trên 2 sao</a><a href="index.html?star=4">Trên 3
+                    sao</a><a href="index.html?star=5">Trên 4 sao</a></div>
+        </div>
+
+        <div class="sortFilter dropdown">
+            <button class="dropbtn">Sắp xếp</button>
+            <div class="dropdown-content"><a href="index.html?sort=price-ascending">Giá tăng dần</a><a
+                    href="index.html?sort=price-decrease">Giá giảm dần</a><a href="index.html?sort=star-ascending">Sao
+                    tăng dần</a><a href="index.html?sort=star-decrease">Sao giảm dần</a><a
+                    href="index.html?sort=rateCount-ascending">Đánh giá tăng dần</a><a
+                    href="index.html?sort=rateCount-decrease">Đánh giá giảm dần</a><a
+                    href="index.html?sort=name-ascending">Tên A-Z</a><a href="index.html?sort=name-decrease">Tên Z-A</a>
+            </div>
+        </div>
+
+    </div> <!-- End khung chọn bộ lọc -->
+
+    <!-- Div hiển thị khung sp hot, khuyến mãi, mới ra mắt ... -->
+    <div class="contain-khungSanPham" id="showallproduct">
+        <div class="khungSanPham" style="border-color: #ff9c00">
+            <h3 class="tenKhung"
+                style="background-image: linear-gradient(120deg, #ff9c00 0%, #ec1f1f 50%, #ff9c00 100%);">*
+                TẤT CẢ SẢN PHẨM
+                *</h3>
+            <div class="listSpTrongKhung flexContain" id="listproduct">
+                {{#each allProduct}}
+                <li class="sanPham">
+                    <a href="/product/detailProducts?id={{productId}}">
+                        <img src="{{image}}" alt="">
+                        <h3>{{name}}</h3>
+                        <div class="price">
+                            <strong>{{convertToVND giagiam}}</strong>
+                            <span>{{convertToVND price}}</span>
+                        </div>
+                        <div class="ratingresult">
+                            {{{showRating tb}}}
+                            <span>{{danhgia}} đánh giá</span>
+                        </div>
+
+                        <div class="tooltip">
+                            <button class="themvaogio">
+                                <span class="tooltiptext" style="font-size: 15px;">Thêm vào giỏ</span>
+                                +
+                            </button>
+                        </div>
+                    </a>
+                </li>
+                {{/each}}
+            </div>
+            <div class="pagination" id="page">
+                <a href="#"><i class="fa fa-angle-left"></i></a>
+                <a href="#">1</a>
+                <a href="#" class="current">2</a>
+                <a href="#">3</a>
+                <a href="#"><i class="fa fa-angle-right"></i></a>
+            </div>
+        </div>
+        <hr>
+        <!--Phan trang-->
+
+    </div>
+
+    <div class="contain-khungSanPham hidden" id="searchproduct">
+        <div class="khungSanPham" style="border-color: #ff9c00">
+            <h3 class="tenKhung"
+                style="background-image: linear-gradient(120deg, #ff9c00 0%, #ec1f1f 50%, #ff9c00 100%);">*
+                SẢN PHẨM TÌM KIẾM THEO TỪ KHÓA
+                *</h3>
+            <div class="listSpTrongKhung flexContain" id="listproductsearch">
+            </div>
+            <div class="pagination" id="pagesearch">
+                <a href="#"><i class="fa fa-angle-left"></i></a>
+                <a href="#">1</a>
+                <a href="#" class="current">2</a>
+                <a href="#">3</a>
+                <a href="#"><i class="fa fa-angle-right"></i></a>
+            </div>
+        </div>
+        <hr>
+        <!--Phan trang-->
+
+    </div>
+</section>
+
+<div class="plc">
+    <section>
+        <ul class="flexContain">
+            <li>Giao hàng hỏa tốc trong 1 giờ</li>
+            <li>Thanh toán linh hoạt: tiền mặt, visa / master, trả góp</li>
+            <li>Trải nghiệm sản phẩm tại nhà</li>
+            <li>Lỗi đổi tại nhà trong 1 ngày</li>
+            <li>Hỗ trợ suốt thời gian sử dụng.
+                <br>Hotline:
+                <a href="tel:12345678" style="color: #288ad6;">12345678</a>
+            </li>
+        </ul>
+    </section>
+</div>
+
+
+<i class="fa fa-arrow-up" id="goto-top-page" onclick="gotoTop()"></i>
+<!-- Code injected by live-server -->
+
+<script>
+    var page = document.getElementById("page");
+    let listproduct = document.getElementById("listproduct");
+    var showallproduct = document.getElementById("showallproduct");
+    var searchproduct = document.getElementById("searchproduct");
+    var listproductsearch = document.getElementById("listproductsearch");
+    var pagesearch = document.getElementById("pagesearch");
+    var search = document.getElementById("search");
+    var searchbox = document.getElementById("search-box");
+    function searchByKeyword(keyword, page) {
+        data = { currentPage: page, keyword: keyword }
+        $.ajax({
+            type: "GET",
+            url: "/product/searchproduct",
+            data: data,
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                renderSearchProduct(data.listproduct);
+                let totalPage = data.totalPage;
+                let currentPage = data.currentPage;
+                renderSearchPagination(totalPage, currentPage)
+            },
+            error: function (result) {
+                console.log(result);
+            }
+        });
+    }
+    function searchP() {
+        let keyword = searchbox.value;
+
+        if (keyword == "") {
+            showallproduct.classList.remove("hidden");
+            searchproduct.classList.add("hidden");
+        }
+        else {
+            showallproduct.classList.add("hidden");
+            searchproduct.classList.remove("hidden");
+            searchByKeyword(keyword, 1);
+        }
+    }
+    searchbox.addEventListener('input', function () {
+        searchP();
+    })
+
+
+
+    function handleClick(page) {
+        //console.log(page.getAttribute("id"))
+        //console.log(ip);
+        data = { currentPage: page.getAttribute("id") }
+        $.ajax({
+            type: "GET",
+            url: "/product/getPerpage",
+            data: data,
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+
+                //console.log(data);
+                let totalPage = data.totalPage;
+                let currentPage = data.currentPage;
+                //let listreview = data.listreview;
+                //console.log(data.listreview);
+                renderPagination(totalPage, currentPage);
+                renderProduct(data.listproduct);
+            },
+            error: function (result) {
+
+                console.log(result);
+            }
+        });
+
+
+    }
+
+    function handleClick1(page) {
+        let keyword = searchbox.value;
+        searchByKeyword(keyword, page.getAttribute("id"))
+    }
+
+    function renderPagination(totalPage, currentPage) {
+        let pages = '';
+        if (currentPage != 1) {
+            pages += `<a href="#"><i class="fa fa-angle-left"></i></a>`
+        }
+        for (let i = 1; i <= totalPage; i++) {
+            if (i == currentPage) {
+                pages += `<a id='${i}'  class="current" onclick="handleClick(this)">${i}</a>`;
+            }
+            else {
+                pages += `<a id='${i}'   onclick="handleClick(this)">${i}</a>`;
+            }
+        }
+
+        if (currentPage != totalPage) {
+            pages += `<a href="#"><i class="fa fa-angle-right"></i></a>`
+        }
+
+        //console.log(pages);
+        //console.log(page);
+        page.innerHTML = pages;
+    }
+
+    function renderSearchPagination(totalPage, currentPage) {
+        let pages = '';
+        if (currentPage != 1) {
+            pages += `<a href="#"><i class="fa fa-angle-left"></i></a>`
+        }
+        for (let i = 1; i <= totalPage; i++) {
+            if (i == currentPage) {
+                pages += `<a id='${i}'  class="current" onclick1="handleClick(this)">${i}</a>`;
+            }
+            else {
+                pages += `<a id='${i}'   onclick="handleClick1(this)">${i}</a>`;
+            }
+        }
+
+        if (currentPage != totalPage) {
+            pages += `<a href="#"><i class="fa fa-angle-right"></i></a>`
+        }
+
+        //console.log(pages);
+        //console.log(page);
+        pagesearch.innerHTML = pages;
+    }
+
+
+    function showRating(tb) {
+        let content = '';
+        var i = 0;
+        for (i = 0; i < tb; i++) {
+            content += '<i class="fa fa-star"></i>'
+        }
+        while (i < 5) {
+            content += '<i class="fa fa-star-o"></i>'
+            i++;
+        }
+        return content;
+    }
+    function convertToVND(number) {
+        // Using toLocaleString to format the number as currency in VND
+        let vndFormatted = number.toLocaleString('vi-VN', {
+            style: 'currency',
+            currency: 'VND'
+        });
+
+        return vndFormatted;
+    }
+
+    function renderSearchProduct(products) {
+        let content = '';
+        for (let i = 0; i < products.length; i++) {
+            content += `<li class="sanPham">
+                    <a href="/product/detailProducts?id=${products[i].productId}">
+                        <img src="${products[i].image}" alt="">
+                        <h3>${products[i].name}</h3>
+                        <div class="price">
+                            <strong>${convertToVND(products[i].giagiam)}</strong>
+                            <span>${convertToVND(products[i].price)}</span>
+                        </div>
+                        <div class="ratingresult">
+                            ${showRating(products[i].tb)}
+                            <span>${products[i].danhgia} đánh giá</span>
+                        </div>
+                    </a>
+                </li>`
+        }
+        listproductsearch.innerHTML = content;
+    }
+    function renderProduct(products) {
+        let content = '';
+        for (let i = 0; i < products.length; i++) {
+            content += `<li class="sanPham">
+                    <a href="/product/detailProducts?id=${products[i].productId}">
+                        <img src="${products[i].image}" alt="">
+                        <h3>${products[i].name}</h3>
+                        <div class="price">
+                            <strong>${convertToVND(products[i].giagiam)}</strong>
+                            <span>${convertToVND(products[i].price)}</span>
+                        </div>
+                        <div class="ratingresult">
+                            ${showRating(products[i].tb)}
+                            <span>${products[i].danhgia} đánh giá</span>
+                        </div>
+                    </a>
+                </li>`
+        }
+
+        listproduct.innerHTML = content;
+    }
+
+
+    // console.log($('#search-box'))
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        $.ajax({
+            type: "GET",
+            url: "/product/getPerpage",
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+
+                //console.log(data);
+                let totalPage = data.totalPage;
+                let currentPage = data.currentPage;
+
+                //console.log(data.listreview);
+                renderPagination(totalPage, currentPage);
+                renderProduct(data.listproduct);
+            },
+            error: function (result) {
+                console.log(result);
+            }
+        });
+
+
+    })
+</script>

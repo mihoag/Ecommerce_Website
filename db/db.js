@@ -35,7 +35,7 @@ module.exports =
         try {
             dbcn = await db.connect();
             data = await dbcn.any(`select * from "${tbName1}" c, "${tbName2}" u where c."${joinName1}" = u."${joinName2}" and c."${fieldName}" =  $1 `, [value]);
-            //  console.log(data)
+
             return data;
         } catch (error) {
             throw error;
@@ -105,7 +105,8 @@ module.exports =
     update2: async (tbName, entity, fieldName1, fieldName2, value1, value2) => {
         try {
             const query = pgp.helpers.update(entity, null, tbName) + ` where "${fieldName1}" = $1` + ` and "${fieldName2}" = $2`;
-            const rs = await db.none(query, [value1], [value2]);
+            // console.log(query);
+            const rs = await db.none(query, [value1, value2]);
             return rs;
         } catch (error) {
             throw error;

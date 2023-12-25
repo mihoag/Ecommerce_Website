@@ -5,6 +5,7 @@ const my_cloudinary = require("../../configs/myCloudinary");
 module.exports = {
   renderPage: async (req, res, next) => {
     try {
+
       res.render("test/test_product", { layout: false });
     } catch (error) {
       next(error);
@@ -95,4 +96,78 @@ module.exports = {
       next(error);
     }
   },
+
+  getProductPerPage: async (req, res, next) => {
+    try {
+      let data = await productM.getAll();
+      // console.log(data)
+      let result = [];
+      const per_page = 10;
+      let totalPage = parseInt(parseInt(data.length) / parseInt(per_page));
+      if (data.length % per_page != 0) {
+        totalPage++;
+      }
+
+      let currentPage = req.query.currentPage;
+      if (currentPage === undefined) {
+        currentPage = 1;
+      }
+      let start = (currentPage - 1) * per_page;
+      for (let i = start; i < start + per_page; i++) {
+        if (i >= data.length) {
+          break;
+        }
+        result.push(data[i]);
+      }
+      /// Tao mot mang tu 1,2..., totalPae
+      res.json({ listproduct: result, totalPage: totalPage, currentPage: currentPage });
+    } catch (error) {
+      next(error);
+    }
+  },
+  getSearchProductPerPage: async (req, res, next) => {
+    try {
+      let keyword = req.query.keyword;
+      let data = await productM.selectProductByNameandCate(keyword);
+      // console.log(data)
+      let result = [];
+      const per_page = 10;
+      let totalPage = parseInt(parseInt(data.length) / parseInt(per_page));
+      if (data.length % per_page != 0) {
+        totalPage++;
+      }
+
+      let currentPage = req.query.currentPage;
+      if (currentPage === undefined) {
+        currentPage = 1;
+      }
+      let start = (currentPage - 1) * per_page;
+      for (let i = start; i < start + per_page; i++) {
+        if (i >= data.length) {
+          break;
+        }
+        result.push(data[i]);
+      }
+      /// Tao mot mang tu 1,2..., totalPae
+      res.json({ listproduct: result, totalPage: totalPage, currentPage: currentPage });
+    } catch (error) {
+      next(error);
+    }
+  }
+  ,
+  showDetailProduct: async (req, res, next) => {
+    try {
+      let IDproduct = req.query.id;
+      let p = await productM.getByID(IDproduct);
+      let idCate = p.typeId;
+
+      console.log(idCate);
+      let relatedProduct = await productM.getProductByCate(idCate)
+      console.log(relatedProduct);
+      //console.log(p);
+      res.render("common/detailProduct", { product: p, isDetail: true, relatedProduct: relatedProduct });
+    } catch (error) {
+      next(error);
+    }
+  }
 };

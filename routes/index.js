@@ -1,3 +1,5 @@
+const authMiddleware = require(".././middlewares/auth.mws");
+
 function route(app) {
   // Admin routes
   app.use('/admin', require('./sites/admin/admin.r'))
@@ -19,17 +21,17 @@ function route(app) {
   // detail User routes
   app.use("/detailUser", require('./sites/detailUser.r'));
   // cart routes
-  app.use("/cart", require("./sites/cart.r"));
+  app.use("/cart", authMiddleware.mustLogin, require("./sites/cart.r"));
 
 
-  app.use("/news", require('./sites/common/news.r'));
-  app.use("/contact", require('./sites/common/contact.r'));
-  app.use("/hiring", require('./sites/common/hiring.r'));
-  app.use("/maintenance", require('./sites/common/maintenance.r'));
-  app.use("/about", require('./sites/common/about.r'));
+  app.use("/news", authMiddleware.mustLogin, require('./sites/common/news.r'));
+  app.use("/contact", authMiddleware.mustLogin, require('./sites/common/contact.r'));
+  app.use("/hiring", authMiddleware.mustLogin, require('./sites/common/hiring.r'));
+  app.use("/maintenance", authMiddleware.mustLogin, require('./sites/common/maintenance.r'));
+  app.use("/about", authMiddleware.mustLogin, require('./sites/common/about.r'));
   app.use("/login", require('./sites/common/login.r'));
   app.use("/signup", require('./sites/common/signup.r'))
-  app.use("/detailProducts", require('./sites/common/detailProduct.r'));
+  app.use("/showall", authMiddleware.mustLogin, require('./sites/common/showallProduct.r'))
 
   app.use("/", require('./sites/common/index.r'));
   app.use((req, res, next) => {

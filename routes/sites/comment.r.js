@@ -5,7 +5,7 @@ const commentController = require('../../controllers/sites/comment.c')
 
 router.get('/show', commentController.showDialog)
 router.get('/insert', commentController.insertComment)
-router.get('/:id', commentController.getByProductId)
+router.get('/:id', commentController.getPerpageByProductId)
 
 router.get('/', commentController.getAll)
 
