@@ -1,11 +1,11 @@
 const productM = require("../../models/product.m");
 const typeM = require("../../models/product.m");
 const my_cloudinary = require("../../configs/myCloudinary");
+const moment = require("moment");
 
 module.exports = {
   renderPage: async (req, res, next) => {
     try {
-
       res.render("test/test_product", { layout: false });
     } catch (error) {
       next(error);
@@ -96,11 +96,14 @@ module.exports = {
       next(error);
     }
   },
-
   getProductPerPage: async (req, res, next) => {
     try {
-      let data = await productM.getAll();
-      // console.log(data)
+      let data;
+      if (req.query?.showType === 'admin') {
+        data = await productM.getMoreInfo();
+      }
+      else data = await productM.getAll();
+
       let result = [];
       const per_page = 10;
       let totalPage = parseInt(parseInt(data.length) / parseInt(per_page));
@@ -117,10 +120,18 @@ module.exports = {
         if (i >= data.length) {
           break;
         }
+        if (data[i].releaseDate !== undefined) {
+          data[i].releaseDate = moment(data[i].releaseDate).format('MMM Do YY')
+        }
         result.push(data[i]);
       }
+
       /// Tao mot mang tu 1,2..., totalPae
-      res.json({ listproduct: result, totalPage: totalPage, currentPage: currentPage });
+      res.json({
+        listproduct: result,
+        totalPage: totalPage,
+        currentPage: currentPage,
+      });
     } catch (error) {
       next(error);
     }
@@ -128,8 +139,13 @@ module.exports = {
   getSearchProductPerPage: async (req, res, next) => {
     try {
       let keyword = req.query.keyword;
-      let data = await productM.selectProductByNameandCate(keyword);
-      // console.log(data)
+      let data;
+      if (req.query?.showType === 'admin') {
+        data = await productM.getSearchMoreInfo(keyword);
+      }
+      else
+        data = await productM.selectProductByNameandCate(keyword);
+
       let result = [];
       const per_page = 10;
       let totalPage = parseInt(parseInt(data.length) / parseInt(per_page));
@@ -146,28 +162,38 @@ module.exports = {
         if (i >= data.length) {
           break;
         }
+        if (data[i].releaseDate !== undefined) {
+          data[i].releaseDate = moment(data[i].releaseDate).format('MMM Do YY')
+        }
         result.push(data[i]);
       }
       /// Tao mot mang tu 1,2..., totalPae
-      res.json({ listproduct: result, totalPage: totalPage, currentPage: currentPage });
+      res.json({
+        listproduct: result,
+        totalPage: totalPage,
+        currentPage: currentPage,
+      });
     } catch (error) {
       next(error);
     }
-  }
-  ,
+  },
   showDetailProduct: async (req, res, next) => {
     try {
       let IDproduct = req.query.id;
       let p = await productM.getByID(IDproduct);
       let idCate = p.typeId;
 
-      console.log(idCate);
-      let relatedProduct = await productM.getProductByCate(idCate)
-      console.log(relatedProduct);
+      //console.log(idCate);
+      let relatedProduct = await productM.getProductByCate(idCate);
+      //console.log(relatedProduct);
       //console.log(p);
-      res.render("common/detailProduct", { product: p, isDetail: true, relatedProduct: relatedProduct });
+      res.render("common/detailProduct", {
+        product: p,
+        isDetail: true,
+        relatedProduct: relatedProduct,
+      });
     } catch (error) {
       next(error);
     }
-  }
+  },
 };

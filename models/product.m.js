@@ -1,6 +1,10 @@
 const { pgp, db } = require("../configs/DBconnection");
 
 module.exports = {
+  getMoreInfo: async () => {
+    const rs = await db.any('select p."productId", p."name" , p.price, p.cost, p.image,  avg((100-p.discount)*p.price)/100 as giagiam, p.discount, p."releaseDate", p.total, t.name as type from "Product" p , "Type" t  where p."typeId" = t."typeId" group by p."productId", t.name');
+    return rs;
+  },
   getAll: async () => {
     const rs = await db.any('select p."productId", p."name" , p.price, p.image,  avg((100-p.discount)*p.price)/100 as giagiam , floor(avg(c.rate)) as tb, count(*) as danhgia from "Product" p , "Comment" c where p."productId" = c."productId" group by p."productId", p.price');
     return rs;
@@ -88,6 +92,9 @@ module.exports = {
   selectProductByNameandCate: async (keyword) => {
     const rs = await db.any(`select p."productId", p."name", p.discount , p.price,p.image, avg((100-p.discount)*p.price)/100 as giagiam , floor(avg(c.rate)) as tb, count(*) as danhgia  from "Product" p LEFT join  "Comment" c on p."productId" = c."productId", "Type" t  where t."typeId" = p."typeId" and (p."name" ilike '%` + keyword + `%' or t."name" ilike '%` + keyword + `%' ) group by p."productId"`);
     return rs;
+  },
+  getSearchMoreInfo: async (keyword) => {
+    const rs = await db.any(`select p."productId", p."name" , p.price, p.cost, p.image,  avg((100-p.discount)*p.price)/100 as giagiam, p.discount, p."releaseDate", p.total, t.name as type from "Product" p , "Type" t  where p."typeId" = t."typeId" and (p."name" ilike '%${keyword}%' or t."name" ilike '%${keyword}%') group by p."productId", t.name`);
+    return rs;
   }
-
 };

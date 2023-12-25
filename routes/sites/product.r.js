@@ -25,7 +25,9 @@ router.post(
   controller.update
 );
 router.post("/delete/:id", authMiddleware.isAdmin, controller.delete);
-router.get("/getPerpage", authMiddleware.mustLogin, controller.getProductPerPage)
+// TODO: add auth middleware
+router.get("/getPerpage", controller.getProductPerPage)
+// END TODO
 router.get("/detailProducts", authMiddleware.mustLogin, controller.showDetailProduct)
-router.get("/searchproduct", authMiddleware.mustLogin, controller.getSearchProductPerPage)
+router.get("/searchproduct", controller.getSearchProductPerPage)
 module.exports = router;

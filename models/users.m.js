@@ -1,6 +1,14 @@
 const { pgp, db } = require("../configs/DBconnection");
 
 module.exports = {
+  getUser: async () => {
+    const rs = await db.any(`SELECT u.*, sum(o."totalCost") as total FROM "User" u, "Order" o where role = 'user' and u."userId" = o."userId" group by u."userId" order by u.name`);
+    return rs;
+  },
+  getUserSearch: async (keyword) => {
+    const rs = await db.any(`SELECT u.*, sum(o."totalCost") as total FROM "User" u, "Order" o where (u.name ilike '%${keyword}%' or u."phoneNumber" ilike '%${keyword}%') and role = 'user' and u."userId" = o."userId" group by u."userId" order by u.name`);
+    return rs;
+  },
   getAll: async () => {
     const rs = await db.any('SELECT * FROM "User"');
     return rs;
@@ -14,9 +22,12 @@ module.exports = {
     return rs;
   },
   add: async (data) => {
+    let ID = await db.one('SELECT MAX("userId") FROM "User"');
+    ID = ID.max + 1;
     const rs = await db.one(
-      'INSERT INTO "User"("name","phoneNumber","email","password", "avatar", "public_id", "gender") VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+      'INSERT INTO "User"("userId", "name","phoneNumber","email","password", "avatar", "public_id", "gender") VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
       [
+        ID,
         data.name,
         data.phoneNumber,
         data.email,
