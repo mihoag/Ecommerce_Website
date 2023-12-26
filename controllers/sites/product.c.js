@@ -121,7 +121,8 @@ module.exports = {
           break;
         }
         if (data[i].releaseDate !== undefined) {
-          data[i].releaseDate = moment(data[i].releaseDate).format('MMM Do YY')
+          data[i].releaseDate_m = moment(data[i].releaseDate).format('DD MMM YYYY')
+          data[i].releaseDate = moment(data[i].releaseDate).format('DD MMM YY')
         }
         result.push(data[i]);
       }
@@ -163,7 +164,8 @@ module.exports = {
           break;
         }
         if (data[i].releaseDate !== undefined) {
-          data[i].releaseDate = moment(data[i].releaseDate).format('MMM Do YY')
+          data[i].releaseDate_m = moment(data[i].releaseDate).format('DD MMM YYYY')
+          data[i].releaseDate = moment(data[i].releaseDate).format('DD MMM YY')
         }
         result.push(data[i]);
       }

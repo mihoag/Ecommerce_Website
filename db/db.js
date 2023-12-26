@@ -120,4 +120,30 @@ module.exports =
             throw error;
         }
     },
+
+    getAllOrder: async () => {
+        try {
+            const rs = db.any(`select o.*, u.name as name from "Order" o, "User" u where u."userId" = o."userId" order by o."timeOrder" desc`);
+            return rs;
+        } catch (error) {
+            throw error;
+        }
+    },
+    getDetailOrder: async (orderId) => {
+        try {
+            const rs = db.any(`select o.*, u.name as name, u.email, p.price, p.discount, p.name as pn, d.quantity from "Order" o, "User" u, "Product" p, "OrderDetail" d where o."orderId" = ${orderId} and u."userId" = o."userId" and d."orderId" = ${orderId} and p."productId" = d."productId"`);
+            return rs;
+        } catch (error) {
+            throw error;
+        }
+    },
+
+    getSearchOrder: async (keyword) => {
+        try {
+            const rs = db.any(`select o.*, u.name as name from "Order" o, "User" u where u."userId" = o."userId" and (u."name" ilike '%${keyword}%' or u."phoneNumber" ilike '%${keyword}%') order by o."timeOrder" desc`);
+            return rs;
+        } catch (error) {
+            throw error;
+        }
+    }
 }

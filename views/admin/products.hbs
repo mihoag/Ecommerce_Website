@@ -93,7 +93,7 @@
 
   function handleClick(page) {
     let keyword = document.querySelector("#search-name").value;
-    data = { currentPage: $(page).attr("data-id") }
+    data = { currentPage: $(page).attr("data-id"), showType: "admin" }
     if (keyword == "") {
       $.ajax({
         type: "GET",
@@ -180,7 +180,7 @@
                             </tr>
                             <tr>
                               <th width="20%">Annouced</th>
-                              <td>${products[i].releaseDate}</td>
+                              <td>${products[i].releaseDate_m}</td>
                             </tr>
                             <tr>
                               <th width="20%">Cost price</th>

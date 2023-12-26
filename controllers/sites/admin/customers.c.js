@@ -1,4 +1,5 @@
 const userM = require("../../../models/users.m")
+const moment = require("moment");
 
 class customersController {
   async showCustomers(req, res, next) {
@@ -36,6 +37,10 @@ class customersController {
           break;
         }
         data[i].password = ""
+        data[i].timeJoined_m = moment(data[i].timeJoined).format('DD MMM YYYY')
+        data[i].lastOnline_m = moment(data[i].lastOnline).format('DD MMM YYYY')
+        data[i].timeJoined = moment(data[i].timeJoined).format('DD MMM YY')
+        data[i].lastOnline = moment(data[i].lastOnline).format('DD MMM YY')
         result.push(data[i]);
       }
       /// Tao mot mang tu 1,2..., totalPae
@@ -70,6 +75,11 @@ class customersController {
         if (i >= data.length) {
           break;
         }
+        data[i].password = ""
+        data[i].timeJoined_m = moment(data[i].timeJoined).format('DD MMM YYYY')
+        data[i].lastOnline_m = moment(data[i].lastOnline).format('DD MMM YYYY')
+        data[i].timeJoined = moment(data[i].timeJoined).format('DD MMM YY')
+        data[i].lastOnline = moment(data[i].lastOnline).format('DD MMM YY')
         result.push(data[i]);
       }
       /// Tao mot mang tu 1,2..., totalPae

@@ -5,4 +5,5 @@ const authMiddleware = require("../../../middlewares/auth.mws");
 
 router.get("/", authMiddleware.dontLogin, homeController.signIn);
 
+
 module.exports = router;

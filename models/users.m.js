@@ -24,8 +24,10 @@ module.exports = {
   add: async (data) => {
     let ID = await db.one('SELECT MAX("userId") FROM "User"');
     ID = ID.max + 1;
+    let active = false;
+    if (data.active) active = true;
     const rs = await db.one(
-      'INSERT INTO "User"("userId", "name","phoneNumber","email","password", "avatar", "public_id", "gender") VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+      'INSERT INTO "User"("userId", "name","phoneNumber","email","password", "avatar", "public_id", "gender", "active") VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
       [
         ID,
         data.name,
@@ -35,6 +37,7 @@ module.exports = {
         data.avatar,
         data.public_id,
         data.gender,
+        active
       ]
     );
     return rs;
@@ -67,4 +70,11 @@ module.exports = {
     );
     return rs;
   },
+  updateLastOnline: async (id) => {
+    const rs = await db.one(
+      'UPDATE "User" SET "lastOnline"=CURRENT_DATE WHERE "userId"=$1 RETURNING *',
+      [id]
+    );
+    return rs;
+  }
 };

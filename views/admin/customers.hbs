@@ -117,9 +117,9 @@
                   <img src="${customers[i].avatar}" width="25" style="border-radius: 50%"> 
                   <span>${customers[i].name}</span>
                 </td>
-                <td>1 Oct, 21</td>
+                <td>${customers[i].timeJoined}</td>
                 <td class="text-center"><span class="fw-bolder">${convertToVND(customers[i].total)}</span></td>
-                <td>1 Dec, 23</td>
+                <td>${customers[i].lastOnline}</td>
                 <td class="text-center">
                   <button class="btn btn-xs btn-light detail-btn" data-id=${i} onclick="toggleDetail(this)">
                     <i class="fa-solid fa-angles-down" style="color: #a5d737;"></i>
@@ -168,12 +168,12 @@
                             </tr>
                             <tr>
                               <th width="20%">Joined</th>
-                              <td>1 Oct, 2021</td>
+                              <td>${customers[i].timeJoined_m}</td>
                             </tr>
                             <tr>
                               <th width="20%">Last
                                 online</th>
-                              <td>1 Dec, 2023</td>
+                              <td>${customers[i].lastOnline_m}</td>
                             </tr>
                             <tr>
                               <th width="20%">Total
