@@ -96,5 +96,33 @@ module.exports = {
   getSearchMoreInfo: async (keyword) => {
     const rs = await db.any(`select p."productId", p."name" , p.price, p.cost, p.image,  avg((100-p.discount)*p.price)/100 as giagiam, p.discount, p."releaseDate", p.total, t.name as type from "Product" p , "Type" t  where p."typeId" = t."typeId" and (p."name" ilike '%${keyword}%' or t."name" ilike '%${keyword}%') group by p."productId", t.name`);
     return rs;
-  }
+  },
+  getProductByType: async (name) => {
+    const rs = await db.any(`select p."productId", p."name", p.discount , p.price,p.image, avg((100-p.discount)*p.price)/100 as giagiam , floor(avg(c.rate)) as tb, count(*) as danhgia  from "Product" p LEFT join  "Comment" c on p."productId" = c."productId" LEFT join "Type" t on p."typeId" = t."typeId" where t."name" = '${name}' group by p."productId"`);
+    return rs;
+  },
+  getProductByCost: async (begin, end) => {
+    if (end == 0) {
+      const maxDiscountedPrice = await db.one(
+          `SELECT MAX((100 - p.discount) * p.price) / 100 AS "maxDiscountedPrice"
+          FROM "Product" p`
+      );
+      end = maxDiscountedPrice.maxDiscountedPrice;
+      //console.log(end);
+    }
+    const rs = await db.any(`select p."productId", p."name", p.discount , p.price,p.image, avg((100-p.discount)*p.price)/100 as giagiam , floor(avg(c.rate)) as tb, count(*) as danhgia  from "Product" p LEFT join  "Comment" c on p."productId" = c."productId" group by p."productId" having avg((100 - p.discount) * p.price) / 100 between ${begin} and ${end}`)
+    return rs;
+  },
+  getProductByStar: async (star) => {
+    const rs = await db.any(`select p."productId", p."name", p.discount , p.price,p.image, avg((100-p.discount)*p.price)/100 as giagiam , floor(avg(c.rate)) as tb, count(*) as danhgia  from "Product" p LEFT join  "Comment" c on p."productId" = c."productId" group by p."productId" having floor(avg(c.rate)) = ${star}`)
+    return rs;
+  },
+  getProductAsc: async (filter) => {
+    const rs = await db.any(`select p."productId", p."name", p.discount , p.price,p.image, avg((100-p.discount)*p.price)/100 as giagiam , floor(avg(c.rate)) as tb, count(*) as danhgia  from "Product" p LEFT join  "Comment" c on p."productId" = c."productId" group by p."productId" order by ${filter} asc`)
+    return rs;
+  },
+  getProductDesc: async (filter) => {
+    const rs = await db.any(`select p."productId", p."name", p.discount , p.price,p.image, avg((100-p.discount)*p.price)/100 as giagiam , floor(avg(c.rate)) as tb, count(*) as danhgia  from "Product" p LEFT join  "Comment" c on p."productId" = c."productId" group by p."productId" order by ${filter} desc`)
+    return rs;
+  },
 };

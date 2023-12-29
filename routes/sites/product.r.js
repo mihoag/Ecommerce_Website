@@ -30,4 +30,6 @@ router.get("/getPerpage", controller.getProductPerPage)
 // END TODO
 router.get("/detailProducts", authMiddleware.mustLogin, controller.showDetailProduct)
 router.get("/searchproduct", controller.getSearchProductPerPage)
+router.get("/filterproduct", controller.filterProductPerPage)
+
 module.exports = router;

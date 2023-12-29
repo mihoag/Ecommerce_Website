@@ -64,7 +64,7 @@ module.exports =
     insert: async (tbName, entity) => {
         try {
             const query = pgp.helpers.insert(entity, null, tbName);
-            console.log(query)
+            //console.log(query)
             const data = await db.one(query + ` returning *`);
             return data;
         } catch (error) {
@@ -105,7 +105,7 @@ module.exports =
     update2: async (tbName, entity, fieldName1, fieldName2, value1, value2) => {
         try {
             const query = pgp.helpers.update(entity, null, tbName) + ` where "${fieldName1}" = $1` + ` and "${fieldName2}" = $2`;
-            // console.log(query);
+            //console.log(query);
             const rs = await db.none(query, [value1, value2]);
             return rs;
         } catch (error) {
@@ -114,7 +114,9 @@ module.exports =
     },
     delete2: async (tbName, fieldname1, fieldname2, value1, value2) => {
         try {
-            const rs = await db.none(`delete from "${tbName}" where "${fieldname1}" = $1 and "${fieldname2}" = $2`, [value1], [value2]);
+            const query = `delete from "${tbName}" where "${fieldname1}" = $1 and "${fieldname2}" = $2`;
+            //console.log(query);
+            const rs = await db.none(query, [value1, value2]);
             return rs;
         } catch (error) {
             throw error;
@@ -129,6 +131,7 @@ module.exports =
             throw error;
         }
     },
+    
     getDetailOrder: async (orderId) => {
         try {
             const rs = db.any(`select o.*, u.name as name, u.email, p.price, p.discount, p.name as pn, d.quantity from "Order" o, "User" u, "Product" p, "OrderDetail" d where o."orderId" = ${orderId} and u."userId" = o."userId" and d."orderId" = ${orderId} and p."productId" = d."productId"`);

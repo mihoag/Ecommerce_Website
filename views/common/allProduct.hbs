@@ -2,31 +2,35 @@
     <div class="banner">
     </div> <!-- End Banner -->
     <br>
-    <div class="companyMenu group flexContain"><a href="index.html?company=Apple"><img
-                src="img/company/Apple.jpg"></a><a href="index.html?company=Samsung"><img
-                src="img/company/Samsung.jpg"></a><a href="index.html?company=Oppo"><img
-                src="img/company/Oppo.jpg"></a><a href="index.html?company=Nokia"><img
-                src="img/company/Nokia.jpg"></a><a href="index.html?company=Huawei"><img
-                src="img/company/Huawei.jpg"></a><a href="index.html?company=Xiaomi"><img
-                src="img/company/Xiaomi.png"></a><a href="index.html?company=Realme"><img
-                src="img/company/Realme.png"></a><a href="index.html?company=Vivo"><img
-                src="img/company/Vivo.jpg"></a><a href="index.html?company=Philips"><img
-                src="img/company/Philips.jpg"></a><a href="index.html?company=Mobell"><img
-                src="img/company/Mobell.jpg"></a><a href="index.html?company=Mobiistar"><img
-                src="img/company/Mobiistar.jpg"></a><a href="index.html?company=Itel"><img
-                src="img/company/Itel.jpg"></a><a href="index.html?company=Coolpad"><img
-                src="img/company/Coolpad.png"></a><a href="index.html?company=HTC"><img src="img/company/HTC.jpg"></a><a
-            href="index.html?company=Motorola"><img src="img/company/Motorola.jpg"></a></div>
+    <div class="companyMenu group flexContain">
+        <a class="company-link" data-name="iPhone" data-text="iPhone"><img src="img/company/Apple.jpg"></a>
+        <a class="company-link" data-name="Samsung" data-text="Samsung"><img src="img/company/Samsung.jpg"></a>
+        <a class="company-link" data-name="Oppo" data-text="Oppo"><img src="img/company/Oppo.jpg"></a>
+        <a class="company-link" data-name="Nokia" data-text="Nokia"><img src="img/company/Nokia.jpg"></a>
+        <a class="company-link" data-name="Huawei" data-text="Huawei"><img src="img/company/Huawei.jpg"></a>
+        <a class="company-link" data-name="Xiaomi" data-text="Xiaomi"><img src="img/company/Xiaomi.png"></a>
+        <a class="company-link" data-name="realme" data-text="realme"><img src="img/company/Realme.png"></a>
+        <a class="company-link" data-name="Vivo" data-text="Vivo"><img src="img/company/Vivo.jpg"></a>
+        <a class="company-link" data-name="Philips" data-text="Philips"><img src="img/company/Philips.jpg"></a>
+        <a class="company-link" data-name="Mobell" data-text="Mobell"><img src="img/company/Mobell.jpg"></a>
+        <a class="company-link" data-name="Mobiistar" data-text="Mobiistar"><img src="img/company/Mobiistar.jpg"></a>
+        <a class="company-link" data-name="Itel" data-text="Itel"><img src="img/company/Itel.jpg"></a>
+        <a class="company-link" data-name="Coolpad" data-text="Coolpad"><img src="img/company/Coolpad.png"></a>
+        <a class="company-link" data-name="HTC" data-text="HTC"><img src="img/company/HTC.jpg"></a>
+        <a class="company-link" data-name="Motorola" data-text="Motorola"><img src="img/company/Motorola.jpg"></a>
+    </div>
 
     <div class="flexContain">
 
         <div class="pricesRangeFilter dropdown">
             <button class="dropbtn">Giá tiền</button>
-            <div class="dropdown-content"><a href="index.html?price=0-2000000">Dưới 2 triệu</a><a
-                    href="index.html?price=2000000-4000000">Từ 2 - 4 triệu</a><a
-                    href="index.html?price=4000000-7000000">Từ
-                    4 - 7 triệu</a><a href="index.html?price=7000000-13000000">Từ 7 - 13 triệu</a><a
-                    href="index.html?price=13000000-0">Trên 13 triệu</a></div>
+            <div class="dropdown-content">
+                <a data-begin="0" data-end="2000000" data-text="Dưới 2 triệu">Dưới 2 triệu</a>
+                <a data-begin="2000000" data-end="4000000" data-text="Từ 2 - 4 triệu">Từ 2 - 4 triệu</a>
+                <a data-begin="4000000" data-end="7000000" data-text="Từ 4 - 7 triệu">Từ 4 - 7 triệu</a>
+                <a data-begin="7000000" data-end="13000000" data-text="Từ 7 - 13 triệu">Từ 7 - 13 triệu</a>
+                <a data-begin="13000000" data-end="0" data-text="Trên 13 triệu">Trên 13 triệu</a>
+            </div>
         </div>
 
         <div class="promosFilter dropdown">
@@ -38,22 +42,35 @@
 
         <div class="starFilter dropdown">
             <button class="dropbtn">Số lượng sao</button>
-            <div class="dropdown-content"><a href="index.html?star=3">Trên 2 sao</a><a href="index.html?star=4">Trên 3
-                    sao</a><a href="index.html?star=5">Trên 4 sao</a></div>
+            <div class="dropdown-content">
+                <a data-star="1" data-text="1 sao">1 sao</a>
+                <a data-star="2" data-text="2 sao">2 sao</a>
+                <a data-star="3" data-text="3 sao">3 sao</a>
+                <a data-star="4" data-text="4 sao">4 sao</a>
+                <a data-star="5" data-text="5 sao">5 sao</a>
+            </div>
         </div>
 
         <div class="sortFilter dropdown">
             <button class="dropbtn">Sắp xếp</button>
-            <div class="dropdown-content"><a href="index.html?sort=price-ascending">Giá tăng dần</a><a
-                    href="index.html?sort=price-decrease">Giá giảm dần</a><a href="index.html?sort=star-ascending">Sao
-                    tăng dần</a><a href="index.html?sort=star-decrease">Sao giảm dần</a><a
-                    href="index.html?sort=rateCount-ascending">Đánh giá tăng dần</a><a
-                    href="index.html?sort=rateCount-decrease">Đánh giá giảm dần</a><a
-                    href="index.html?sort=name-ascending">Tên A-Z</a><a href="index.html?sort=name-decrease">Tên Z-A</a>
+            <div class="dropdown-content">
+                <a data-sort="giagiam-asc" data-text="Giá tăng dần">Giá tăng dần</a>
+                <a data-sort="giagiam-desc" data-text="Giá giảm dần">Giá giảm dần</a>
+                <a data-sort="tb-asc" data-text="Sao tăng dần">Sao tăng dần</a>
+                <a data-sort="tb-desc" data-text="Sao giảm dần">Sao giảm dần</a>
+                <a data-sort="name-asc" data-text="Tên A-Z">Tên A-Z</a>
+                <a data-sort="name-desc" data-text="Tên Z-A">Tên Z-A</a>
             </div>
         </div>
 
     </div> <!-- End khung chọn bộ lọc -->
+
+    <div class="choosedFilter flexContain">
+        <a id="deleteAllFilter" style="display: none;">
+            <h3>Xóa bộ lọc</h3>
+        </a>
+    </div> <!-- Những bộ lọc đã chọn -->
+	<hr>
 
     <!-- Div hiển thị khung sp hot, khuyến mãi, mới ra mắt ... -->
     <div class="contain-khungSanPham" id="showallproduct">
@@ -120,6 +137,27 @@
         <!--Phan trang-->
 
     </div>
+
+    <div class="contain-khungSanPham hidden" id="filterproduct">
+        <div class="khungSanPham" style="border-color: #ff9c00">
+            <h3 class="tenKhung"
+                style="background-image: linear-gradient(120deg, #ff9c00 0%, #ec1f1f 50%, #ff9c00 100%);">*
+                SẢN PHẨM TÌM KIẾM THEO YÊU CẦU
+                *</h3>
+            <div class="listSpTrongKhung flexContain" id="listfilterproduct">
+            </div>
+            <div class="pagination" id="pagefilter">
+                <a href="#"><i class="fa fa-angle-left"></i></a>
+                <a href="#">1</a>
+                <a href="#" class="current">2</a>
+                <a href="#">3</a>
+                <a href="#"><i class="fa fa-angle-right"></i></a>
+            </div>
+        </div>
+        <hr>
+        <!--Phan trang-->
+
+    </div>
 </section>
 
 <div class="plc">
@@ -150,6 +188,131 @@
     var pagesearch = document.getElementById("pagesearch");
     var search = document.getElementById("search");
     var searchbox = document.getElementById("search-box");
+    var filterproduct = document.getElementById("filterproduct");
+    var listfilterproduct = document.getElementById("listfilterproduct");
+    var pagefilter = document.getElementById("pagefilter");
+    var chooseFilter = document.querySelector('.choosedFilter');
+    var deleteAll = document.getElementById('deleteAllFilter');
+    var nameType, begin, end, star, sort;
+    var filters = {};
+    var filterText = [];
+
+    function addFilterCondition(key, value) {
+        filters[key] = value;
+    }
+
+    function removeFilterCondition(key) {
+        delete filters[key];
+    }
+
+    function clearAllFilters() {
+        filters = {};
+    } 
+
+    function searchByFilter(filters, page) {
+        const data = { currentPage: page, filters: filters };
+        $.ajax({
+            type: "GET",
+            url: "/product/filterproduct",
+            data: data,
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+                // console.log(data);
+                renderFilterProduct(data.listproduct);
+                let totalPage = data.totalPage;
+                let currentPage = data.currentPage;
+                renderFilterPagination(totalPage, currentPage);
+            },
+            error: function (result) {
+                console.log(result);
+            }
+        });
+    }
+
+    function removeExistingFilters(brand) {
+        // Lặp qua mảng filterText và xoá các giá trị thuộc vào brand
+        for (let i = filterText.length - 1; i >= 0; i--) {
+            if (brand.includes(filterText[i])) {
+                filterText.splice(i, 1); // Xoá phần tử tại vị trí i
+            }
+        }
+    }
+
+    $(document).ready(function () {
+        $('.company-link').on('click', function () {
+            nameType = $(this).data('name');
+
+            removeExistingFilters(["iPhone", "Samsung", "Oppo", "Nokia", "Huawei", "Xiaomi", "realme", "Vivo", "Philips", "Mobell", "Mobiistar", "Itel", "Coolpad", "HTC", "Motorola"]);
+
+            filterText.push($(this).data('text'));
+
+            showallproduct.classList.add("hidden");
+            searchproduct.classList.add("hidden");
+            filterproduct.classList.remove("hidden");
+            
+            addFilterCondition("name", nameType);
+            searchByFilter(filters, 1);
+            renderFilter();
+        });
+    });
+
+    $(document).ready(function () {
+        $('.pricesRangeFilter .dropdown-content a').on('click', function () {
+            begin = parseInt($(this).data('begin'));
+            end = parseInt($(this).data('end'));
+
+            removeExistingFilters(["Dưới 2 triệu", "Từ 2 - 4 triệu", "Từ 4 - 7 triệu", "Từ 7 - 13 triệu", "Trên 13 triệu"]);
+
+            filterText.push($(this).data('text'));
+
+            showallproduct.classList.add("hidden");
+            searchproduct.classList.add("hidden");
+            filterproduct.classList.remove("hidden");
+
+            addFilterCondition("begin", begin);
+            addFilterCondition("end", end);
+            searchByFilter(filters, 1);
+            renderFilter();
+        });
+    });
+
+    $(document).ready(function () {
+        $('.starFilter .dropdown-content a').on('click', function () {
+            star = parseInt($(this).data('star'));
+
+            removeExistingFilters(["1 sao", "2 sao", "3 sao", "4 sao", "5 sao"]);
+
+            filterText.push($(this).data('text'));
+
+            showallproduct.classList.add("hidden");
+            searchproduct.classList.add("hidden");
+            filterproduct.classList.remove("hidden");
+
+            addFilterCondition("star", star);
+            searchByFilter(filters, 1); 
+            renderFilter();
+        });
+    });
+
+    $(document).ready(function () {
+        $('.sortFilter .dropdown-content a').on('click', function () {
+            sort = $(this).data('sort');
+
+            removeExistingFilters(["Giá tăng dần", "Giá giảm dần", "Sao tăng dần", "Sao giảm dần", "Tên A-Z", "Tên Z-A"]);
+
+            filterText.push($(this).data('text'));
+
+            showallproduct.classList.add("hidden");
+            searchproduct.classList.add("hidden");
+            filterproduct.classList.remove("hidden");
+
+            addFilterCondition("sort", sort);
+            searchByFilter(filters, 1); 
+            renderFilter();
+        });
+    });
+
     function searchByKeyword(keyword, page) {
         data = { currentPage: page, keyword: keyword }
         $.ajax({
@@ -159,7 +322,6 @@
             contentType: 'application/json',
             dataType: "json",
             success: function (data) {
-                console.log(data);
                 renderSearchProduct(data.listproduct);
                 let totalPage = data.totalPage;
                 let currentPage = data.currentPage;
@@ -176,18 +338,18 @@
         if (keyword == "") {
             showallproduct.classList.remove("hidden");
             searchproduct.classList.add("hidden");
+            filterproduct.classList.add("hidden");
         }
         else {
             showallproduct.classList.add("hidden");
             searchproduct.classList.remove("hidden");
+            filterproduct.classList.add("hidden");
             searchByKeyword(keyword, 1);
         }
     }
     searchbox.addEventListener('input', function () {
         searchP();
     })
-
-
 
     function handleClick(page) {
         //console.log(page.getAttribute("id"))
@@ -220,7 +382,11 @@
 
     function handleClick1(page) {
         let keyword = searchbox.value;
-        searchByKeyword(keyword, page.getAttribute("id"))
+        searchByKeyword(keyword, page.getAttribute("id"));
+    }
+
+    function handleClick2(page) {
+        searchByFilter(filters, page.getAttribute("id"));
     }
 
     function renderPagination(totalPage, currentPage) {
@@ -253,7 +419,7 @@
         }
         for (let i = 1; i <= totalPage; i++) {
             if (i == currentPage) {
-                pages += `<a id='${i}'  class="current" onclick1="handleClick(this)">${i}</a>`;
+                pages += `<a id='${i}'  class="current" onclick="handleClick1(this)">${i}</a>`;
             }
             else {
                 pages += `<a id='${i}'   onclick="handleClick1(this)">${i}</a>`;
@@ -269,6 +435,28 @@
         pagesearch.innerHTML = pages;
     }
 
+    function renderFilterPagination(totalPage, currentPage) {
+        let pages = '';
+        if (currentPage != 1) {
+            pages += `<a href="#"><i class="fa fa-angle-left"></i></a>`
+        }
+        for (let i = 1; i <= totalPage; i++) {
+            if (i == currentPage) {
+                pages += `<a id='${i}'  class="current" onclick="handleClick2(this)">${i}</a>`;
+            }
+            else {
+                pages += `<a id='${i}'   onclick="handleClick2(this)">${i}</a>`;
+            }
+        }
+
+        if (currentPage != totalPage) {
+            pages += `<a href="#"><i class="fa fa-angle-right"></i></a>`
+        }
+
+        //console.log(pages);
+        //console.log(page);
+        pagefilter.innerHTML = pages;
+    }
 
     function showRating(tb) {
         let content = '';
@@ -282,6 +470,7 @@
         }
         return content;
     }
+
     function convertToVND(number) {
         // Using toLocaleString to format the number as currency in VND
         let vndFormatted = number.toLocaleString('vi-VN', {
@@ -312,6 +501,28 @@
         }
         listproductsearch.innerHTML = content;
     }
+
+    function renderFilterProduct(products) {
+        let content = '';
+        for (let i = 0; i < products.length; i++) {
+            content += `<li class="sanPham">
+                    <a href="/product/detailProducts?id=${products[i].productId}">
+                        <img src="${products[i].image}" alt="">
+                        <h3>${products[i].name}</h3>
+                        <div class="price">
+                            <strong>${convertToVND(products[i].giagiam)}</strong>
+                            <span>${convertToVND(products[i].price)}</span>
+                        </div>
+                        <div class="ratingresult">
+                            ${showRating(products[i].tb)}
+                            <span>${products[i].danhgia} đánh giá</span>
+                        </div>
+                    </a>
+                </li>`
+        }
+        listfilterproduct.innerHTML = content;
+    }
+    //getPerpage
     function renderProduct(products) {
         let content = '';
         for (let i = 0; i < products.length; i++) {
@@ -336,16 +547,14 @@
 
 
     // console.log($('#search-box'))
-
-    document.addEventListener("DOMContentLoaded", function () {
-
+    function renderAll() {
         $.ajax({
             type: "GET",
             url: "/product/getPerpage",
             contentType: 'application/json',
             dataType: "json",
             success: function (data) {
-                console.log(data);
+                //console.log(data);
 
                 //console.log(data);
                 let totalPage = data.totalPage;
@@ -354,12 +563,114 @@
                 //console.log(data.listreview);
                 renderPagination(totalPage, currentPage);
                 renderProduct(data.listproduct);
+
+                showallproduct.classList.remove("hidden");
+                searchproduct.classList.add("hidden");
+                filterproduct.classList.add("hidden");
             },
             error: function (result) {
                 console.log(result);
             }
         });
 
+    }
 
-    })
+    document.addEventListener("DOMContentLoaded", renderAll())
+
+    function renderFilter() {
+
+        // Hiển thị nút xóa bộ lọc
+        deleteAll.style.display = "block";
+        deleteAll.addEventListener("click", function() {
+            clearAllFilters();
+            deleteAll.style.display = "none";
+            filterText = [];
+            let filterElements = Array.from(chooseFilter.children);
+            
+            // Lặp qua từng phần tử, xóa hết ngoại trừ phần tử có id="deleteAllFilter"
+            for (let i = filterElements.length - 1; i >= 0; i--) {
+                if (filterElements[i].id !== 'deleteAllFilter') {
+                    filterElements[i].remove();
+                }
+            }
+
+            //render lại trang hiển thị tất cả sản phẩm
+            renderAll();
+        });
+
+        // Xoá hết để render lại
+        let filterElements = Array.from(chooseFilter.children);
+        
+        // Lặp qua từng phần tử, xóa hết ngoại trừ phần tử có id="deleteAllFilter"
+        for (let i = filterElements.length - 1; i >= 0; i--) {
+            if (filterElements[i].id !== 'deleteAllFilter') {
+                filterElements[i].remove();
+            }
+        }
+
+        //console.log(filterText);
+        filterText.forEach(text => {
+            // Kiểm tra xem text đã tồn tại trong chooseFilter chưa
+            // Tạo biến boolean để kiểm tra xem text đã tồn tại hay chưa
+            let textExists = false;
+
+            // Lặp qua các phần tử h3 trong chooseFilter để kiểm tra
+            chooseFilter.querySelectorAll('h3').forEach(h3 => {
+                if (h3.textContent.trim() === text.trim()) {
+                    // Nếu tìm thấy phần tử h3 có nội dung giống text, đặt biến textExists thành true
+                    textExists = true;
+                }
+            });
+
+            // Kiểm tra giá trị của biến textExists
+            if (!textExists) {
+                // Tạo phần tử 'a'
+                let filterElement = document.createElement('a');
+
+                // Tạo phần tử 'h3'
+                let h3Element = document.createElement('h3');
+                h3Element.textContent = text;
+
+                // Tạo phần tử 'i' (icon đóng)
+                let closeIcon = document.createElement('i');
+                closeIcon.classList.add('fa', 'fa-close');
+
+                // Thêm sự kiện click cho icon đóng để xóa bộ lọc
+                closeIcon.addEventListener('click', function () {
+                    // Xử lý logic xóa bộ lọc ở đây
+                    // ...
+                    if (text === "iPhone" || text === "Samsung" || text === "Oppo" || text === "Nokia" || text === "Huawei" || text === "Xiaomi" || text === "realme" || text === "Vivo" || text === "Philips" || text === "Mobell" || text === "Mobiistar" || text === "Itel" || text === "Coolpad" || text === "HTC" || text === "Motorola") {
+                        removeFilterCondition("name");
+                    } else if (text === "Dưới 2 triệu" || text === "Từ 2 - 4 triệu" || text === "Từ 4 - 7 triệu" || text === "Từ 7 - 13 triệu" || text === "Trên 13 triệu") {
+                        removeFilterCondition("begin");
+                        removeFilterCondition("end");
+                    } else if (text === "1 sao" || text === "2 sao" || text === "3 sao" || text === "4 sao" || text === "5 sao") {
+                        removeFilterCondition("star");
+                    } else if (text === "Giá tăng dần" || text === "Giá giảm dần" || text === "Sao tăng dần" || text === "Sao giảm dần" || text === "Tên A-Z" || text === "Tên Z-A") {
+                        removeFilterCondition("sort");
+                    }
+                    // Sau khi xóa bộ lọc, có thể làm mất đi phần tử đã tạo
+                    filterElement.remove();
+                    // Xoá luôn trong filterText
+                    filterText = filterText.filter(item => item !== text);
+                    // nếu filterText không còn item nào thì ẩn nút xoá tất cả và render all products
+                    if (filterText.length === 0) {
+                        deleteAll.style.display = "none";
+                        renderAll();
+                    } else {
+                        searchByFilter(filters, 1);
+                    }
+                });
+
+                // Thêm 'i' vào 'h3'
+                h3Element.appendChild(closeIcon);
+                
+                // Thêm 'h3' vào 'a'
+                filterElement.appendChild(h3Element);
+
+                // Thêm 'a' vào 'chooseFilter'
+                chooseFilter.appendChild(filterElement);
+            }
+        });
+    }
 </script>

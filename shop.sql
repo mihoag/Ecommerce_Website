@@ -34,7 +34,7 @@ CREATE TABLE "Order" (
     "phoneNumber" character varying(255),
     "totalCost" integer,
     "isPayment" boolean DEFAULT false,
-    "status" character varying(100) default "Pending",
+    "status" character varying(100) default 'Pending',
     "timeOrder" timestamp default CURRENT_TIMESTAMP
 );
 

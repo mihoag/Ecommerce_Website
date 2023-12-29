@@ -198,4 +198,93 @@ module.exports = {
       next(error);
     }
   },
+  filterProductPerPage: async (req, res, next) => {
+    try {
+      let filters = req.query.filters;
+      //console.log(filters);
+      let data = {};
+      let data1, data2, data3, data4;
+      let begin;
+      for (const key in filters) {
+        if(filters.hasOwnProperty(key)) {
+          if(key === "sort") {
+            const type = filters[key].split('-')[0];
+            const sort = filters[key].split('-')[1];
+            if (sort === "asc") {
+              data1 = await productM.getProductAsc(type);
+            } else if (sort === "desc") {
+              data1 = await productM.getProductDesc(type);
+            }
+          }
+          if(key === "name") {
+            const name = filters[key];
+            data2 = await productM.getProductByType(name);
+          }
+          if(key === "begin") {
+            begin = filters[key];
+          }
+          if(key === "end") {
+            const end = filters[key];
+            data3 = await productM.getProductByCost(begin, end);
+          }
+          if(key === "star") {
+            const star = filters[key];
+            data4 = await productM.getProductByStar(star);
+          }
+        }
+      }
+      //console.log(data4);
+      // Lọc và bỏ qua những mảng undefined
+      let validArrays = [data1, data2, data3, data4].filter(arr => arr !== undefined);
+      
+      if (validArrays.length > 0) {
+        // Kiểm tra và xóa những phần tử undefined từ mảng validArrays
+        validArrays = validArrays.filter(arr => arr !== undefined);
+        //console.log(validArrays);
+        if (validArrays.length === 1) {
+          data = validArrays[0];
+        }
+      
+        if (validArrays.length > 1) {
+          // lấy ra các phần tử chung của các mảng trong validArrays
+          data = validArrays[0].filter(obj1 =>
+            validArrays.slice(1).every(arr =>
+              arr.some(obj => obj.productId === obj1.productId)
+            )
+          );
+        }
+      }
+
+      let result = [];
+      const per_page = 10;
+      let totalPage = parseInt(parseInt(data.length) / parseInt(per_page));
+      if (data.length % per_page != 0) {
+        totalPage++;
+      }
+
+      let currentPage = req.query.currentPage;
+      if (currentPage === undefined) {
+        currentPage = 1;
+      }
+      let start = (currentPage - 1) * per_page;
+      for (let i = start; i < start + per_page; i++) {
+        if (i >= data.length) {
+          break;
+        }
+        if (data[i].releaseDate !== undefined) {
+          data[i].releaseDate_m = moment(data[i].releaseDate).format('DD MMM YYYY')
+          data[i].releaseDate = moment(data[i].releaseDate).format('DD MMM YY')
+        }
+        result.push(data[i]);
+      }
+      /// Tao mot mang tu 1,2..., totalPae
+      res.json({
+        listproduct: result,
+        totalPage: totalPage,
+        currentPage: currentPage,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
 };

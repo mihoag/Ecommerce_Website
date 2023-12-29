@@ -35,6 +35,13 @@ module.exports = class comment {
         }
     }
 
-
+    static async deleteFromCart(cart) {
+        try {
+            let data = await db.delete2("Cart", "userId", "productId", cart.userId, cart.productId);
+            return data;
+        } catch (error) {
+            throw error
+        }
+    }
 }
 

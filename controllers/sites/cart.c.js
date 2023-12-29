@@ -20,7 +20,7 @@ class cartUserController {
 
     async updateCart(req, res, next) {
         try {
-            console.log(req.query)
+            //console.log(req.query)
             const { userId, productId, timeAddToCart, quantity } = req.query;
             //console.log(userId, productId, timeAddToCart, quantity);
             let updatedCart = new cartModel(userId, productId, timeAddToCart, quantity);
@@ -42,6 +42,18 @@ class cartUserController {
             next(error);
         }
 
+    }
+    async deleteCart(req, res, next) {
+        try {
+            //console.log(req.query)
+            const {userId, productId} = req.query;
+            let deleteCart = new cartModel(userId, productId);
+            //console.log(deleteCart)
+            await cartModel.deleteFromCart(deleteCart);
+            res.json({ status: "ok" })
+        } catch (error) {
+            next(error);
+        }
     }
 }
 module.exports = new cartUserController;

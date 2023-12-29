@@ -142,7 +142,6 @@
             dataType: "json",
             success: function (data) {
                 //console.log(data);
-                console.log(data);
                 cartNumber.innerHTML = data.listPCart.length;
                 renderListProductInCart(data.listPCart)
             },
@@ -196,7 +195,7 @@
                 updateCartnumber();
             },
             error: function (result) {
-                console.log(result)
+                //console.log(result)
             }
         });
     }
@@ -265,7 +264,7 @@
                     </td >
                     <td class="alignRight">${convertToVND((100 - listCart[i].discount) * listCart[i].price * listCart[i].quantity)}</td>
                     <td style="text-align: center">${listCart[i].timeAddToCart.substring(0, 10)}</td>
-                    <td class="noPadding"> <i class="fa fa-trash" onclick="xoaSanPhamTrongGioHang()"></i> </td>
+                    <td class="noPadding"> <i class="fa fa-trash" onclick="xoaSanPhamTrongGioHang(this)"></i> </td>
                 </tr > `
         }
 
@@ -281,5 +280,42 @@
                 </tr >`
 
         listProductinCart.innerHTML = content;
+    }
+
+    function xoaSanPhamTrongGioHang(element) {
+        let id = element.parentElement.parentElement.querySelector('td:nth-child(4)').querySelector('input').getAttribute("id");
+        let userId = id.split("|")[0];
+        let productId = id.split("|")[1];
+        deleteProductInCart(userId, productId);
+    } 
+
+    function deleteProductInCart(userId, productId) {
+        data = { userId: userId, productId: productId};
+        $.ajax({
+            type: "GET",
+            url: `/cart/deleteCart`,
+            data: data,
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+                //console.log(data);
+                updateCartnumber();
+            },
+            error: function (result) {
+                console.log(result)
+            }
+        });
+    }
+
+    function xoaHet() {
+        let productIds = [];
+        for (let i = 1; i < document.getElementsByTagName("tr").length - 1; i++) {
+            var productId = document.getElementsByTagName("tr")[i].getElementsByTagName("td")[0].innerText;
+            productIds.push(productId);
+        }
+        let userId = document.querySelector("tr:nth-child(2) .soluong input").id.split("|")[0];
+        for (let i = 0; i < productIds.length; i++) {
+            deleteProductInCart(userId, productIds[i]);
+        }
     }
 </script>
