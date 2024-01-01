@@ -1,4 +1,13 @@
-#khongCoSanPham {
+#khongCoSanPham1 {
+	opacity: 0;
+	width: 0;
+	color: red;
+	font-size: 30px;
+	font-weight: bold;
+	height: 310px;
+}
+
+#khongCoSanPham2 {
 	opacity: 0;
 	width: 0;
 	color: red;

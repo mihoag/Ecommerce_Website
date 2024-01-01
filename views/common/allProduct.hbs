@@ -33,11 +33,15 @@
             </div>
         </div>
 
-        <div class="promosFilter dropdown">
-            <button class="dropbtn">Khuyến mãi</button>
-            <div class="dropdown-content"><a href="index.html?promo=giamgia">Giảm giá</a><a
-                    href="index.html?promo=tragop">Trả góp</a><a href="index.html?promo=moiramat">Mới ra mắt</a><a
-                    href="index.html?promo=giareonline">Giá rẻ online</a></div>
+        <div class="categoryFilter dropdown">
+            <button class="dropbtn">Danh mục</button>
+            <div class="dropdown-content">
+                <a data-category="rated" data-text="Nổi bật nhất">Nổi bật nhất</a>
+                <a data-category="newest" data-text="Sản phẩm mới">Sản phẩm mới</a>
+                <a data-category="modern" data-text="Sản phẩm hiện đại nhất">Sản phẩm hiện đại nhất</a>
+                <a data-category="discount" data-text="Giảm giá lớn">Giảm giá lớn</a>
+                <a data-category="cheapest" data-text="Giá rẻ cho mọi nhà">Giá rẻ cho mọi nhà</a>
+            </div>
         </div>
 
         <div class="starFilter dropdown">
@@ -125,6 +129,10 @@
                 *</h3>
             <div class="listSpTrongKhung flexContain" id="listproductsearch">
             </div>
+            <div id="khongCoSanPham1">
+                <i class="fa fa-times-circle"></i>
+                Không có sản phẩm nào
+            </div>           
             <div class="pagination" id="pagesearch">
                 <a href="#"><i class="fa fa-angle-left"></i></a>
                 <a href="#">1</a>
@@ -145,6 +153,10 @@
                 SẢN PHẨM TÌM KIẾM THEO YÊU CẦU
                 *</h3>
             <div class="listSpTrongKhung flexContain" id="listfilterproduct">
+            </div>
+            <div id="khongCoSanPham2">
+                <i class="fa fa-times-circle"></i>
+                Không có sản phẩm nào
             </div>
             <div class="pagination" id="pagefilter">
                 <a href="#"><i class="fa fa-angle-left"></i></a>
@@ -193,7 +205,9 @@
     var pagefilter = document.getElementById("pagefilter");
     var chooseFilter = document.querySelector('.choosedFilter');
     var deleteAll = document.getElementById('deleteAllFilter');
-    var nameType, begin, end, star, sort;
+    var thongbao1 = document.getElementById('khongCoSanPham1');
+    var thongbao2 = document.getElementById('khongCoSanPham2');
+    var nameType, begin, end, star, sort, category;
     var filters = {};
     var filterText = [];
 
@@ -308,6 +322,24 @@
             filterproduct.classList.remove("hidden");
 
             addFilterCondition("sort", sort);
+            searchByFilter(filters, 1); 
+            renderFilter();
+        });
+    });
+
+    $(document).ready(function () {
+        $('.categoryFilter .dropdown-content a').on('click', function () {
+            category = $(this).data('category');
+
+            removeExistingFilters(["Nổi bật nhất", "Sản phẩm mới", "Sản phẩm hiện đại nhất", "Giảm giá lớn", "Giá rẻ cho mọi nhà"]);
+
+            filterText.push($(this).data('text'));
+
+            showallproduct.classList.add("hidden");
+            searchproduct.classList.add("hidden");
+            filterproduct.classList.remove("hidden");
+
+            addFilterCondition("category", category);
             searchByFilter(filters, 1); 
             renderFilter();
         });
@@ -483,6 +515,11 @@
 
     function renderSearchProduct(products) {
         let content = '';
+        if (products.length == 0) {
+            hienThongBaoKhongCoSanPham1();
+        } else {
+            tatThongBaoKhongCoSanPham1();
+        }
         for (let i = 0; i < products.length; i++) {
             content += `<li class="sanPham">
                     <a href="/product/detailProducts?id=${products[i].productId}">
@@ -504,6 +541,11 @@
 
     function renderFilterProduct(products) {
         let content = '';
+        if (products.length == 0) {
+            hienThongBaoKhongCoSanPham2();
+        } else {
+            tatThongBaoKhongCoSanPham2();
+        }
         for (let i = 0; i < products.length; i++) {
             content += `<li class="sanPham">
                     <a href="/product/detailProducts?id=${products[i].productId}">
@@ -648,6 +690,8 @@
                         removeFilterCondition("star");
                     } else if (text === "Giá tăng dần" || text === "Giá giảm dần" || text === "Sao tăng dần" || text === "Sao giảm dần" || text === "Tên A-Z" || text === "Tên Z-A") {
                         removeFilterCondition("sort");
+                    } else if (text === "Nổi bật nhất" || text === "Sản phẩm mới" || text === "Sản phẩm hiện đại nhất" || text === "Giảm giá lớn" || text === "Giá rẻ cho mọi nhà") {
+                        removeFilterCondition("category");
                     }
                     // Sau khi xóa bộ lọc, có thể làm mất đi phần tử đã tạo
                     filterElement.remove();
@@ -672,5 +716,34 @@
                 chooseFilter.appendChild(filterElement);
             }
         });
+    }
+
+    
+    function hienThongBaoKhongCoSanPham1() {
+        thongbao1.style.width = "400px";
+		thongbao1.style.opacity = "1";
+		thongbao1.style.margin = "auto"; // Căn giữa
+		thongbao1.style.transitionDuration = "0s"; // Ngay lâp tức hiện ra
+    }
+
+    function tatThongBaoKhongCoSanPham1() {
+        thongbao1.style.width = "0";
+		thongbao1.style.opacity = "0";
+		thongbao1.style.margin = "0";
+		thongbao1.style.transitionDuration = "0s"; // Ngay lâp tức biến mất
+    }
+
+    function hienThongBaoKhongCoSanPham2() {
+        thongbao2.style.width = "400px";
+		thongbao2.style.opacity = "1";
+		thongbao2.style.margin = "auto"; // Căn giữa
+		thongbao2.style.transitionDuration = "0s"; // Ngay lâp tức hiện ra
+    }
+
+    function tatThongBaoKhongCoSanPham2() {
+        thongbao2.style.width = "0";
+		thongbao2.style.opacity = "0";
+		thongbao2.style.margin = "0";
+		thongbao2.style.transitionDuration = "0s"; // Ngay lâp tức biến mất
     }
 </script>

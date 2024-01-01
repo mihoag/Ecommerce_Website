@@ -203,7 +203,7 @@ module.exports = {
       let filters = req.query.filters;
       //console.log(filters);
       let data = {};
-      let data1, data2, data3, data4;
+      let data1, data2, data3, data4, data5;
       let begin;
       for (const key in filters) {
         if(filters.hasOwnProperty(key)) {
@@ -216,26 +216,41 @@ module.exports = {
               data1 = await productM.getProductDesc(type);
             }
           }
+          if(key === "category") {
+            const category = filters[key];
+            if (category === "rated") {
+              data2 = await productM.getProductRated();
+            } else if (category === "newest") {
+              data2 = await productM.getProductNewest();
+            } else if (category === "modern") {
+              data2 = await productM.getProductModern();
+            } else if (category === "discount") {
+              data2 = await productM.getProductDiscount();
+            } else if (category === "cheapest") {
+              data2 = await productM.getProductCheapest();
+            }
+          }
           if(key === "name") {
             const name = filters[key];
-            data2 = await productM.getProductByType(name);
+            data3 = await productM.getProductByType(name);
           }
           if(key === "begin") {
             begin = filters[key];
           }
           if(key === "end") {
             const end = filters[key];
-            data3 = await productM.getProductByCost(begin, end);
+            data4 = await productM.getProductByCost(begin, end);
           }
           if(key === "star") {
             const star = filters[key];
-            data4 = await productM.getProductByStar(star);
+            data5 = await productM.getProductByStar(star);
           }
+          
         }
       }
       //console.log(data4);
       // Lọc và bỏ qua những mảng undefined
-      let validArrays = [data1, data2, data3, data4].filter(arr => arr !== undefined);
+      let validArrays = [data1, data2, data3, data4, data5].filter(arr => arr !== undefined);
       
       if (validArrays.length > 0) {
         // Kiểm tra và xóa những phần tử undefined từ mảng validArrays
