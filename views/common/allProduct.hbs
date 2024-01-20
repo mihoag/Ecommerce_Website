@@ -74,7 +74,7 @@
             <h3>Xóa bộ lọc</h3>
         </a>
     </div> <!-- Những bộ lọc đã chọn -->
-	<hr>
+    <hr>
 
     <!-- Div hiển thị khung sp hot, khuyến mãi, mới ra mắt ... -->
     <div class="contain-khungSanPham" id="showallproduct">
@@ -132,7 +132,7 @@
             <div id="khongCoSanPham1">
                 <i class="fa fa-times-circle"></i>
                 Không có sản phẩm nào
-            </div>           
+            </div>
             <div class="pagination" id="pagesearch">
                 <a href="#"><i class="fa fa-angle-left"></i></a>
                 <a href="#">1</a>
@@ -221,7 +221,7 @@
 
     function clearAllFilters() {
         filters = {};
-    } 
+    }
 
     function searchByFilter(filters, page) {
         const data = { currentPage: page, filters: filters };
@@ -256,15 +256,12 @@
     $(document).ready(function () {
         $('.company-link').on('click', function () {
             nameType = $(this).data('name');
-
             removeExistingFilters(["iPhone", "Samsung", "Oppo", "Nokia", "Huawei", "Xiaomi", "realme", "Vivo", "Philips", "Mobell", "Mobiistar", "Itel", "Coolpad", "HTC", "Motorola"]);
-
             filterText.push($(this).data('text'));
-
             showallproduct.classList.add("hidden");
             searchproduct.classList.add("hidden");
             filterproduct.classList.remove("hidden");
-            
+
             addFilterCondition("name", nameType);
             searchByFilter(filters, 1);
             renderFilter();
@@ -304,7 +301,7 @@
             filterproduct.classList.remove("hidden");
 
             addFilterCondition("star", star);
-            searchByFilter(filters, 1); 
+            searchByFilter(filters, 1);
             renderFilter();
         });
     });
@@ -322,7 +319,7 @@
             filterproduct.classList.remove("hidden");
 
             addFilterCondition("sort", sort);
-            searchByFilter(filters, 1); 
+            searchByFilter(filters, 1);
             renderFilter();
         });
     });
@@ -340,7 +337,7 @@
             filterproduct.classList.remove("hidden");
 
             addFilterCondition("category", category);
-            searchByFilter(filters, 1); 
+            searchByFilter(filters, 1);
             renderFilter();
         });
     });
@@ -623,12 +620,12 @@
 
         // Hiển thị nút xóa bộ lọc
         deleteAll.style.display = "block";
-        deleteAll.addEventListener("click", function() {
+        deleteAll.addEventListener("click", function () {
             clearAllFilters();
             deleteAll.style.display = "none";
             filterText = [];
             let filterElements = Array.from(chooseFilter.children);
-            
+
             // Lặp qua từng phần tử, xóa hết ngoại trừ phần tử có id="deleteAllFilter"
             for (let i = filterElements.length - 1; i >= 0; i--) {
                 if (filterElements[i].id !== 'deleteAllFilter') {
@@ -642,7 +639,7 @@
 
         // Xoá hết để render lại
         let filterElements = Array.from(chooseFilter.children);
-        
+
         // Lặp qua từng phần tử, xóa hết ngoại trừ phần tử có id="deleteAllFilter"
         for (let i = filterElements.length - 1; i >= 0; i--) {
             if (filterElements[i].id !== 'deleteAllFilter') {
@@ -708,7 +705,7 @@
 
                 // Thêm 'i' vào 'h3'
                 h3Element.appendChild(closeIcon);
-                
+
                 // Thêm 'h3' vào 'a'
                 filterElement.appendChild(h3Element);
 
@@ -718,32 +715,32 @@
         });
     }
 
-    
+
     function hienThongBaoKhongCoSanPham1() {
         thongbao1.style.width = "400px";
-		thongbao1.style.opacity = "1";
-		thongbao1.style.margin = "auto"; // Căn giữa
-		thongbao1.style.transitionDuration = "0s"; // Ngay lâp tức hiện ra
+        thongbao1.style.opacity = "1";
+        thongbao1.style.margin = "auto"; // Căn giữa
+        thongbao1.style.transitionDuration = "0s"; // Ngay lâp tức hiện ra
     }
 
     function tatThongBaoKhongCoSanPham1() {
         thongbao1.style.width = "0";
-		thongbao1.style.opacity = "0";
-		thongbao1.style.margin = "0";
-		thongbao1.style.transitionDuration = "0s"; // Ngay lâp tức biến mất
+        thongbao1.style.opacity = "0";
+        thongbao1.style.margin = "0";
+        thongbao1.style.transitionDuration = "0s"; // Ngay lâp tức biến mất
     }
 
     function hienThongBaoKhongCoSanPham2() {
         thongbao2.style.width = "400px";
-		thongbao2.style.opacity = "1";
-		thongbao2.style.margin = "auto"; // Căn giữa
-		thongbao2.style.transitionDuration = "0s"; // Ngay lâp tức hiện ra
+        thongbao2.style.opacity = "1";
+        thongbao2.style.margin = "auto"; // Căn giữa
+        thongbao2.style.transitionDuration = "0s"; // Ngay lâp tức hiện ra
     }
 
     function tatThongBaoKhongCoSanPham2() {
         thongbao2.style.width = "0";
-		thongbao2.style.opacity = "0";
-		thongbao2.style.margin = "0";
-		thongbao2.style.transitionDuration = "0s"; // Ngay lâp tức biến mất
+        thongbao2.style.opacity = "0";
+        thongbao2.style.margin = "0";
+        thongbao2.style.transitionDuration = "0s"; // Ngay lâp tức biến mất
     }
 </script>
