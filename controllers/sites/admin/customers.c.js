@@ -2,6 +2,27 @@ const userM = require("../../../models/users.m")
 const moment = require("moment");
 
 class customersController {
+  async getOneCustomer(req, res, next) {
+    try {
+      const user = await userM.getByEmail(req.params.email);
+      return res.json({ data: user[0] });
+    } catch (error) {
+      next(error);
+    }
+  }
+  async deleteCustomer(req, res, next) {
+    try {
+      // check existing customer
+      const check = await userM.getByEmail(req.params.email);
+      if (check.length == 0) return res.json({ success: false, message: "Tài khoản này không tồn tại" })
+
+      // delete the user
+      const rs = await userM.deleteByEmail(req.params.email, check[0].userId);
+      res.json({ success: true });
+    } catch (error) {
+      next(error);
+    }
+  }
   async addNewCustomer(req, res, next) {
     try {
       //check have data
@@ -22,6 +43,28 @@ class customersController {
       const user = await userM.add(newUser);
       if (!user) return res.json({ success: false });
       return res.json({ success: true, message: "Tạo mới tài khoản thành công" });
+    } catch (error) {
+      next(error);
+    }
+  }
+  async updateCustomer(req, res, next) {
+    try {
+      //check have data
+      const { name, email, phoneNumber, address } = req.body;
+      if (!email || !phoneNumber || !address || !name)
+        return res.json({ success: false, message: "Vui lòng điền đầy đủ thông tin" })
+      // check email address exists
+      const rs = await userM.getByEmail(email)
+      if (rs.length <= 0) {
+        return res.json({ success: false, message: "Địa chỉ email này không tồn tại" });
+      }
+      // all good => update user account
+      let updateUser = rs[0];
+      updateUser.name = req.body.name;
+      updateUser.phoneNumber = req.body.phoneNumber;
+      const user = await userM.update(updateUser);
+      if (!user) return res.json({ success: false });
+      return res.json({ success: true, message: "Cập nhật tài khoản thành công" });
     } catch (error) {
       next(error);
     }

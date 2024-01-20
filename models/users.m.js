@@ -77,5 +77,32 @@ module.exports = {
       [id]
     );
     return rs;
+  },
+  deleteByEmail: async (email, userId) => {
+    try {
+      // delete cart
+      const rs1 = await db.any(
+        'DELETE FROM "Cart" WHERE "userId"=$1 RETURNING *',
+        [userId]
+      );
+      const rs2 = await db.any(
+        `DELETE FROM "OrderDetail" WHERE "orderId" in (
+          select "orderId" from "Order" WHERE "userId"=$1
+        ) RETURNING *
+        `,
+        [userId]
+      );
+      const rs3 = await db.any(
+        'DELETE FROM "Order" WHERE "userId"=$1 RETURNING *',
+        [userId]
+      );
+      const rs = await db.one(
+        'DELETE FROM "User" WHERE "email"=$1 RETURNING *',
+        [email]
+      );
+      return rs;
+    } catch (error) {
+      throw error;
+    }
   }
 };
