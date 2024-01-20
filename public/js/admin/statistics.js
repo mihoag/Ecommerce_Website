@@ -293,6 +293,7 @@ async function DoughnutChart(options) {
     labels.push(options[i].name);
     dataSet.push(options[i].quantity);
   }
+
   const data = {
     labels,
     datasets: [{

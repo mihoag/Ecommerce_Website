@@ -33,8 +33,8 @@ function route(app) {
   app.use("/login", require('./sites/common/login.r'));
   app.use("/signup", require('./sites/common/signup.r'))
   app.use("/showall", authMiddleware.mustLogin, require('./sites/common/showallProduct.r'))
-
   app.use("/", require('./sites/common/index.r'));
+
   app.use((req, res, next) => {
     res.render("error/404", { layout: false });
   });

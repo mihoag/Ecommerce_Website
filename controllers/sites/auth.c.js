@@ -157,7 +157,7 @@ module.exports = {
         }
       }
     } catch (error) {
-      next(error);
+      next();
     }
   },
   change: async (req, res, next) => {
