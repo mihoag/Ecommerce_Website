@@ -8,9 +8,56 @@
           <input class="form-control w-100 order-table" placeholder="Search by name" id="search-name">
         </div>
 
-        <div class="px-2">
-          <span>Filters <i class="fa fa-angle-down"></i></span>
-          <i class="fa fa-ellipsis-h ms-3"></i>
+        <!-- Button trigger modal -->
+        <div>
+          <button type="button" class="btn modal-button" data-bs-toggle="modal" data-bs-target="#addOrderModal">
+            Thêm mới tài khoản
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="addOrderModal" tabindex="-1" aria-labelledby="addOrderModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="addOrderModalLabel">Tài khoản mới</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div id="cnt-err" class="alert alert-danger p-2" style="font-size: 15px; display:none;" role="alert">
+                    <ul class="mb-0" id="errMess">
+                    </ul>
+                  </div>
+                  <div class="container-fluid" style="height: 100%;">
+                    <form id="addUserForm" style="height: 100%;">
+                      <div class="form-group mt-2">
+                        <label for="name">Tên khách hàng</label>
+                        <input type="text" id="name" class="form-control" name="name" placeholder="Nhập tên khách hàng"
+                          required>
+                      </div>
+                      <div class="form-group mt-2">
+                        <label for="name">Email</label>
+                        <input type="text" class="form-control" name="email" placeholder="Địa chỉ email" required>
+                      </div>
+                      <div class="form-group mt-2">
+                        <label for="name">Address</label>
+                        <input type="text" class="form-control" name="address" placeholder="Địa chỉ nhận hàng mặc định"
+                          required>
+                      </div>
+                      <div class="form-group mt-2">
+                        <label for="name">Số điện thoại</label>
+                        <input type="text" class="form-control" name="phoneNumber" placeholder="Số điện thoại" required>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                  <button type="button" class="btn btn-primary" onclick="addUser()">Thêm</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -47,7 +94,7 @@
 
 <script>
   function convertToVND(number) {
-    number = parseInt(number)
+    number = parseInt(number) || 0;
     // Using toLocaleString to format the number as currency in VND
     let vndFormatted = number.toLocaleString('vi-VN', {
       style: 'currency',
@@ -155,12 +202,6 @@
                                 5, Thành phố Hồ
                                 Chí
                                 Minh</td>
-                            </tr>
-                            <tr>
-                              <th width="20%">Date
-                                of
-                                Birth</th>
-                              <td>18 Oct, 2003</td>
                             </tr>
                             <tr>
                               <th width="20%">Phone</th>

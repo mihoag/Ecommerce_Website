@@ -151,9 +151,9 @@ module.exports = {
         } else {
           await userM.updateActiveAccount(haveAcc[0].userId);
           await tokenM.delete(rs[0].codeId);
-          // req.session.uid = haveAcc[0].userId;
-          // req.session.email = haveAcc[0].email;
-          res.send("Verified email");
+          return res.render("common/verifySuccess", {
+            layout: false,
+          });
         }
       }
     } catch (error) {

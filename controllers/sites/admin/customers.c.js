@@ -2,6 +2,31 @@ const userM = require("../../../models/users.m")
 const moment = require("moment");
 
 class customersController {
+  async addNewCustomer(req, res, next) {
+    try {
+      //check have data
+      const { name, email, phoneNumber, address } = req.body;
+      if (!email || !phoneNumber || !address || !name)
+        return res.json({ success: false, message: "Vui lòng điền đầy đủ thông tin" })
+      // check email address exists
+      const rs = await userM.getByEmail(email)
+      if (rs.length > 0) {
+        return res.json({ success: false, message: "Địa chỉ email này đã được người khác đăng ký" });
+      }
+      // all good => add new user account
+      let newUser = req.body;
+      newUser.password = "";
+      newUser.avatar = `https://ui-avatars.com/api/?name=No+Name`;
+      newUser.public_id = null;
+      newUser.active = true;
+      const user = await userM.add(newUser);
+      if (!user) return res.json({ success: false });
+      return res.json({ success: true, message: "Tạo mới tài khoản thành công" });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async showCustomers(req, res, next) {
     try {
       res.render("admin/customers", {

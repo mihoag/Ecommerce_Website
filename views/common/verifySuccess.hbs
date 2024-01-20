@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Roboto+Mono:300,500");
+
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .email__container {
+      background: linear-gradient(to right, #77a1d3 0%, #79cbca 51%, #77a1d3 100%);
+      min-width: 350px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .email__main-content {
+      position: relative;
+      box-sizing: content-box;
+      width: max-content;
+      margin: 10px auto;
+      background: #fff;
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 1px 5px rgb(138, 137, 137);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .email__heading {
+      margin: 3rem 0 1rem;
+    }
+
+    .email__img-success {
+      width: 20%;
+      position: absolute;
+      top: -1.5rem;
+    }
+
+    .email__img-email-success {
+      width: 40%;
+      margin: 20px 0;
+    }
+
+    .email__message1 {
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin: 5px 0;
+    }
+
+    .email__message2 {
+      text-align: center;
+      font-size: 1rem;
+      margin: 5px 0;
+    }
+
+    .email___login {
+      border-radius: 15px;
+      padding: 0.5rem 2rem;
+      margin: 2rem 0;
+      font-size: larger;
+    }
+
+    @media screen and (max-width: 480px) {
+      .email__main-content {
+        width: 80%;
+      }
+
+      .email__img-success {
+        top: -2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="email__container">
+    <div class="email__main-content">
+      <h3 class="email__heading">Congratulations</h3>
+      <img src="../../img/verify/success.png" alt="Success" class="email__img-success" />
+      <img src="../../img/verify/email-success.png" alt="Email-Success" class="email__img-email-success" />
+      <p class="email__message1">
+        Your account is verified successfully!
+      </p>
+      <p class="email__message2">Are you ready to join with us?</p>
+      <a href="/auth/login" class="forgot__link my-3">
+        <button type="button" class="btn btn-outline-success" style="border-radius: 15px; font-size:1.2rem;">Login
+          now</button>
+      </a>
+    </div>
+  </div>
+</body>
+
+</html>

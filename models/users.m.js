@@ -2,11 +2,12 @@ const { pgp, db } = require("../configs/DBconnection");
 
 module.exports = {
   getUser: async () => {
-    const rs = await db.any(`SELECT u.*, sum(o."totalCost") as total FROM "User" u, "Order" o where role = 'user' and u."userId" = o."userId" group by u."userId" order by u.name`);
+    const rs = await db.any(`SELECT u.*, sum(o."totalCost") as total FROM "User" u LEFT JOIN "Order" o ON u."userId" = o."userId"
+    where role = 'user' group by u."userId" order by u.name`);
     return rs;
   },
   getUserSearch: async (keyword) => {
-    const rs = await db.any(`SELECT u.*, sum(o."totalCost") as total FROM "User" u, "Order" o where (u.name ilike '%${keyword}%' or u."phoneNumber" ilike '%${keyword}%') and role = 'user' and u."userId" = o."userId" group by u."userId" order by u.name`);
+    const rs = await db.any(`SELECT u.*, sum(o."totalCost") as total FROM "User" u LEFT JOIN "Order" o ON u."userId" = o."userId" where (UPPER(u.name) ilike UPPER('%${keyword}%') or UPPER(u."phoneNumber") ilike UPPER('%${keyword}%')) and role = 'user' group by u."userId" order by u.name`);
     return rs;
   },
   getAll: async () => {
