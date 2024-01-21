@@ -1,4 +1,4 @@
-.body-tintuc{
+ /* .body-tintuc{
 	margin: 70px 50px 50px 90px;
 	width: 80%;
 	
@@ -26,4 +26,41 @@
 	font-weight: 100;
 	font-style: italic;
 	color: gray;
+}  */
+
+/* Thiết lập kiểu chung cho phần tin tức */
+.body-tintuc {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+/* Thiết lập kiểu cho mỗi tin tức */
+.tintuc-info {
+    width: calc(50% - 10px); /* Chia làm đôi và thêm khoảng trống 10px giữa chúng */
+    margin-bottom: 20px;
+}
+
+/* Kiểu hình ảnh */
+.tintuc-info img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    max-height: 150px; /* Đặt chiều cao tối đa cho ảnh */
+    object-fit: cover; /* Giữ tỷ lệ khung hình */
+}
+
+/* Kiểu cho tiêu đề tin tức */
+.tintuc-info h2 {
+    font-size: 1.2em;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+/* Kiểu cho thời gian đăng tin */
+.tintuc-info h5 {
+    font-size: 0.8em;
+    color: #888;
+    margin-bottom: 0;
 }

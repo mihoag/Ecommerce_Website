@@ -1,7 +1,7 @@
 class newController {
     async showNews(req, res, next) {
         try {
-            res.render("common/maintenance");
+            res.render("common/news");
         } catch (error) {
             next(error);
         }
