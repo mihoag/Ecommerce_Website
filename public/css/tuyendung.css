@@ -2,25 +2,66 @@
 	margin: 50px ;
 	width: 90%;
 }
-.tuyendung-header{
-	height: 40px;
-	font-weight: bold;
-	line-height: 40px;
-	padding-left: 10px;
-	background: pink;
-}
+
 .tuyendung-info{
 	margin: 10px;
 }
+
+.tuyendung-info b{
+	color: #3498db;
+}
+
 .tieude{
-	color: #0C9;
+	color: #3498db;
 	text-align: center;
 	font-size: 28px;
 }
-.tuyendung-noidung{
+/* .tuyendung-noidung{
 	margin:10px 0 15px 25px;
-}
+} */
 ul li span{
 	font-weight: bold;
 	color: red;
 }
+
+.link_tuyendung:hover{
+    text-decoration: underline; /* Thêm gạch chân khi hover */
+}
+
+/* Kiểu cho mô tả công việc */
+.tuyendung-noidung {
+    border: 2px solid #3498db; /* Màu xanh lam */
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+	margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng nhẹ */
+    background-color: #f0f0f0; /* Màu nền bên trong */
+}
+
+/* Kiểu cho mỗi mục trong mô tả công việc */
+.tuyendung-noidung li:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+/* Kiểu cho nội dung trong mô tả công việc */
+.tuyendung-noidung li {
+    color: #333;
+}
+
+/* Kiểu cho mỗi mục trong mô tả công việc có icon */
+.tuyendung-noidung li::before {
+    content: "\2022"; /* Dấu chấm tròn Unicode */
+    color: #3498db; /* Màu xanh lam */
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+/* Kiểu cho nội dung mô tả công việc */
+.tuyendung-noidung li {
+    margin-left: 15px;
+}
+
+
