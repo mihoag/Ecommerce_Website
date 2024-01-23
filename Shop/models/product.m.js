@@ -1,6 +1,17 @@
 const { pgp, db } = require("../configs/DBconnection");
 
 module.exports = {
+  getDataTypeById: async (typeId) => {
+    try {
+      const rs = await db.any(`
+        SELECT SUM(d."quantity"), date_part('month', o."timeOrder") as month from "Order" o, "OrderDetail" d, "Product" p WHERE
+        p."typeId" = $1 and p."productId" = d."productId" and o."orderId" = d."orderId" and date_part('year', o."timeOrder") = 2023 GROUP BY date_part('month', o."timeOrder")
+      `, [typeId])
+      return rs;
+    } catch (error) {
+      throw error;
+    }
+  },
   getMoreInfo: async () => {
     const rs = await db.any('select p."productId", p."name" , p.price, p.cost, p.image,  avg((100-p.discount)*p.price)/100 as giagiam, p.discount, p."releaseDate", p.total, t.name as type from "Product" p , "Type" t  where p."typeId" = t."typeId" group by p."productId", t.name');
     return rs;
@@ -102,7 +113,7 @@ module.exports = {
   getProductByCost: async (begin, end) => {
     if (end == 0) {
       const maxDiscountedPrice = await db.one(
-          `SELECT MAX((100 - p.discount) * p.price) / 100 AS "maxDiscountedPrice"
+        `SELECT MAX((100 - p.discount) * p.price) / 100 AS "maxDiscountedPrice"
           FROM "Product" p`
       );
       end = maxDiscountedPrice.maxDiscountedPrice;
