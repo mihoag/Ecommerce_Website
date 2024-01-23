@@ -17,8 +17,7 @@
 
 .listGT {
 	display: flex;
-	margin: 4% 5% 4% 13%;
-	display: flex;
+	justify-content: center;
 	flex-wrap: wrap;
 }
 

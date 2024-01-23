@@ -147,6 +147,7 @@ async function updateUser(btn) {
 function deleteUser(btn) {
   let email = $(btn).attr("data-email");
   if (email.length == 0) return;
+  document.getElementById("emailDel").innerHTML = email;
   let myModal = new bootstrap.Modal(document.getElementById('myModal'));
   myModal.show();
   document.getElementById('confirmDel').addEventListener('click', async function () {

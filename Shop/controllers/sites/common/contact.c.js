@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer')
 class contactController {
     async showContact(req, res, next) {
         try {
-            res.render("common/contact");
+            res.render("common/contact", { title: "Liên hệ" });
         } catch (error) {
             next(error);
         }

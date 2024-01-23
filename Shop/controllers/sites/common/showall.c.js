@@ -2,7 +2,7 @@ const productM = require('../../../models/product.m')
 class showallController {
     async showall(req, res, next) {
         try {
-            res.render("common/allProduct", { showall: true });
+            res.render("common/allProduct", { showall: true, title: "Thế giới điện thoại" });
         } catch (error) {
             next(error);
         }

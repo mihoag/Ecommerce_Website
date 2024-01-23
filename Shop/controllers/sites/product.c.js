@@ -184,7 +184,6 @@ module.exports = {
       let IDproduct = req.query.id;
       let p = await productM.getByID(IDproduct);
       let idCate = p.typeId;
-
       //console.log(idCate);
       let relatedProduct = await productM.getProductByCate(idCate);
       //console.log(relatedProduct);
@@ -193,6 +192,7 @@ module.exports = {
         product: p,
         isDetail: true,
         relatedProduct: relatedProduct,
+        title: p.name
       });
     } catch (error) {
       next(error);
@@ -206,8 +206,8 @@ module.exports = {
       let data1, data2, data3, data4, data5;
       let begin;
       for (const key in filters) {
-        if(filters.hasOwnProperty(key)) {
-          if(key === "sort") {
+        if (filters.hasOwnProperty(key)) {
+          if (key === "sort") {
             const type = filters[key].split('-')[0];
             const sort = filters[key].split('-')[1];
             if (sort === "asc") {
@@ -216,7 +216,7 @@ module.exports = {
               data1 = await productM.getProductDesc(type);
             }
           }
-          if(key === "category") {
+          if (key === "category") {
             const category = filters[key];
             if (category === "rated") {
               data2 = await productM.getProductRated();
@@ -230,28 +230,28 @@ module.exports = {
               data2 = await productM.getProductCheapest();
             }
           }
-          if(key === "name") {
+          if (key === "name") {
             const name = filters[key];
             data3 = await productM.getProductByType(name);
           }
-          if(key === "begin") {
+          if (key === "begin") {
             begin = filters[key];
           }
-          if(key === "end") {
+          if (key === "end") {
             const end = filters[key];
             data4 = await productM.getProductByCost(begin, end);
           }
-          if(key === "star") {
+          if (key === "star") {
             const star = filters[key];
             data5 = await productM.getProductByStar(star);
           }
-          
+
         }
       }
       //console.log(data4);
       // Lọc và bỏ qua những mảng undefined
       let validArrays = [data1, data2, data3, data4, data5].filter(arr => arr !== undefined);
-      
+
       if (validArrays.length > 0) {
         // Kiểm tra và xóa những phần tử undefined từ mảng validArrays
         validArrays = validArrays.filter(arr => arr !== undefined);
@@ -259,7 +259,7 @@ module.exports = {
         if (validArrays.length === 1) {
           data = validArrays[0];
         }
-      
+
         if (validArrays.length > 1) {
           // lấy ra các phần tử chung của các mảng trong validArrays
           data = validArrays[0].filter(obj1 =>
