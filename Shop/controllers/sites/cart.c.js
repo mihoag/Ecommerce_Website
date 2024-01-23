@@ -46,7 +46,7 @@ class cartUserController {
     async deleteCart(req, res, next) {
         try {
             //console.log(req.query)
-            const {userId, productId} = req.query;
+            const { userId, productId } = req.query;
             let deleteCart = new cartModel(userId, productId);
             //console.log(deleteCart)
             await cartModel.deleteFromCart(deleteCart);

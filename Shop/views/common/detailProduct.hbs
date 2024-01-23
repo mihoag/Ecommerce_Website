@@ -251,6 +251,9 @@
         </div>
     </div>
 </section>
+<div id="alert">
+    <span id="closebtn">&otimes;</span>
+</div>
 
 <script>
     var listCmt = document.getElementById("listCmt");
@@ -258,6 +261,20 @@
     var proID = document.getElementById("proID");
     var page = document.getElementById("page");
 
+    function addAlertBox(text, bgcolor, textcolor, time) {
+        var al = document.getElementById('alert');
+        al.childNodes[0].nodeValue = text;
+        al.style.backgroundColor = bgcolor;
+        al.style.opacity = 1;
+        al.style.zIndex = 200;
+
+        if (textcolor) al.style.color = textcolor;
+        if (time)
+            setTimeout(function () {
+                al.style.opacity = 0;
+                al.style.zIndex = 0;
+            }, time);
+    }
     function getCommentPerpage(page) {
         let id = $('#proID').val();
 
@@ -407,11 +424,13 @@
             contentType: 'application/json',
             dataType: "json",
             success: function (data) {
-                alert("Thêm vào giỏ hàng thành công")
+                addAlertBox('Thêm vào giỏ hàng thành công', '#17c671', '#fff', 3500);
                 updateCartnumber();
+                return;
             },
             error: function (result) {
-                alert("Đã thêm vào giỏ hàng")
+                addAlertBox('Mặt hàng đã tồn tại trong giỏ hàng', '#FF3333', '#fff', 3500);
+                return;
             }
         });
     }
