@@ -364,18 +364,15 @@
     function searchP() {
         let keyword = searchbox.value;
 
-        if (keyword == "") {
-            showallproduct.classList.remove("hidden");
-            searchproduct.classList.add("hidden");
-            filterproduct.classList.add("hidden");
-        }
-        else {
-            showallproduct.classList.add("hidden");
-            searchproduct.classList.remove("hidden");
-            filterproduct.classList.add("hidden");
-            searchByKeyword(keyword, 1);
-        }
+        showallproduct.classList.add("hidden");
+        searchproduct.classList.add("hidden");
+        filterproduct.classList.remove("hidden");
+        
+        addFilterCondition("search", keyword);
+        searchByFilter(filters, 1);
+        renderFilter();
     }
+
     searchbox.addEventListener('input', function () {
         searchP();
     })
@@ -619,7 +616,9 @@
     function renderFilter() {
 
         // Hiển thị nút xóa bộ lọc
-        deleteAll.style.display = "block";
+        if (filterText.length > 0) {
+            deleteAll.style.display = "block";
+        }
         deleteAll.addEventListener("click", function () {
             clearAllFilters();
             deleteAll.style.display = "none";
@@ -697,7 +696,10 @@
                     // nếu filterText không còn item nào thì ẩn nút xoá tất cả và render all products
                     if (filterText.length === 0) {
                         deleteAll.style.display = "none";
-                        renderAll();
+                        if (searchbox.value === "")
+                            renderAll();
+                        else
+                            searchByFilter(filters, 1);
                     } else {
                         searchByFilter(filters, 1);
                     }
@@ -734,6 +736,7 @@
         thongbao2.style.width = "400px";
         thongbao2.style.opacity = "1";
         thongbao2.style.margin = "auto"; // Căn giữa
+        thongbao2.style.height = "300"
         thongbao2.style.transitionDuration = "0s"; // Ngay lâp tức hiện ra
     }
 
@@ -741,6 +744,7 @@
         thongbao2.style.width = "0";
         thongbao2.style.opacity = "0";
         thongbao2.style.margin = "0";
+        thongbao2.style.height = "0";
         thongbao2.style.transitionDuration = "0s"; // Ngay lâp tức biến mất
     }
 </script>

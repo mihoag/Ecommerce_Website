@@ -203,10 +203,14 @@ module.exports = {
       let filters = req.query.filters;
       //console.log(filters);
       let data = {};
-      let data1, data2, data3, data4, data5;
+      let data1, data2, data3, data4, data5, data6;
       let begin;
       for (const key in filters) {
         if (filters.hasOwnProperty(key)) {
+          if (key === "search") {
+            const keyword = filters[key];
+            data6 = await productM.selectProductByNameandCate(keyword);
+          }
           if (key === "sort") {
             const type = filters[key].split('-')[0];
             const sort = filters[key].split('-')[1];
@@ -250,7 +254,7 @@ module.exports = {
       }
       //console.log(data4);
       // Lọc và bỏ qua những mảng undefined
-      let validArrays = [data1, data2, data3, data4, data5].filter(arr => arr !== undefined);
+      let validArrays = [data1, data2, data3, data4, data5, data6].filter(arr => arr !== undefined);
 
       if (validArrays.length > 0) {
         // Kiểm tra và xóa những phần tử undefined từ mảng validArrays
