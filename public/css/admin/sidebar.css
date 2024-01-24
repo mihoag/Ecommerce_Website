@@ -24,3 +24,8 @@
     min-width: 20px;
 }
 
+aside {
+    max-height: 80vh;
+    overflow-y: scroll;
+}
+

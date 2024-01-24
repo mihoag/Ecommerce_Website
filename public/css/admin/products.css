@@ -78,4 +78,25 @@
       box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.1);
   }
   
+  .modal-button {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.05);
+  }
+  
+  .modal {
+    --bs-modal-width: 1000px;
+  }
+  
+  .modal-body {
+    height: fit-content;
+  }
+
+  .form-control {
+    border: 1px solid #ccc;
+  }
+
+  .form-control:focus {
+    border: 1px solid #ccc;
+  }
   

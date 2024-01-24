@@ -1,13 +1,13 @@
 const db = require('../db/db')
 
 module.exports = class comment {
-    constructor(commentId, productid, userid, content, date, rate) {
+    constructor(commentId, productid, content, date, rate, name) {
         this.commentId = commentId
         this.productId = productid
-        this.userId = userid
         this.content = content
         this.date = date
         this.rate = rate
+        this.name = name
     }
 
     static async selectAllComment() {
@@ -30,7 +30,7 @@ module.exports = class comment {
     }
     static async getCommentByProductId(id) {
         try {
-            let data = await db.selectJoinTable("Comment", "User", "userId", "userId", "productId", id)
+            let data = await db.selectByOneField("Comment", "productId", id);
             return data;
         }
         catch (error) {

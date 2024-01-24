@@ -21,7 +21,29 @@ const handlebars = exphbs.create({
   // tạo handlebars với những config
   extname: ".hbs",
   defaultLayout: "main",
-  helpers: require("./utils/customHelper.u"),
+  helpers: {
+    showRating(tb) {
+      let content = "";
+      var i = 0;
+      for (i = 0; i < tb; i++) {
+        content += '<i class="fa fa-star"></i>';
+      }
+      while (i < 5) {
+        content += '<i class="fa fa-star-o"></i>';
+        i++;
+      }
+      return content;
+    },
+    convertToVND(number) {
+      // Using toLocaleString to format the number as currency in VND
+      let vndFormatted = number.toLocaleString("vi-VN", {
+        style: "currency",
+        currency: "VND",
+      });
+
+      return vndFormatted;
+    },
+  },
 });
 
 app.engine("hbs", handlebars.engine);
@@ -31,6 +53,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/product", express.static(path.join(__dirname, "public")));
 
 // routes
 route(app);

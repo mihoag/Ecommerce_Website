@@ -1,301 +1,485 @@
 <h4>Orders</h4>
 <div class="container-fluid py-4">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="my-2 d-flex justify-content-between align-items-center">
-                <div class="position-relative">
-                    <span class="position-absolute search"><i
-                            class="fa fa-search"></i></span>
-                    <input class="form-control w-100 order-table"
-                        placeholder="Search by name">
-                </div>
-
-                <div class="px-2">
-                    <span>Filters <i class="fa fa-angle-down"></i></span>
-                    <i class="fa fa-ellipsis-h ms-3"></i>
-                </div>
-
-            </div>
-            <div class="container table-responsive order-table mt-4 pt-2 px-2">
-                <div class="row pt-2 mx-2">
-                    <table
-                        class="table table-responsive table-borderless align-middle">
-                        <thead class="table-info">
-                            <tr class="bg-light">
-                                <th scope="col" width="5%"><input
-                                        class="form-check-input" type="checkbox"></th>
-                                <th scope="col" width="5%">#</th>
-                                <th scope="col" width="15%">Customer</th>
-                                <th scope="col" width="30%">Address</th>
-                                <th scope="col" class="text-center" width="15%">Date</th>
-                                <th scope="col" class="text-center" width="10%">Total</th>
-                                <th scope="col" class="text-center" width="10%">Status</th>
-                                <th scope="col" class="text-center" width="10%">Detail</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row"><input class="form-check-input"
-                                        type="checkbox"></th>
-                                <td>12</td>
-                                <td>To Phuong Hieu</td>
-                                <td>227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5,
-                                    Thành phố Hồ Chí Minh</td>
-                                <td class="text-center">13 Dec, 2023</td>
-                                <td class="text-center"><span class="fw-bolder">$5307</span></td>
-                                <td class="text-center"><span class="fw-bolder">Paid</span></td>
-                                <td class="text-center">
-                                    <button
-                                        class="btn btn-xs btn-light detail-btn">
-                                        <i
-                                            class="fa-solid fa-angles-down"
-                                            style="color: #a5d737;"></i>
-
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="detail-row">
-                                <td colspan="8" class="detail-col">
-                                    <div class="container-fluid detail-table">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="card border-0">
-                                                    <div class="card-body">
-                                                        <div
-                                                            class="invoice-title">
-                                                            <h4
-                                                                class="float-end font-size-15">Order
-                                                                #12 <span
-                                                                    class="badge bg-success font-size-12 ms-2">Paid</span></h4>
-                                                            <div class="mb-4">
-                                                                <h2
-                                                                    class="mb-1 text-muted">SMARTPHONE
-                                                                    STORE</h2>
-                                                            </div>
-                                                            <div
-                                                                class="text-muted">
-                                                                <p class="mb-1">227
-                                                                    Đ. Nguyễn
-                                                                    Văn Cừ,
-                                                                    Phường 4,
-                                                                    Quận 5,
-                                                                    Thành phố Hồ
-                                                                    Chí Minh</p>
-                                                                <p class="mb-1"><i
-                                                                        class="uil uil-envelope-alt me-1"></i>
-                                                                    xyz@987.com</p>
-                                                                <p><i
-                                                                        class="uil uil-phone me-1"></i>
-                                                                    012-345-6789</p>
-                                                            </div>
-                                                        </div>
-
-                                                        <hr class="my-4">
-
-                                                        <div class="row">
-                                                            <div
-                                                                class="col-sm-6">
-                                                                <div
-                                                                    class="text-muted">
-                                                                    <h5
-                                                                        class="font-size-16 mb-3">Billed
-                                                                        To:</h5>
-                                                                    <h5
-                                                                        class="font-size-15 mb-2">To
-                                                                        Phuong
-                                                                        Hieu</h5>
-                                                                    <p
-                                                                        class="mb-1">227
-                                                                        Đ.
-                                                                        Nguyễn
-                                                                        Văn Cừ,
-                                                                        Phường
-                                                                        4, Quận
-                                                                        5, Thành
-                                                                        phố Hồ
-                                                                        Chí Minh</p>
-                                                                    <p
-                                                                        class="mb-1">abc@armyspy.com</p>
-                                                                    <p>001-234-5678</p>
-                                                                </div>
-                                                            </div>
-                                                            <!-- end col -->
-                                                            <div
-                                                                class="col-sm-6">
-                                                                <div
-                                                                    class="text-muted text-sm-end">
-                                                                    <div>
-                                                                        <h5
-                                                                            class="font-size-15 mb-1">Order
-                                                                            No:</h5>
-                                                                        <p>#12</p>
-                                                                    </div>
-                                                                    <div
-                                                                        class="mt-4">
-                                                                        <h5
-                                                                            class="font-size-15 mb-1">Order
-                                                                            Date:</h5>
-                                                                        <p>13
-                                                                            Dec,
-                                                                            2023</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- end col -->
-                                                        </div>
-                                                        <!-- end row -->
-
-                                                        <div class="py-2">
-                                                            <h5
-                                                                class="font-size-15">Order
-                                                                Summary</h5>
-
-                                                            <div
-                                                                class="table-responsive">
-                                                                <table
-                                                                    class="table align-middle table-nowrap table-centered mb-0">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th
-                                                                                style="width: 70px;">No.</th>
-                                                                            <th>Item</th>
-                                                                            <th>Price</th>
-                                                                            <th>Quantity</th>
-                                                                            <th
-                                                                                class="text-end"
-                                                                                style="width: 120px;">Total</th>
-                                                                        </tr>
-                                                                    </thead><!-- end thead -->
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <th
-                                                                                scope="row">01</th>
-                                                                            <td>
-                                                                                <div>
-                                                                                    <h5
-                                                                                        class="text-truncate font-size-14 mb-1">iPhone
-                                                                                        X
-                                                                                        256GB
-                                                                                        Silver</h5>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>$
-                                                                                2,099</td>
-                                                                            <td>1</td>
-                                                                            <td
-                                                                                class="text-end">$2,099</td>
-                                                                        </tr>
-                                                                        <!-- end tr -->
-                                                                        <tr>
-                                                                            <th
-                                                                                scope="row">02</th>
-                                                                            <td>
-                                                                                <div>
-                                                                                    <h5
-                                                                                        class="text-truncate font-size-14 mb-1">Oppo
-                                                                                        FindX
-                                                                                        6
-                                                                                        pro</h5>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>$
-                                                                                1,599</td>
-                                                                            <td>2</td>
-                                                                            <td
-                                                                                class="text-end">$3,198</td>
-                                                                        </tr>
-                                                                        <!-- end tr -->
-                                                                        <tr>
-                                                                            <th
-                                                                                scope="row"
-                                                                                colspan="4"
-                                                                                class="text-end">Sub
-                                                                                Total</th>
-                                                                            <td
-                                                                                class="text-end">$5297</td>
-                                                                        </tr>
-                                                                        <!-- end tr -->
-                                                                        <tr>
-                                                                            <th
-                                                                                scope="row"
-                                                                                colspan="4"
-                                                                                class="border-0 text-end">
-                                                                                Discount
-                                                                                :</th>
-                                                                            <td
-                                                                                class="border-0 text-end">-
-                                                                                $25.50</td>
-                                                                        </tr>
-                                                                        <!-- end tr -->
-                                                                        <tr>
-                                                                            <th
-                                                                                scope="row"
-                                                                                colspan="4"
-                                                                                class="border-0 text-end">
-                                                                                Shipping
-                                                                                Charge
-                                                                                :</th>
-                                                                            <td
-                                                                                class="border-0 text-end">$20.00</td>
-                                                                        </tr>
-                                                                        <!-- end tr -->
-                                                                        <tr>
-                                                                            <th
-                                                                                scope="row"
-                                                                                colspan="4"
-                                                                                class="border-0 text-end">
-                                                                                Tax</th>
-                                                                            <td
-                                                                                class="border-0 text-end">$12.00</td>
-                                                                        </tr>
-                                                                        <!-- end tr -->
-                                                                        <tr>
-                                                                            <th
-                                                                                scope="row"
-                                                                                colspan="4"
-                                                                                class="border-0 text-end">Total</th>
-                                                                            <td
-                                                                                class="border-0 text-end"><h4
-                                                                                    class="m-0 fw-semibold">$5307</h4></td>
-                                                                        </tr>
-                                                                        <!-- end tr -->
-                                                                    </tbody><!-- end tbody -->
-                                                                </table><!-- end table -->
-                                                            </div><!-- end table responsive -->
-                                                            <div
-                                                                class="d-print-none mt-4">
-                                                                <div
-                                                                    class="float-end">
-                                                                    <a
-                                                                        href="javascript:window.print()"
-                                                                        class="btn btn-success me-1"><i
-                                                                            class="fa fa-print"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="row mx-2 justify-content-end d-flex">
-                    <nav style="width:auto">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-
+  <div class="row">
+    <div class="col-md-12">
+      <div class="my-2 d-flex justify-content-between align-items-center">
+        <div class="position-relative">
+          <span class="position-absolute search"><i class="fa fa-search"></i></span>
+          <input class="form-control w-100 order-table" placeholder="Search by name" id="search-name" />
         </div>
+
+        <div class="px-2">
+          <span>Filters <i class="fa fa-angle-down"></i></span>
+          <i class="fa fa-ellipsis-h ms-3"></i>
+        </div>
+
+      </div>
+      <div class="container table-responsive order-table mt-4 pt-2 px-2">
+        <div class="row pt-2 mx-2">
+          <table class="table table-responsive table-borderless align-middle">
+            <thead class="table-info">
+              <tr class="bg-light">
+                <th scope="col" width="5%"><input class="form-check-input" type="checkbox" /></th>
+                <th scope="col" width="5%">#</th>
+                <th scope="col" width="15%">Customer</th>
+                <th scope="col" width="30%">Address</th>
+                <th scope="col" class="text-center" width="15%">Date</th>
+                <th scope="col" class="text-center" width="10%">Total</th>
+                <th scope="col" class="text-center" width="10%">Status</th>
+                <th scope="col" class="text-center" width="10%">Detail</th>
+              </tr>
+            </thead>
+            <tbody id="order-list">
+              <tr>
+                <th scope="row"><input class="form-check-input" type="checkbox" /></th>
+                <td>12</td>
+                <td>To Phuong Hieu</td>
+                <td>227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, Thành phố Hồ Chí
+                  Minh</td>
+                <td class="text-center">13 Dec, 2023</td>
+                <td class="text-center"><span class="fw-bolder">$5307</span></td>
+                <td class="text-center"><span class="fw-bolder">Paid</span></td>
+                <td class="text-center">
+                  <button class="btn btn-xs btn-light detail-btn">
+                    <i class="fa-solid fa-angles-down" style="color: #a5d737;"></i>
+
+                  </button>
+                </td>
+              </tr>
+              <tr class="detail-row">
+                <td colspan="8" class="detail-col">
+                  <div class="container-fluid detail-table">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="card border-0">
+                          <div class="card-body">
+                            <div class="invoice-title">
+                              <h4 class="float-end font-size-15">Order #12
+                                <span class="badge bg-success font-size-12 ms-2">Paid</span>
+                              </h4>
+                              <div class="mb-4">
+                                <h2 class="mb-1 text-muted">SMARTPHONE STORE</h2>
+                              </div>
+                              <div class="text-muted">
+                                <p class="mb-1">227 Đ. Nguyễn Văn Cừ, Phường 4,
+                                  Quận 5, Thành phố Hồ Chí Minh</p>
+                                <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i>
+                                  xyz@987.com</p>
+                                <p><i class="uil uil-phone me-1"></i>
+                                  012-345-6789</p>
+                              </div>
+                            </div>
+
+                            <hr class="my-4" />
+
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <div class="text-muted">
+                                  <h5 class="font-size-16 mb-3">Billed To:</h5>
+                                  <h5 class="font-size-15 mb-2">To Phuong Hieu</h5>
+                                  <p class="mb-1">227 Đ. Nguyễn Văn Cừ, Phường
+                                    4, Quận 5, Thành phố Hồ Chí Minh</p>
+                                  <p class="mb-1">abc@armyspy.com</p>
+                                  <p>001-234-5678</p>
+                                </div>
+                              </div>
+                              <!-- end col -->
+                              <div class="col-sm-6">
+                                <div class="text-muted text-sm-end">
+                                  <div>
+                                    <h5 class="font-size-15 mb-1">Order No:</h5>
+                                    <p>#12</p>
+                                  </div>
+                                  <div class="mt-4">
+                                    <h5 class="font-size-15 mb-1">Order Date:</h5>
+                                    <p>13 Dec, 2023</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- end col -->
+                            </div>
+                            <!-- end row -->
+
+                            <div class="py-2">
+                              <h5 class="font-size-15">Order Summary</h5>
+
+                              <div class="table-responsive">
+                                <table class="table align-middle table-nowrap table-centered mb-0">
+                                  <thead>
+                                    <tr>
+                                      <th style="width: 70px;">No.</th>
+                                      <th>Item</th>
+                                      <th>Price</th>
+                                      <th>Quantity</th>
+                                      <th class="text-end" style="width: 120px;">Total</th>
+                                    </tr>
+                                  </thead><!-- end thead -->
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">01</th>
+                                      <td>
+                                        <div>
+                                          <h5 class="text-truncate font-size-14 mb-1">iPhone X 256GB Silver</h5>
+                                        </div>
+                                      </td>
+                                      <td>$ 2,099</td>
+                                      <td>1</td>
+                                      <td class="text-end">$2,099</td>
+                                    </tr>
+                                    <!-- end tr -->
+                                    <tr>
+                                      <th scope="row">02</th>
+                                      <td>
+                                        <div>
+                                          <h5 class="text-truncate font-size-14 mb-1">Oppo FindX 6 pro</h5>
+                                        </div>
+                                      </td>
+                                      <td>$ 1,599</td>
+                                      <td>2</td>
+                                      <td class="text-end">$3,198</td>
+                                    </tr>
+                                    <!-- end tr -->
+                                    <tr>
+                                      <th scope="row" colspan="4" class="text-end">Sub Total</th>
+                                      <td class="text-end">$5297</td>
+                                    </tr>
+                                    <!-- end tr -->
+                                    <tr>
+                                      <th scope="row" colspan="4" class="border-0 text-end">
+                                        Discount :</th>
+                                      <td class="border-0 text-end">- $25.50</td>
+                                    </tr>
+                                    <!-- end tr -->
+                                    <tr>
+                                      <th scope="row" colspan="4" class="border-0 text-end">
+                                        Shipping Charge :</th>
+                                      <td class="border-0 text-end">$20.00</td>
+                                    </tr>
+                                    <!-- end tr -->
+                                    <tr>
+                                      <th scope="row" colspan="4" class="border-0 text-end">
+                                        Tax</th>
+                                      <td class="border-0 text-end">$12.00</td>
+                                    </tr>
+                                    <!-- end tr -->
+                                    <tr>
+                                      <th scope="row" colspan="4" class="border-0 text-end">Total</th>
+                                      <td class="border-0 text-end">
+                                        <h4 class="m-0 fw-semibold">$5307</h4>
+                                      </td>
+                                    </tr>
+                                    <!-- end tr -->
+                                  </tbody><!-- end tbody -->
+                                </table><!-- end table -->
+                              </div><!-- end table responsive -->
+                              <div class="d-print-none mt-4">
+                                <div class="float-end">
+                                  <a href="javascript:window.print()" class="btn btn-success me-1"><i
+                                      class="fa fa-print"></i></a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row mx-2 justify-content-end d-flex">
+          <nav style="width:auto">
+            <ul class="pagination overflow-x-scroll" id="pagination">
+            </ul>
+          </nav>
+        </div>
+      </div>
+
     </div>
+  </div>
 </div>
+
+<script>
+  function convertToVND(number) {
+    number = parseInt(number)
+    // Using toLocaleString to format the number as currency in VND
+    let vndFormatted = number.toLocaleString('vi-VN', {
+      style: 'currency',
+      currency: 'VND'
+    });
+
+    return vndFormatted;
+  }
+
+  function formatPhoneNumber(number) {
+    number = number + "";
+    return number.slice(0, 3) + '-' + number.slice(3, 6) + '-' + number.slice(6, 10);
+  }
+
+  function renderOrderDetail(orderId, detail) {
+    $.ajax({
+      type: "GET",
+      url: "/admin/orders/getDetail",
+      contentType: 'application/json',
+      data: { orderId },
+      dataType: "json",
+      success: function (data) {
+        let top = data[0]
+        let listProductOrder = ''
+        let sumPrice = 0;
+        for (let i = 0; i < data.length; i++) {
+          let idx = `${i + 1}`;
+          if (i + 1 < 10) idx = '0' + idx;
+          listProductOrder += `
+            <tr>
+              <th scope="row">${idx}</th>
+              <td>
+                <div>
+                  <h6 class="text-truncate font-size-14 mb-1 text-wrap">${data[i].pn}</h6>
+                </div>
+              </td>
+              <td>${convertToVND(data[i].price)}</td>
+              <td class="text-center">${data[i].quantity}</td>
+              <td class="text-end">-${data[i].discount}%</td>
+            </tr>
+          `
+        }
+        listProductOrder += `
+                  <tr>
+                    <th scope="row" colspan="4" class="text-end">Sub Total</th>
+                    <td class="text-end">${convertToVND(top.totalCost)}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" colspan="4" class="border-0 text-end">
+                      Shipping Charge :</th>
+                    <td class="border-0 text-end">50.000 ₫</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" colspan="4" class="border-0 text-end">Total</th>
+                    <td class="border-0 text-end">
+                      <h4 class="m-0 fw-semibold">${convertToVND(top.totalCost + 50000)}</h4>
+                    </td>
+                  </tr>
+        `
+        detail.querySelector(".card-body").innerHTML = `
+        <div class="invoice-title">
+                    <h4 class="float-end font-size-15">Order #${top.orderId}
+                      <span class="badge bg-success font-size-12 ms-2"></span>
+                    </h4>
+                    <div class="mb-4">
+                      <h2 class="mb-1 text-muted">SMARTPHONE STORE</h2>
+                    </div>
+                    <div class="text-muted">
+                      <p class="mb-1">227 Đ. Nguyễn Văn Cừ, Phường 4,
+                        Quận 5, Thành phố Hồ Chí Minh</p>
+                      <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i>
+                        smartphone@shop.com</p>
+                      <p><i class="uil uil-phone me-1"></i>
+                        099-988-9898</p>
+                    </div>
+                  </div>
+                  <hr class="my-4" />
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="text-muted">
+                        <h5 class="font-size-16 mb-3">Billed To:</h5>
+                        <h5 class="font-size-15 mb-2">${top.name}</h5>
+                        <p class="mb-1">${top.address}</p>
+                        <p class="mb-1">${top.email}</p>
+                        <p>${formatPhoneNumber(top.phoneNumber)}</p>
+                      </div>
+                    </div>
+                    <!-- end col -->
+                    <div class="col-sm-6">
+                      <div class="text-muted text-sm-end">
+                        <div>
+                          <h5 class="font-size-15 mb-1">Order No:</h5>
+                          <p>#12</p>
+                        </div>
+                        <div class="mt-4">
+                          <h5 class="font-size-15 mb-1">Order Date:</h5>
+                          <p>${top.timeOrder}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="py-2">
+                    <h5 class="font-size-15">Order Summary</h5>
+                    <div class="table-responsive">
+                      <table class="table align-middle table-nowrap table-centered mb-0">
+                        <thead>
+                          <tr>
+                            <th style="width: 70px;">No.</th>
+                            <th>Item</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th class="text-end" style="width: 120px;">Discount</th>
+                          </tr>
+                        <tbody>
+                          ${listProductOrder}
+                        </tbody><!-- end tbody -->
+                      </table><!-- end table -->
+                    </div><!-- end table responsive -->
+                    <div class="d-print-none mt-4">
+                      <div class="float-end">
+                        <a href="javascript:window.print()" class="btn btn-success me-1"><i
+                            class="fa fa-print"></i></a>
+                      </div>
+                    </div>
+                  </div>
+    `
+      },
+      error: function (result) {
+        console.log(result);
+      }
+    });
+  }
+
+  function toggleDetail(data) {
+    let id = $(data).attr("data-id")
+    let orderId = parseInt($(data).attr("data-order-id"))
+    let detail = document.querySelectorAll('.detail-row')[id]
+    detail.classList.toggle('open')
+    if (detail.classList.contains('open')) {
+      renderOrderDetail(orderId, detail)
+    }
+  }
+
+  function handleClick(page) {
+    let keyword = ""
+    //document.querySelector("#search-name").value;
+    data = { currentPage: $(page).attr("data-id"), showType: "admin" }
+    if (keyword == "") {
+      $.ajax({
+        type: "GET",
+        url: "/admin/orders/getPerpage",
+        data: data,
+        contentType: 'application/json',
+        dataType: "json",
+        success: function (data) {
+          renderPagination(data.totalPage, data.currentPage);
+          renderOrder(data.listorder, data.currentPage);
+        },
+        error: function (result) {
+          console.log(result);
+        }
+      });
+
+    }
+    else {
+      searchByKeyword(keyword, $(page).attr("data-id"))
+    }
+  }
+
+  function renderPagination(totalPage, currentPage) {
+    let pages = '';
+
+    for (let i = 1; i <= totalPage; i++) {
+      if (i == currentPage) {
+        pages += `<li class="page-item active" aria-current="page"><span class="page-link">${i}</span></li>`
+      }
+      else {
+        pages += `<li class="page-item"><a data-id='${i}' class="page-link" style ="cursor: pointer" onclick="handleClick(this)">${i}</a></li>`;
+      }
+    }
+
+    document.querySelector('#pagination').innerHTML = pages;
+  }
+
+  function renderOrder(orders, currentPage) {
+    let startIndex = (currentPage - 1) * 10
+    let listorder = document.querySelector("#order-list")
+    listorder.innerHTML = ""
+    for (let i = 0; i < orders.length; i++) {
+      listorder.innerHTML += `
+        <tr>
+                <th scope="row"><input class="form-check-input" type="checkbox" /></th>
+                <td>${startIndex + i + 1}</td>
+                <td>${orders[i].name}</td>
+                <td>${orders[i].address}</td>
+                <td class="text-center">${orders[i].timeOrder}</td>
+                <td class="text-center"><span class="fw-bolder">${convertToVND(orders[i].totalCost + 50000)}</span></td>
+                <td class="text-center"><span class="fw-bolder">${orders[i].status}</span></td>
+                <td class="text-center">
+                  <button class="btn btn-xs btn-light detail-btn" data-id=${i} data-order-id=${orders[i].orderId} onclick="toggleDetail(this)">
+                    <i class="fa-solid fa-angles-down" style="color: #a5d737;"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr class="detail-row">
+                <td colspan="8" class="detail-col">
+                  <div class="container-fluid detail-table">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="card border-0">
+                          <div class="card-body">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+      `
+    }
+  }
+
+
+
+  function getAllOrderList() {
+    $.ajax({
+      type: "GET",
+      url: "/admin/orders/getPerpage",
+      contentType: 'application/json',
+      data: { showType: "admin" },
+      dataType: "json",
+      success: function (data) {
+        renderPagination(data.totalPage, data.currentPage);
+        renderOrder(data.listorder, data.currentPage);
+      },
+      error: function (result) {
+        console.log(result);
+      }
+    });
+  }
+
+  function searchByKeyword(keyword, page) {
+    data = { currentPage: page, keyword: keyword, showType: 'admin' }
+    $.ajax({
+      type: "GET",
+      url: "/admin/orders/searchorder",
+      data: data,
+      contentType: 'application/json',
+      dataType: "json",
+      success: function (data) {
+        let totalPage = data.totalPage;
+        let currentPage = data.currentPage;
+        renderPagination(data.totalPage, data.currentPage);
+        renderOrder(data.listorder, data.currentPage);
+      },
+      error: function (result) {
+        console.log(result);
+      }
+    });
+  }
+
+  function searchP() {
+    let searchbox = document.querySelector("#search-name")
+    let keyword = searchbox.value;
+
+    if (keyword == "") {
+      getAllOrderList()
+    }
+    else {
+      searchByKeyword(keyword, 1);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    getAllOrderList();
+  })
+
+  document.querySelector("#search-name").addEventListener("input", () => searchP())
+</script>

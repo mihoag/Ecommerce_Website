@@ -35,7 +35,7 @@ module.exports =
         try {
             dbcn = await db.connect();
             data = await dbcn.any(`select * from "${tbName1}" c, "${tbName2}" u where c."${joinName1}" = u."${joinName2}" and c."${fieldName}" =  $1 `, [value]);
-            //  console.log(data)
+
             return data;
         } catch (error) {
             throw error;
@@ -64,7 +64,7 @@ module.exports =
     insert: async (tbName, entity) => {
         try {
             const query = pgp.helpers.insert(entity, null, tbName);
-            console.log(query)
+            //console.log(query)
             const data = await db.one(query + ` returning *`);
             return data;
         } catch (error) {
@@ -81,8 +81,8 @@ module.exports =
     },
     update: async (tbName, entity, fieldName, value) => {
         try {
-            const query = pgp.helpers.update(entity, null, tbName) + ` where "${fieldName}" = $1`;
-            const rs = await db.none(query, [value]);
+            const query = pgp.helpers.update(entity, null, tbName) + ` where "${fieldName}" = $1 RETURNING *`;
+            const rs = await db.one(query, [value]);
             return rs;
         } catch (error) {
             throw error;
@@ -105,7 +105,8 @@ module.exports =
     update2: async (tbName, entity, fieldName1, fieldName2, value1, value2) => {
         try {
             const query = pgp.helpers.update(entity, null, tbName) + ` where "${fieldName1}" = $1` + ` and "${fieldName2}" = $2`;
-            const rs = await db.none(query, [value1], [value2]);
+            //console.log(query);
+            const rs = await db.none(query, [value1, value2]);
             return rs;
         } catch (error) {
             throw error;
@@ -113,10 +114,39 @@ module.exports =
     },
     delete2: async (tbName, fieldname1, fieldname2, value1, value2) => {
         try {
-            const rs = await db.none(`delete from "${tbName}" where "${fieldname1}" = $1 and "${fieldname2}" = $2`, [value1], [value2]);
+            const query = `delete from "${tbName}" where "${fieldname1}" = $1 and "${fieldname2}" = $2`;
+            //console.log(query);
+            const rs = await db.none(query, [value1, value2]);
             return rs;
         } catch (error) {
             throw error;
         }
     },
+
+    getAllOrder: async () => {
+        try {
+            const rs = db.any(`select o.*, u.name as name from "Order" o, "User" u where u."userId" = o."userId" order by o."timeOrder" desc`);
+            return rs;
+        } catch (error) {
+            throw error;
+        }
+    },
+    
+    getDetailOrder: async (orderId) => {
+        try {
+            const rs = db.any(`select o.*, u.name as name, u.email, p.price, p.discount, p.name as pn, d.quantity from "Order" o, "User" u, "Product" p, "OrderDetail" d where o."orderId" = ${orderId} and u."userId" = o."userId" and d."orderId" = ${orderId} and p."productId" = d."productId"`);
+            return rs;
+        } catch (error) {
+            throw error;
+        }
+    },
+
+    getSearchOrder: async (keyword) => {
+        try {
+            const rs = db.any(`select o.*, u.name as name from "Order" o, "User" u where u."userId" = o."userId" and (u."name" ilike '%${keyword}%' or u."phoneNumber" ilike '%${keyword}%') order by o."timeOrder" desc`);
+            return rs;
+        } catch (error) {
+            throw error;
+        }
+    }
 }

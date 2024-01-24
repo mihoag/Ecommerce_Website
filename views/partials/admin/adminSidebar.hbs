@@ -35,6 +35,15 @@
           <span class="nav-link-text ms-3">Products</span>
         </a>
       </li>
+      <li class="nav-item my-2 {{#if isProductsList}}active{{/if}}">
+        <a class="nav-link active ps-4 py-3" href="/admin/products-list">
+          <span class="nav-icon">
+            <i class="fa-solid fa-list"
+              style="color: #12799b; max-width: 20px;"></i>
+          </span>
+          <span class="nav-link-text ms-3">Products List</span>
+        </a>
+      </li>
       <li class="nav-item my-2 {{#if isOrders}}active{{/if}}">
         <a class="nav-link active ps-4 py-3" href="/admin/orders">
           <span class="nav-icon">

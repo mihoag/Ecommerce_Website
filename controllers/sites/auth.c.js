@@ -112,7 +112,7 @@ module.exports = {
             outputLength: hashLength * 4,
           }).toString(CryptoJS.enc.Hex);
           newUser.password = pwHashed + salt;
-          newUser.avatar = `https://robohash.org/${newUser.email}.png?set=set4`;
+          newUser.avatar = `https://ui-avatars.com/api/?name=No+Name`;
           newUser.public_id = null;
 
           // new user
@@ -169,17 +169,19 @@ module.exports = {
           res.redirect("/auth/login");
         } else {
           // check current password
-          const pwDb = rs[0].password;
-          const salt = pwDb.slice(hashLength);
-          const pwSalt = password + salt;
-          const pwHashed = CryptoJS.SHA3(pwSalt, {
-            outputLength: hashLength * 4,
-          }).toString(CryptoJS.enc.Hex);
-          if (pwDb !== pwHashed + salt) {
-            return res.json({
-              success: false,
-              message: "Password hiện tại không khớp",
-            });
+          if (rs[0].password.length > 0) {
+            const pwDb = rs[0].password;
+            const salt = pwDb.slice(hashLength);
+            const pwSalt = password + salt;
+            const pwHashed = CryptoJS.SHA3(pwSalt, {
+              outputLength: hashLength * 4,
+            }).toString(CryptoJS.enc.Hex);
+            if (pwDb !== pwHashed + salt) {
+              return res.json({
+                success: false,
+                message: "Password hiện tại không khớp",
+              });
+            }
           }
 
           // change password

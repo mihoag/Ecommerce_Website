@@ -3,11 +3,18 @@ const userM = require("../models/users.m");
 module.exports = {
   mustLogin: async (req, res, next) => {
     try {
-      if (req.session.uid && req.session.email) {
-        userM.getByID(req.session.uid).then((user) => {
+      if (req.session.passport) {
+        req.session.uid = req.session.passport.user.userId
+        req.session.email = req.session.passport.user.email
+      }
+      if ((req.session.uid && req.session.email)) {
+        userM.getByID(req.session.uid).then(async (user) => {
           if (user.length < 0 || user[0].email != req.session.email) {
             return res.redirect("/auth/login");
-          } else next();
+          } else {
+            await userM.updateLastOnline(user[0].userId)
+            next();
+          }
         });
       } else return res.redirect("/auth/login");
     } catch (error) {
