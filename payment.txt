@@ -1,0 +1,26 @@
+CREATE DATABASE payment;
+
+
+CREATE TABLE taikhoanGD (
+    username VARCHAR(255) primary key,   -- Kiểu string với độ dài tối đa là 255 ký tự
+    balance DOUBLE PRECISION, -- Kiểu double precision
+    active BOOLEAN
+);
+
+CREATE TABLE GDnaptien (
+    idgiaodich BIGSERIAL PRIMARY KEY,
+    username VARCHAR(255) REFERENCES taikhoanGD(username),
+    sotiennap DOUBLE PRECISION,
+    ngaygio TIMESTAMP
+);
+
+CREATE TABLE GDthanhtoan (
+    idgiaodich BIGSERIAL PRIMARY KEY,
+    username1 VARCHAR(255) REFERENCES taikhoanGD(username),
+    username2 VARCHAR(255) REFERENCES taikhoanGD(username),
+    sotien DOUBLE PRECISION,
+    ngaygio TIMESTAMP,
+    noidung VARCHAR(255),
+    idhoadon INT
+);
+

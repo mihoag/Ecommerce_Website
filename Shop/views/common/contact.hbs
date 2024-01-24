@@ -1,0 +1,92 @@
+<section>
+    <div class="box-wrapper">
+        <div class="info-wrap">
+            <h2 class="info-title">Thông tin liên hệ</h2>
+            <h3 class="info-sub-title">Gửi phản hồi của bạn vào form. Chúng tôi sẽ trả lời sớm nhất cho bạn!</h3>
+            <ul class="info-details">
+                <li>
+                    <span>Số điện thoại:</span> <a href="tel:+ 1235 2355 98">0123456789</a>
+                </li>
+                <li>
+                    <span>Email:</span> <a href="mailto:info@yoursite.com">doan@gmail.com</a>
+                </li>
+                <li>
+                    <span>Địa chỉ:</span> <a href="mailto:info@yoursite.com">Linh Trung, Thủ Đức, TP Hồ Chí Minh</a>
+                </li>
+            </ul>
+        </div>
+        <div class="form-wrap">
+            <form name="myform">
+                <h2 class="form-title">Gửi phản hồi cho chúng tôi</h2>
+                <div class="form-fields">
+                    <div class="form-group">
+                        <input type="text" class="fname" name="firstname" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="lname" name="lastname" placeholder="Last Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="email" name="email" placeholder="Mail">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="phone" name="phone" placeholder="Phone">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" id="" name="message" placeholder="Write your message"></textarea>
+                    </div>
+                </div>
+                <input type="submit" value="Send Message" class="submit-button">
+            </form>
+        </div>
+    </div>
+</section>
+
+<div id="alert">
+    <span id="closebtn">&otimes;</span>
+</div>
+
+<script>
+    function addAlertBox(text, bgcolor, textcolor, time) {
+        var al = document.getElementById('alert');
+        al.childNodes[0].nodeValue = text;
+        al.style.backgroundColor = bgcolor;
+        al.style.opacity = 1;
+        al.style.zIndex = 200;
+
+        if (textcolor) al.style.color = textcolor;
+        if (time)
+            setTimeout(function () {
+                al.style.opacity = 0;
+                al.style.zIndex = 0;
+            }, time);
+    }
+    const form = document.forms['myform'];
+    $(form).on("submit", async function (e) {
+        e.preventDefault();
+        const data = $(this)
+            .serializeArray()
+            .reduce((obj, field) => ({ ...obj, [field.name]: field.value }), {});
+
+        //console.log(data);
+        const res = await fetch(`/contact`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+
+        const resData = await res.json();
+
+        if (res.ok) {
+            addAlertBox('Gửi email thành công', '#17c671', '#fff', 3500);
+            return;
+        }
+        else {
+            addAlertBox('Gửi email thất bại', '#FF3333', '#fff', 3500);
+            // alert('Error!')
+            return;
+        }
+    });
+
+</script>

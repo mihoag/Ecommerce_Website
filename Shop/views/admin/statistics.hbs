@@ -1,0 +1,102 @@
+<style>
+  .bx {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+</style>
+
+<section>
+  <h4>Statistics</h4>
+  {{!-- detail --}}
+  <div class="row mb-5 justify-content-between px-4 mt-4">
+    <div class="col-md-4 text-white rounded fw-bold py-2 bx" style="background-color: #369FFF;">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column justify-content-between">
+          <p>In Stock</p>
+          <p class="fs-4">{{data.products}} Products</p>
+        </div>
+        <div class="d-flex flex-column justify-content-center"><i class="fas fa-boxes fs-1 text-black"></i></div>
+      </div>
+    </div>
+    <div class="col-md-3 text-white rounded fw-bold py-2 bx" style="background-color: #8AC53E;">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column justify-content-between">
+          <p>Todays Revenue</p>
+          <p class="fs-4">{{convertToVND data.today}}</p>
+        </div>
+        <div class="d-flex flex-column justify-content-center"><i class="fas fa-coins fs-1 text-warning"></i></div>
+      </div>
+    </div>
+    <div class="col-md-4 text-white rounded fw-bold py-2 bx" style="background-color: #C11A0F;">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column justify-content-between">
+          <p>Month Revenue</p>
+          <p class="fs-4">{{convertToVND data.month}}</p>
+        </div>
+        <div class="d-flex flex-column justify-content-center"><i class="fas fa-coins fs-1 text-warning"></i></div>
+      </div>
+    </div>
+  </div>
+  {{!-- end --}}
+  <div class="row mt-4 mb-5">
+    <div class="col-md-8">
+      <div class="card z-index-2 h-100">
+        <div class="card-body p-2">
+          <div class="chart">
+            <canvas id="myLineChart" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card z-index-2 h-100">
+        <div class="card-body p-2">
+          <div style="font-size: 30px; color: #161A30; text-align:center;" class="fw-bold">Top 5 sản phẩm bán chạy</div>
+          {{!-- select --}}
+          <div class="d-flex align-items-center justify-content-center my-2 fw-bold">
+            <div class="d-flex align-items-center">
+              <button type="button" class="btn btn-outline-secondary" onclick="prevYearClick()">
+                ❮
+              </button>
+              <div class="px-3" id="Year">All</div>
+              <button type="button" class="btn btn-outline-secondary" onclick="nextYearClick()">
+                ❯
+              </button>
+            </div>
+
+          </div>
+          {{!-- pie chart --}}
+          <div class="chart">
+            <canvas id="myPieChart" class="chart-canvas"></canvas>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between mx-4 mb-3 align-items-center">
+    {{! select }}
+    <div class="d-flex align-items-center justify-content-between fs-5 px-5 fw-bold">
+      <div class="d-flex align-items-center">
+        <button type="button" class="btn btn-outline-secondary" onclick="prevMonthClick()">
+          ❮
+        </button>
+        <div class="px-3" id="MonthYear"></div>
+        <button type="button" class="btn btn-outline-secondary" onclick="nextMonthClick()">
+          ❯
+        </button>
+      </div>
+
+    </div>
+    <button type="button" class="btn btn-success fs-5" onclick="exportExcel()">Export Excel</button>
+
+  </div>
+  {{! chartJS }}
+  <div class="card p-2 mb-5">
+
+    <canvas id="myChart"></canvas>
+  </div>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

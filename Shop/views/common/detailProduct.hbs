@@ -1,0 +1,439 @@
+<section>
+    {{#with product}}
+    <div class="chitietSanpham" style="margin-bottom: 100px">
+        <input hidden value="{{productId}}" id="proID">
+        <h1>{{name}}</h1>
+        <div class="rating">
+            {{{showRating tb}}}
+            <span> {{danhgia}} đánh giá</span>
+        </div>
+        <div class="rowdetail group">
+            <div class="picture">
+                <img src="{{image}}" onclick="opencertain()">
+            </div>
+            <div class="price_sale">
+                <div class="area_price"><strong>{{convertToVND price}}</strong></div>
+                <div class="ship" style="display: none;">
+                    <img src="img/chitietsanpham/clock-152067_960_720.png">
+                    <div>NHẬN HÀNG TRONG 1 GIỜ</div>
+                </div>
+                <div class="area_promo">
+                    <strong>khuyến mãi</strong>
+                    <div class="promo">
+                        <img src="img/chitietsanpham/icon-tick.png">
+                        <div id="detailPromo">Khách hàng sẽ được thử máy miễn phí tại cửa hàng. Có thể đổi trả lỗi trong
+                            vòng 2 tháng.</div>
+                    </div>
+                </div>
+                <div class="policy">
+                    <div>
+                        <img src="img/chitietsanpham/box.png">
+                        <p>Trong hộp có: Sạc, Tai nghe, Sách hướng dẫn, Cây lấy sim, Ốp lưng </p>
+                    </div>
+                    <div>
+                        <img src="img/chitietsanpham/icon-baohanh.png">
+                        <p>Bảo hành chính hãng 12 tháng.</p>
+                    </div>
+                    <div class="last">
+                        <img src="img/chitietsanpham/1-1.jpg">
+                        <p>1 đổi 1 trong 1 tháng nếu lỗi, đổi sản phẩm tại nhà trong 1 ngày.</p>
+                    </div>
+                </div>
+                <div class="area_order">
+                    <!-- nameProduct là biến toàn cục được khởi tạo giá trị trong phanTich_URL_chiTietSanPham -->
+                    <a class="buy_now" id="{{productId}}" onclick="themvaogio(this)">
+                        <b><i class="fa fa-cart-plus"></i> Thêm vào giỏ hàng</b>
+                        <p>Giao trong 1 giờ hoặc nhận tại cửa hàng</p>
+                    </a>
+                </div>
+            </div>
+            <div class="info_product">
+                <h2>Thông số kỹ thuật</h2>
+                <ul class="info">
+                    <li>
+                        <p>Màn hình</p>
+                        <div>{{screen}}</div>
+                    </li>
+                    <li>
+                        <p>Hệ điều hành</p>
+                        <div>{{os}}</div>
+                    </li>
+                    <li>
+                        <p>Camera sau</p>
+                        <div>{{cameraBehind}}</div>
+                    </li>
+                    <li>
+                        <p>Camera trước</p>
+                        <div>{{cameraFront}}</div>
+                    </li>
+                    <li>
+                        <p>CPU</p>
+                        <div>{{cpu}}</div>
+                    </li>
+                    <li>
+                        <p>RAM</p>
+                        <div>{{ram}}</div>
+                    </li>
+                    <li>
+                        <p>ROM</p>
+                        <div>{{rom}}</div>
+                    </li>
+                    <li>
+                        <p>Dung lượng pin</p>
+                        <div>{{battery}}</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <div id="overlaycertainimg" class="overlaycertainimg">
+            <div class="close" onclick="closecertain()">×</div>
+            <div class="overlaycertainimg-content">
+                <img id="bigimg" class="bigimg"
+                    src="https://cdn.tgdd.vn/Products/Images/42/192002/oppo-realme-2-pro-black-600x600.jpg">
+                <div class="div_smallimg owl-carousel owl-loaded owl-drag">
+                    <!-- <img src="img/chitietsanpham/oppo-f9-mau-do-1-org.jpg" onclick="changepic(this.src)">
+                        <img src="img/chitietsanpham/oppo-f9-mau-do-2-org.jpg" onclick="changepic(this.src)">
+                        <img src="img/chitietsanpham/oppo-f9-mau-do-3-org.jpg" onclick="changepic(this.src)"> -->
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage"
+                            style="transition: all 0s ease 0s; width: 1073px; transform: translate3d(307px, 0px, 0px);">
+                            <div class="owl-item active center" style="width: 153.28px;">
+                                <div class="item">
+                                    <a>
+                                        <img src="img/products/huawei-mate-20-pro-green-600x600.jpg"
+                                            onclick="changepic(this.src)">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item active" style="width: 153.28px;">
+                                <div class="item">
+                                    <a>
+                                        <img src="img/chitietsanpham/oppo-f9-mau-do-1-org.jpg"
+                                            onclick="changepic(this.src)">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item active" style="width: 153.28px;">
+                                <div class="item">
+                                    <a>
+                                        <img src="img/chitietsanpham/oppo-f9-mau-do-2-org.jpg"
+                                            onclick="changepic(this.src)">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item" style="width: 153.28px;">
+                                <div class="item">
+                                    <a>
+                                        <img src="img/chitietsanpham/oppo-f9-mau-do-3-org.jpg"
+                                            onclick="changepic(this.src)">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item" style="width: 153.28px;">
+                                <div class="item">
+                                    <a>
+                                        <img src="img/products/huawei-mate-20-pro-green-600x600.jpg"
+                                            onclick="changepic(this.src)">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item" style="width: 153.28px;">
+                                <div class="item">
+                                    <a>
+                                        <img src="img/chitietsanpham/oppo-f9-mau-do-3-org.jpg"
+                                            onclick="changepic(this.src)">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item" style="width: 153.28px;">
+                                <div class="item">
+                                    <a>
+                                        <img src="img/products/huawei-mate-20-pro-green-600x600.jpg"
+                                            onclick="changepic(this.src)">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><span
+                                aria-label="Previous">‹</span></button><button type="button" role="presentation"
+                            class="owl-next"><span aria-label="Next">›</span></button></div>
+                    <div class="owl-dots"><button role="button" class="owl-dot active"><span></span></button><button
+                            role="button" class="owl-dot"><span></span></button><button role="button"
+                            class="owl-dot"><span></span></button><button role="button"
+                            class="owl-dot"><span></span></button><button role="button"
+                            class="owl-dot"><span></span></button><button role="button"
+                            class="owl-dot"><span></span></button><button role="button"
+                            class="owl-dot"><span></span></button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/with}}
+    <!-- Comment , rating -->
+    <div class="card">
+        <div class="card-body">
+            <h4>Bình luận về sản phẩm</h4>
+        </div>
+
+        <div class="comment-widgets m-b-20" id="listCmt">
+
+            <div class="comment-row">
+                <div style="margin-right: 5px;"><span class="round"><img src="https://i.imgur.com/uIgDDDd.jpg"
+                            alt="user" width="50"></span></div>
+                <div class="comment-text w-100">
+                    <div class="comment-footer">
+                        <span class="date" style="margin-right: 10px;">April 14, 2019</span>
+                        {{{showRating 5}}}
+                    </div>
+                    <p class="m-b-5 m-t-10">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+                        printer took a galley of type and scrambled it</p>
+                </div>
+            </div>
+        </div>
+        <div class="pagination" id="page">
+            <a href="#"><i class="fa fa-angle-left"></i></a>
+            <a href="#">1</a>
+            <a href="#" class="current">2</a>
+            <a href="#">3</a>
+            <a href="#"><i class="fa fa-angle-right"></i></a>
+        </div>
+        <div class="postCmt">
+            <form>
+                <div class="form">
+                    <span class="round"><img src="https://i.imgur.com/RpzrMR2.jpg" width="50"></span>
+                    <input type="text" class="text-name" name="name" placeholder="Nhập tên của bạn">
+                    <textarea class="txt-area" name="content" placeholder="Nhập nội dung đánh giá"></textarea>
+                </div>
+                <div class="operation">
+                    <div class="rate">
+                        <input type="radio" name="rating" value="5" id="5">5☆ &nbsp;
+                        <input type="radio" name="rating" value="4" id="4">4☆ &nbsp;
+                        <input type="radio" name="rating" value="3" id="3">3☆&nbsp;
+                        <input type="radio" name="rating" value="2" id="2">2☆ &nbsp;
+                        <input type="radio" name="rating" value="1" id="1">1☆&nbsp;
+                    </div>
+                    <button type="submit" class="btn-post" id="send">Post
+                        comment</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Goi y san pham -->
+    <div id="goiYSanPham">
+        <div class="khungSanPham" style="border-color: #434aa8">
+            <h3 class="tenKhung"
+                style="background-image: linear-gradient(120deg, #434aa8 0%, #ec1f1f 50%, #434aa8 100%);">* Bạn có thể
+                thích *</h3>
+            <div class="listSpTrongKhung flexContain">
+                {{#each relatedProduct}}
+                <li class="sanPham">
+                    <a href="/product/detailProducts?id={{productId}}">
+                        <img src="{{image}}" alt="">
+                        <h3>{{name}}</h3>
+                        <div class="price">
+                            <strong>{{convertToVND giagiam}}</strong>
+                            <span>{{convertToVND price}}</span>
+                        </div>
+                        <div class="ratingresult">
+                            {{{showRating tb}}}
+                            <span>{{danhgia}} đánh giá</span>
+                        </div>
+                    </a>
+                </li>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</section>
+<div id="alert">
+    <span id="closebtn">&otimes;</span>
+</div>
+
+<script>
+    var listCmt = document.getElementById("listCmt");
+    var send = document.getElementById("send");
+    var proID = document.getElementById("proID");
+    var page = document.getElementById("page");
+
+    function addAlertBox(text, bgcolor, textcolor, time) {
+        var al = document.getElementById('alert');
+        al.childNodes[0].nodeValue = text;
+        al.style.backgroundColor = bgcolor;
+        al.style.opacity = 1;
+        al.style.zIndex = 200;
+
+        if (textcolor) al.style.color = textcolor;
+        if (time)
+            setTimeout(function () {
+                al.style.opacity = 0;
+                al.style.zIndex = 0;
+            }, time);
+    }
+    function getCommentPerpage(page) {
+        let id = $('#proID').val();
+
+        data = { currentPage: page }
+        $.ajax({
+            type: "GET",
+            url: `/comment/${id}`,
+            data: data,
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+                //console.log(data);
+                renderComment(data.listComments);
+                renderPagination(data.totalPage, data.currentPage);
+            },
+            error: function (result) {
+                console.log(result)
+            }
+        });
+    }
+
+
+    function handleClick(page) {
+        //console.log(page.getAttribute("id"))
+        //console.log(ip);
+        currentPage = page.getAttribute("id");
+        getCommentPerpage(currentPage);
+    }
+
+    function renderPagination(totalPage, currentPage) {
+        let pages = '';
+        if (currentPage != 1) {
+            pages += `<a href="#"><i class="fa fa-angle-left"></i></a>`
+        }
+        for (let i = 1; i <= totalPage; i++) {
+            if (i == currentPage) {
+                pages += `<a id='${i}'  class="current" onclick="handleClick(this)">${i}</a>`;
+            }
+            else {
+                pages += `<a id='${i}'   onclick="handleClick(this)">${i}</a>`;
+            }
+        }
+
+        if (currentPage != totalPage) {
+            pages += `<a href="#"><i class="fa fa-angle-right"></i></a>`
+        }
+
+        //console.log(pages);
+        //console.log(page);
+        page.innerHTML = pages;
+    }
+    function showRating(tb) {
+        let content = '';
+        var i = 0;
+        for (i = 0; i < tb; i++) {
+            content += '<i class="fa fa-star"></i>'
+        }
+        while (i < 5) {
+            content += '<i class="fa fa-star-o"></i>'
+            i++;
+        }
+        return content;
+    }
+    function renderComment(data) {
+        let content = '';
+        console.log(data);
+        //  console.log(data)
+        for (let i = 0; i < data.length; i++) {
+            content += `<div class="comment-row">
+                <div style="margin-right: 5px;"><span class="round"><img src="https://i.imgur.com/uIgDDDd.jpg"
+                            alt="user" width="50"></span></div>
+                <div class="comment-text w-100">
+                    <h5>${data[i].name}</h5>
+                    <div class="comment-footer">
+                        <span class="date" style="margin-right: 10px;">${data[i].date.substring(0, 10)}</span>
+                        ${showRating(data[i].rate)}
+                    </div>
+                    <p class="m-b-5 m-t-10">${data[i].content}</p>
+                </div>
+            </div>`;
+        }
+        // console.log(content)
+        listCmt.innerHTML = content;
+    }
+    // gia su id product la 1000
+    document.addEventListener("DOMContentLoaded", () => {
+        getCommentPerpage(1);
+
+    })
+
+    send.addEventListener("click", (e) => {
+        e.preventDefault();
+        //console.log(content.val())
+        let content = $("textarea[name='content']").val();
+        let name = $("input[name='name']").val();
+        let rate = $("input[name='rating']:checked").val();
+        //console.log(rate); 
+        //
+        var currentDate = new Date();
+        // Get the components of the date (year, month, day)
+        var year = currentDate.getFullYear();
+        var month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Adding 1 because months are zero-based
+        var day = currentDate.getDate().toString().padStart(2, '0');
+
+        // Construct the formatted date string
+        var formattedDate = year + '-' + month + '-' + day;
+        //console.log(formattedDate);
+        // gia su id product la 1000, id nguoi dung la 1000
+        let id = $('#proID').val();
+        data = { productId: id, name: name, content: content, rate: rate, date: formattedDate }
+        // console.log(new Date())
+        console.log(data);
+        $.ajax({
+            type: "get",
+            url: `/comment/insert`,
+            data: data,
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+                getCommentPerpage(1);
+            },
+            error: function (result) {
+                console.log(result)
+            }
+        });
+    })
+
+
+    /// add to cart
+    function themvaogio(btn) {
+        let idProduct = btn.getAttribute("id")
+        let idUser = localStorage.getItem("idUser")
+        console.log(idUser);
+        var currentDate = new Date();
+        // Get the components of the date (year, month, day)
+        var year = currentDate.getFullYear();
+        var month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Adding 1 because months are zero-based
+        var day = currentDate.getDate().toString().padStart(2, '0');
+        // Construct the formatted date string
+        var formattedDate = year + '-' + month + '-' + day;
+        console.log(formattedDate);
+        let data = { userId: idUser, productId: idProduct, quantity: 1, timeAddToCart: formattedDate };
+
+        $.ajax({
+            type: "GET",
+            url: `/cart/insertCart`,
+            data: data,
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+                addAlertBox('Thêm vào giỏ hàng thành công', '#17c671', '#fff', 3500);
+                updateCartnumber();
+                return;
+            },
+            error: function (result) {
+                addAlertBox('Mặt hàng đã tồn tại trong giỏ hàng', '#FF3333', '#fff', 3500);
+                return;
+            }
+        });
+    }
+
+</script>
