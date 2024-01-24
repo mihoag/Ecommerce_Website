@@ -47,6 +47,14 @@ module.exports = class taikhoangd {
             throw error;
         }
     }
-
+    static async getMoney(username) {
+        try {
+            let data = await db.selectByID("taikhoangd", "username", username);
+            return data.balance;
+        }
+        catch (error) {
+            throw error;
+        }
+    }
 }
 

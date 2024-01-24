@@ -1,6 +1,14 @@
 const { pgp, db } = require("../configs/DBconnection");
 
 module.exports = {
+  countProducts: async () => {
+    try {
+      const rs = await db.one(`select SUM(total) from "Product"`)
+      return rs;
+    } catch (error) {
+      throw error;
+    }
+  },
   getDataTypeById: async (typeId) => {
     try {
       const rs = await db.any(`

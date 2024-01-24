@@ -3,7 +3,6 @@ const express = require("express");
 var cors = require("cors");
 const app = express();
 const https = require("https");
-const http = require('http');
 const route = require('./routes/index.r')
 
 const port = process.env.PORT_GD;
@@ -32,5 +31,5 @@ const server = https.createServer(
 
 //const server = http.createServer(app);
 server.listen(port, () =>
-    console.log(`Auth server listening on port ${port}`),
+    console.log(`Payment server listening on port ${port}`),
 );

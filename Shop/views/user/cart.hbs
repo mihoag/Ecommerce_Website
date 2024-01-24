@@ -240,7 +240,7 @@
 
   function renderListProductInCart(listCart) {
     let content = `<tr>
-                    <th>ID sản phẩm</th>
+                    <th>&nbsp;&nbsp;#&nbsp;&nbsp;</th>
                     <th>Sản phẩm</th>
                     <th>Giá</th>
                     <th>Số lượng</th>
@@ -250,7 +250,7 @@
                 </tr>`;
     for (let i = 0; i < listCart.length; i++) {
       content = content + `<tr>
-                    <td>${listCart[i].productId}</td>
+                    <td>${i + 1}</td>
                     <td class="noPadding imgHide">
                         <a target="_blank" href="/product/detailProducts?id=${listCart[i].productId}" title="Xem chi tiết">
                            ${listCart[i].name}

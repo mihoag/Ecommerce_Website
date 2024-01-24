@@ -1,10 +1,37 @@
 const { pgp, db } = require("../configs/DBconnection");
 
 module.exports = {
-  getTop5: async function () {
+  getTodayRevenue: async function () {
     try {
+      data = await db.one(
+        `
+        select SUM(ROUND(p.price * (100-p.discount)/100) * quantity) from "OrderDetail" d, "Product" p, "Order" o where d."productId" = p."productId" and o."orderId" = d."orderId" and CURRENT_DATE=o."timeOrder"
+        `
+      );
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  getMonthRevenue: async function () {
+    try {
+      data = await db.one(
+        `
+        select SUM(ROUND(p.price * (100-p.discount)/100) * quantity) from "OrderDetail" d, "Product" p, "Order" o where d."productId" = p."productId" and o."orderId" = d."orderId"
+        and date_part('month', o."timeOrder") = date_part('month',CURRENT_DATE) and date_part('year', o."timeOrder") = date_part('year',CURRENT_DATE)
+        `
+      );
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  getTop5: async function (time) {
+    try {
+      let bonusSql = '';
+      if (time) bonusSql += `and date_part('year', o."timeOrder") = ${time}`
       const data = await db.any(`
-      select p."name", SUM(d."quantity") as quantity from "OrderDetail" d, "Product" p where d."productId" = p."productId" group by p."productId", p."name" order by SUM(d."quantity") desc limit 5
+      select p."name", SUM(d."quantity") as quantity from "OrderDetail" d, "Product" p, "Order" o where d."productId" = p."productId" and o."orderId" = d."orderId" ${bonusSql} group by p."productId", p."name" order by SUM(d."quantity") desc limit 5
       `)
       return data;
     } catch (error) {

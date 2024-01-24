@@ -1,8 +1,10 @@
 
 //export excel file
+
 var filterMonth;
 var filterYear;
 let chart;
+let donutChart;
 function convertToVND(number) {
   // Using toLocaleString to format the number as currency in VND
   number = parseInt(number);
@@ -111,7 +113,6 @@ function exportExcel() {
 }
 
 function LineChart(options) {
-  console.log(options);
   let daySet = [];
   let revenueSet = [];
   let profitSet = [];
@@ -266,6 +267,35 @@ function nextMonthClick() {
   lastDayOfMonth = lastDayOfMonth.getDate();
   showViewChart(filterMonth, filterYear, lastDayOfMonth);
 }
+async function prevYearClick() {
+  let year = $('#Year').text();
+  if (year == 'All') {
+    year = 2024
+  } else year = parseInt(year, 10) - 1;
+  if (year == 2018) year = 'All';
+  $('#Year').text(year);
+
+  const res = await fetch(`/admin/statistics/top5/${year}`, {
+    method: "GET",
+  });
+  response = await res.json();
+
+  DoughnutChart(response);
+}
+async function nextYearClick() {
+  let year = $('#Year').text();
+  if (year == 'All') {
+    year = 2019
+  } else year = parseInt(year, 10) + 1;
+  if (year == 2025) year = 'All';
+  $('#Year').text(year);
+  const res = await fetch(`/admin/statistics/top5/${year}`, {
+    method: "GET",
+  });
+  response = await res.json();
+  DoughnutChart(response);
+}
+
 
 async function showViewChart(month, year, lastDayOfMonth) {
   filterMonth = month;
@@ -290,8 +320,13 @@ async function DoughnutChart(options) {
   let dataSet = [];
 
   for (let i = 0; i < Math.min(options.length, 5); i++) {
-    labels.push(options[i].name);
+    labels.push(options[i].name.replace('Điện thoại', ''));
     dataSet.push(options[i].quantity);
+  }
+
+  if (options.length == 0) {
+    labels.push('Không có dữ liệu');
+    dataSet.push(1);
   }
 
   const data = {
@@ -311,13 +346,14 @@ async function DoughnutChart(options) {
   };
 
   const ctx = document.getElementById('myPieChart');
-  new Chart(ctx, {
+  if (donutChart) donutChart.destroy();
+  donutChart = new Chart(ctx, {
     type: 'pie',
     data,
     options: {
       plugins: {
         title: {
-          display: true, text: 'Top 5 sản phẩm bán chạy', font: { size: 30 }, color: '#161A30'
+          display: false, text: 'Top 5 sản phẩm bán chạy', font: { size: 30 }, color: '#161A30'
         }
       }
     }
@@ -326,7 +362,7 @@ async function DoughnutChart(options) {
 
 document.addEventListener("DOMContentLoaded", async function () {
 
-  const res = await fetch(`/admin/statistics/top5`, {
+  const res = await fetch(`/admin/statistics/top5/all`, {
     method: "GET",
   });
   response = await res.json();
