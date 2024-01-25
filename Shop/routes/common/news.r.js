@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const newsController = require('../../../controllers/sites/common/new.c');
+const newsController = require('../../controllers/common/new.c');
 
 
 router.get('/', newsController.showNews);

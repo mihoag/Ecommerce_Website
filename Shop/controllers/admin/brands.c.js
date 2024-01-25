@@ -1,5 +1,5 @@
-const productM = require('../../../models/product.m');
-const typeM = require('../../../models/type.m');
+const productM = require('../../models/product.m');
+const typeM = require('../../models/type.m');
 
 class brandsController {
     async showBrands(req, res, next) {

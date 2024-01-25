@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const ordersController = require('../../../controllers/sites/admin/orders.c')
+const ordersController = require('../../controllers/admin/orders.c')
 
 router.get('/', ordersController.showOrders)
 router.get('/getPerpage', ordersController.getOrderPerPage)

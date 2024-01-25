@@ -4,12 +4,12 @@ const Product = require("../models/product.m");
 module.exports = {
   add: async (data) => {
     const rs = await db.one(
-      'INSERT INTO "ProductsList" ("name") VALUES($1) RETURNING *',
-      [data.name]
+      'INSERT INTO "ProductsList" ("name", "color1", "color2") VALUES($1, $2, $3) RETURNING *',
+      [data.name, data.color1, data.color2]
     );
     await db.any(
-      'UPDATE "ProductsList" SET "name"=$1, "sortId"=$2 WHERE "listId"=$3',
-      [rs.name, rs.listId, rs.listId]
+      'UPDATE "ProductsList" SET "sortId"=$1 WHERE "listId"=$2',
+      [rs.listId, rs.listId]
     );
     for (const item of data.items) {
       if (data.home.includes(item)) {
@@ -54,8 +54,7 @@ module.exports = {
   },
 
   update: async (data) => {
-    const rs = await DB.update("ProductsList", {name: data.name}, "listId", data.listId);
-    console.log(rs);
+    const rs = await DB.update("ProductsList", {name: data.name, color1: data.color1, color2: data.color2}, "listId", data.listId);
     const items = await db.any(
       'SELECT * FROM "ProductsListItems" WHERE "listId" = $1',
       [rs.listId]

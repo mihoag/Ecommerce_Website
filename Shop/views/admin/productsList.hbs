@@ -25,10 +25,24 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <label
-                                        for="name">List's Name</label>
-                                    <input id="listName" type="text"
-                                        style="width:30vw">
+                                    <div>
+                                        <label
+                                            for="name">List's Name</label>
+                                        <input id="listName" type="text"
+                                            style="width:30vw"
+                                            class="text-center rounded-2">
+                                        <div
+                                            class="text-end ml-4 d-inline-block">
+                                            <span>Background:</span>
+                                            <input type="color" id="c1"
+                                                class="border-0"
+                                                value="#ff9c00">
+                                            <input type="color" id="c2"
+                                                class="border-0"
+                                                value="#ec1f1f">
+
+                                        </div>
+                                    </div>
                                     <p class="mt-4">Chọn mặt hàng:</p>
                                     <div
                                         class="my-2 d-flex justify-content-between align-items-center">
@@ -151,7 +165,7 @@
                     <div class="khungSanPham" style="border-color: #ff9c00"
                         id="{{this.listId}}">
                         <h3 class="tenKhung"
-                            style="background-image: linear-gradient(120deg, #ff9c00 0%, #ec1f1f 50%, #ff9c00 100%);">*
+                            style="background-image: linear-gradient(120deg, {{this.color1}} 0%, {{this.color2}} 50%, {{this.color1}} 100%);">*
                             {{this.name}}
                             *</h3>
                         <div class="list-btn">
@@ -254,10 +268,20 @@
                     aria-label="Close"></button>
             </div>
             <div class="modal-body text-start">
-                <label
-                    for="update-list-name">List's Name</label>
-                <input id="update-list-name" type="text"
-                    style="width:30vw">
+                <div>
+                    <label
+                        for="update-list-name">List's Name</label>
+                    <input id="update-list-name" type="text"
+                        style="width:30vw"
+                        class="text-center rounded-2">
+                    <div class="text-end ml-4 d-inline-block">
+                        <span>Background:</span>
+                        <input type="color" id="uc1" class="border-0"
+                            value="#ff9c00">
+                        <input type="color" id="uc2" class="border-0"
+                            value="#ec1f1f">
+                    </div>
+                </div>
                 <p class="mt-4">Chọn mặt hàng:</p>
                 <div
                     class="my-2 d-flex justify-content-between align-items-center">

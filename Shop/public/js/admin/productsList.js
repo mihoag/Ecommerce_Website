@@ -2,7 +2,9 @@ function listCheckAll(event) {
   const check = event.target.checked;
   const items = document.querySelectorAll(".list-check");
   items.forEach(function (item) {
-    item.checked = check;
+    if (!item.closest(".item").classList.contains("hidden")) {
+      item.checked = check;
+    }
   });
 }
 
@@ -39,6 +41,8 @@ async function addList() {
     name: listName,
     items: items,
     home: home,
+    color1: document.getElementById("c1").value,
+    color2: document.getElementById("c2").value,
   };
 
   try {
@@ -62,7 +66,7 @@ async function addList() {
 
 const searchItem = document.getElementById("search-name");
 searchItem.addEventListener("input", Searching);
-async function Searching (e) {
+async function Searching(e) {
   const searchTerm = searchItem.value.toLowerCase();
   const items = document.querySelectorAll("tr.item");
   items.forEach((item) => {
@@ -75,6 +79,22 @@ async function Searching (e) {
       item.classList.add("hidden");
     }
   });
+  var count1 = 0;
+  var count2 = 0;
+  const listChecks = document.querySelectorAll(".list-check");
+  for (const item of listChecks) {
+    if(!item.closest(".item").classList.contains("hidden")) {
+      count1++;
+    }
+    if(item.checked) {
+      count2++;
+    }
+  }
+  if (count1 == count2) {
+    document.getElementById("list-check-all").checked = true;
+  } else {
+    document.getElementById("list-check-all").checked = false;
+  }
 }
 $(function () {
   $("#sortableList").sortable({
@@ -174,7 +194,7 @@ async function renderItemsList(data) {
 </tr>
     `;
   });
-  document.getElementById('list-check-all').checked = false;
+  document.getElementById("list-check-all").checked = false;
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -207,7 +227,7 @@ document.addEventListener("DOMContentLoaded", function () {
           "Content-Type": "application/json",
         },
         method: "POST",
-        body: JSON.stringify({listId: itemId}),
+        body: JSON.stringify({ listId: itemId }),
       });
       const rs = await response.json();
       alert(rs);
@@ -223,21 +243,25 @@ document.addEventListener("DOMContentLoaded", function () {
 let updatingList;
 let updatingHome;
 async function ActiveUpdateMode(event) {
-  const id = event.currentTarget.getAttribute('btnid');
-  document.querySelector(".update-list-btn").setAttribute('btnid', id);
+  const id = event.currentTarget.getAttribute("btnid");
+  document.querySelector(".update-list-btn").setAttribute("btnid", id);
   try {
     const response = await fetch(
       `/admin/products-list/get-list-update?id=${id}`
     );
     const rs = await response.json();
-    if(rs) {
+    if (rs) {
       const name = document.getElementById("update-list-name");
+      const c1 = document.getElementById("uc1");
+      const c2 = document.getElementById("uc2");
       name.value = rs.name;
+      c1.value = rs.color1;
+      c2.value = rs.color2;
+      name.style.backgroundImage = `linear-gradient(120deg, ${rs.color1} 0%, ${rs.color2} 50%, ${rs.color1} 100%)`;
       updatingList = rs.items;
       updatingHome = rs.home;
       renderCheckUpdateList(rs.items, rs.home);
     }
-    
   } catch (error) {
     console.log(error);
   }
@@ -245,7 +269,7 @@ async function ActiveUpdateMode(event) {
 
 function renderCheckUpdateList(list, home) {
   const listItems = document.querySelectorAll("tr.update-item");
-  if(listItems.length == list.length) {
+  if (listItems.length == list.length) {
     document.getElementById("update-list-check-all").checked = true;
   }
   listItems.forEach((item) => {
@@ -262,7 +286,9 @@ function UpdateListCheckAll(event) {
   const check = event.target.checked;
   const items = document.querySelectorAll(".update-list-check");
   items.forEach(function (item) {
-    item.checked = check;
+    if (!item.closest(".update-item").classList.contains("hidden")) {
+      item.checked = check;
+    }
   });
 }
 
@@ -299,6 +325,8 @@ async function updateList() {
     name: listName,
     items: items,
     home: home,
+    color1: document.getElementById("uc1").value,
+    color2: document.getElementById("uc2").value,
   };
   data.listId = event.currentTarget.getAttribute("btnid");
   try {
@@ -335,6 +363,23 @@ async function UpdateSearching(e) {
       item.classList.add("hidden");
     }
   });
+
+  var count1 = 0;
+  var count2 = 0;
+  const listChecks = document.querySelectorAll(".update-list-check");
+  for (const item of listChecks) {
+    if(!item.closest(".update-item").classList.contains("hidden")) {
+      count1++;
+    }
+    if(item.checked) {
+      count2++;
+    }
+  }
+  if (count1 == count2) {
+    document.getElementById("update-list-check-all").checked = true;
+  } else {
+    document.getElementById("update-list-check-all").checked = false;
+  }
 }
 async function UpdateSortItemsList(event) {
   try {
@@ -351,7 +396,6 @@ async function UpdateSortItemsList(event) {
     console.log(error);
   }
 }
-
 
 async function renderUpdateItemsList(data) {
   const productsList = document.querySelector("#update-products-list");
@@ -388,4 +432,24 @@ async function renderUpdateItemsList(data) {
 </tr>
     `;
   });
+}
+
+document.getElementById("c1").addEventListener("input", updateGradient);
+document.getElementById("c2").addEventListener("input", updateGradient);
+
+function updateGradient() {
+  var c1 = document.getElementById("c1").value;
+  var c2 = document.getElementById("c2").value;
+  var listName = document.getElementById("listName");
+  listName.style.backgroundImage = `linear-gradient(120deg, ${c1} 0%, ${c2} 50%, ${c1} 100%)`;
+}
+
+document.getElementById("uc1").addEventListener("input", updateGradient2);
+document.getElementById("uc2").addEventListener("input", updateGradient2);
+
+function updateGradient2() {
+  var c1 = document.getElementById("uc1").value;
+  var c2 = document.getElementById("uc2").value;
+  var listName = document.getElementById("update-list-name");
+  listName.style.backgroundImage = `linear-gradient(120deg, ${c1} 0%, ${c2} 50%, ${c1} 100%)`;
 }

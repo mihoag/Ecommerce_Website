@@ -120,7 +120,9 @@ DROP TABLE IF EXISTS "ProductsList";
 CREATE TABLE "ProductsList" (
 	"listId" serial NOT NULL UNIQUE,
 	"name" character varying(255),
-	"sortId" int4
+	"sortId" int4,
+	"color1" character varying(255),
+	"color2" character varying(255)
 );
 
 DROP TABLE IF EXISTS "ProductsListItems";

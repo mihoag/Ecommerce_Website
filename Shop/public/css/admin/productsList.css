@@ -210,3 +210,14 @@ ul.items-list {
   background: #f21;
   color: white;
 }
+
+#listName {
+  color: white;
+  background-image: linear-gradient(120deg, #ff9c00 0%, #ec1f1f 50%, #ff9c00 100%);
+  border: none !important;
+}
+
+#update-list-name {
+  color: white;
+  border: none !important;
+}

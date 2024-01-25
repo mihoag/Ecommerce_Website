@@ -1,5 +1,5 @@
-const statisticsM = require('../../../models/statistics.m');
-const productsM = require('../../../models/product.m');
+const statisticsM = require('../../models/statistics.m');
+const productsM = require('../../models/product.m');
 
 class statisticsController {
   async showStatistics(req, res, next) {

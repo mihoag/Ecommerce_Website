@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const brandsController = require('../../../controllers/sites/admin/brands.c')
+const brandsController = require('../../controllers/admin/brands.c')
 
 router.get('/brands', brandsController.showBrands)
 router.get('/', brandsController.showBrands)

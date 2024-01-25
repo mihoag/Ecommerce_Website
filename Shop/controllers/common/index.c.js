@@ -1,4 +1,4 @@
-const productM = require('../../../models/product.m')
+const productM = require('../../models/product.m')
 class indexController {
     async showIndex(req, res, next) {
         try {

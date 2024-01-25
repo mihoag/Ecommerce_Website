@@ -1,4 +1,4 @@
-const orderM = require('../../../models/order.m')
+const orderM = require('../../models/order.m')
 const moment = require("moment");
 
 class ordersController {

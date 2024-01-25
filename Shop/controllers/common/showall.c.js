@@ -1,4 +1,4 @@
-const productM = require('../../../models/product.m')
+const productM = require('../../models/product.m')
 class showallController {
     async showall(req, res, next) {
         try {
