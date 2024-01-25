@@ -11,11 +11,19 @@ module.exports = {
     return rs;
   },
   add: async (data) => {
-    const rs = await db.one(
-      'INSERT INTO "Type"("name") VALUES($1) RETURNING *',
-      [data.name]
-    );
-    return rs;
+    try {
+      const idResult = await db.one('SELECT MAX("typeId") FROM "Type"');
+      const maxTypeId = idResult.max || 0;
+      const id = parseInt(maxTypeId) + 1;
+      const rs = await db.one(
+        'INSERT INTO "Type" ("typeId",name) VALUES ($1, $2) RETURNING *',
+        [id, data.name]
+      );
+      return rs;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   },
   getByName: async (name) => {
     const rs = await db.any('SELECT * FROM "Type" WHERE "name"=$1', [name]);
@@ -40,10 +48,14 @@ module.exports = {
     return rs;
   },
   delete: async (id) => {
-    const rs = await db.one(
-      'DELETE FROM "Type" WHERE "typeId"=$1 RETURNING *',
-      [id]
-    );
-    return rs;
+    try {
+      const rs = await db.one(
+        'DELETE FROM "Type" WHERE "typeId"=$1 RETURNING *',
+        [id]
+      );
+      return rs;
+    } catch (error) {
+      return -1;
+    }
   },
 };
