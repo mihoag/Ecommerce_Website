@@ -168,7 +168,41 @@
 
     <!-- Div hiển thị khung sp hot, khuyến mãi, mới ra mắt ... -->
     <div class="contain-khungSanPham">
-        <div class="khungSanPham" style="border-color: #ff9c00">
+        {{#each listproducts}}
+            <div class="khungSanPham" style="border-color: {{color1}}">
+                <h3 class="tenKhung"
+                    style="background-image: linear-gradient(120deg, {{color1}} 0%, {{color2}} 50%, {{color1}} 100%);">*
+                    {{name}}
+                    *</h3>
+                <div class="listSpTrongKhung flexContain">
+                    {{#each home}}
+                    <li class="sanPham">
+                        <a href="/product/detailProducts?id={{productId}}">
+                            <img src="{{image}}" alt="">
+                            <h3>{{name}}</h3>
+                            <div class="price">
+                                <strong>{{convertToVND giagiam}}</strong>
+                                <span>{{convertToVND price}}</span>
+                            </div>
+                            <div class="ratingresult">
+                                {{{showRating tb}}}
+                                <span>{{danhgia}} đánh giá</span>
+                            </div>
+
+
+                        </a>
+                    </li>
+                    {{/each}}
+                </div>
+                <a class="xemTatCa" href="/showall" style="	border-left: 2px solid {{color1}};
+                        border-right: 2px solid {{color1}};">
+                    Xem tất cả các sản phẩm
+                </a>
+            </div>
+            <hr>
+        {{/each}}
+
+        {{!-- <div class="khungSanPham" style="border-color: #ff9c00">
             <h3 class="tenKhung"
                 style="background-image: linear-gradient(120deg, #ff9c00 0%, #ec1f1f 50%, #ff9c00 100%);">*
                 NỔI BẬT NHẤT
@@ -198,8 +232,8 @@
                 Xem tất cả các sản phẩm
             </a>
         </div>
-        <hr>
-        <div class="khungSanPham" style="border-color: #42bcf4">
+        <hr> --}}
+        {{!-- <div class="khungSanPham" style="border-color: #42bcf4">
             <h3 class="tenKhung"
                 style="background-image: linear-gradient(120deg, #42bcf4 0%, #004c70 50%, #42bcf4 100%);">*
                 SẢN PHẨM MỚI
@@ -325,7 +359,7 @@
                 Xem tất các sản phẩm
             </a>
         </div>
-        <hr>
+        <hr> --}}
     </div>
 </section>
 

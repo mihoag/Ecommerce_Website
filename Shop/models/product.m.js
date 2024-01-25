@@ -97,6 +97,7 @@ module.exports = {
     const rs = await db.any(
       'select p."productId", p."name" , p.price, p.image,  avg((100-p.discount)*p.price)/100 as giagiam , floor(avg(c.rate)) as tb, count(*) as danhgia from "Product" p LEFT join  "Comment" c on p."productId" = c."productId" group by p."productId", p.price order by p.rate desc limit 5'
     );
+    console.log(rs);
     return rs;
   },
   top5discount: async () => {
