@@ -86,6 +86,7 @@ async function updateUser(btn) {
 
   const response = await res.json();
   let data = response.data
+  console.log(data);
   document.getElementById("uEmail").value = email;
   document.getElementById("uName").value = data.name;
   document.getElementById("uAddress").value = "Không có";

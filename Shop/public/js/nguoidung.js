@@ -2,37 +2,6 @@ var currentUser;
 var tongTienTatCaDonHang = 0; // lưu tổng tiền từ tất cả các đơn hàng đã mua
 var tongSanPhamTatCaDonHang = 0;
 
-window.onload = function () {
-  khoiTao();
-
-  // autocomplete cho khung tim kiem
-  autocomplete(document.getElementById("search-box"), list_products);
-
-  // thêm tags (từ khóa) vào khung tìm kiếm
-  var tags = ["Samsung", "iPhone", "Huawei", "Oppo", "Mobi"];
-  for (var t of tags) addTags(t, "index.html?search=" + t);
-
-  currentUser = getCurrentUser();
-
-  if (currentUser) {
-    // cập nhật từ list user, do trong admin chỉ tác động tới listuser
-    var listUser = getListUser();
-    for (var u of listUser) {
-      if (equalUser(currentUser, u)) {
-        currentUser = u;
-        setCurrentUser(u);
-      }
-    }
-
-    addTatCaDonHang(currentUser); // hàm này cần chạy trước để tính được tổng tiền tất cả đơn hàng
-    addInfoUser(currentUser);
-  } else {
-    var warning = `<h2 style="color: red; font-weight:bold; text-align:center; font-size: 2em; padding: 50px;">
-                            Bạn chưa đăng nhập !!
-                        </h2>`;
-    document.getElementsByClassName("infoUser")[0].innerHTML = warning;
-  }
-};
 
 // Phần Thông tin người dùng
 // function addInfoUser(user) {

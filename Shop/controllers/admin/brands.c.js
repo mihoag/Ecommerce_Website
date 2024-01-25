@@ -36,5 +36,38 @@ class brandsController {
             next(error);
         }
     }
+    async addNewBrand(req, res, next) {
+        try {
+            if (!req.body || !req.body.brand) {
+                return res.status(401).json({ message: "Thông tin không hợp lệ" });
+            }
+            await typeM.add({ name: req.body.brand });
+            res.json({ message: 'Thêm brand mới thành công' });
+        } catch (error) {
+            next(error);
+        }
+    }
+    async editBrand(req, res, next) {
+        try {
+            if (!req.body) {
+                return res.status(401).json({ message: 'Dữ liệu cập nhật không hợp lệ' });
+            }
+            await typeM.update(req.body);
+            return res.json({ message: 'Cập nhật thông tin thành công' });
+        } catch (error) {
+            next(error);
+        }
+    }
+    async deleteBrand(req, res, next) {
+        try {
+            const rs = await typeM.delete(req.params.typeId);
+            if (rs === -1) {
+                return res.status(401).json({ message: 'Không thể xóa do hiện có sản phẩm trong brand này' });
+            }
+            return res.json({ message: 'Đã xóa brand thành công' });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 module.exports = new brandsController();

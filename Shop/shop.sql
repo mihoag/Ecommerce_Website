@@ -116,6 +116,13 @@ CREATE TABLE "User" (
     "lastOnline" date default CURRENT_DATE
 );
 
+DROP TABLE IF EXISTS "ProductsListItems";
+CREATE TABLE "ProductsListItems" (
+	"listId" int4 NOT NULL,
+	"productId" int4 NOT NULL,
+	"home" boolean default false
+);
+
 DROP TABLE IF EXISTS "ProductsList";
 CREATE TABLE "ProductsList" (
 	"listId" serial NOT NULL UNIQUE,
@@ -125,12 +132,6 @@ CREATE TABLE "ProductsList" (
 	"color2" character varying(255)
 );
 
-DROP TABLE IF EXISTS "ProductsListItems";
-CREATE TABLE "ProductsListItems" (
-	"listId" int4 NOT NULL,
-	"productId" int4 NOT NULL,
-	"home" boolean default false
-);
 
 ALTER TABLE "Cart" ADD CONSTRAINT "Cart_pkey" PRIMARY KEY ("userId", "productId");
 ALTER TABLE "Comment" ADD CONSTRAINT "Commnet_pkey" PRIMARY KEY ("commentId");

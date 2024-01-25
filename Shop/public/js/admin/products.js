@@ -118,9 +118,8 @@ async function turnOnEditMode(event) {
   let options = "";
   data.forEach((type) => {
     if (type.active) {
-      options += `<option value="${type.typeId}" ${
-        item.typeId == type.typeId ? "selected" : ""
-      }>${type.name}</option>\n`;
+      options += `<option value="${type.typeId}" ${item.typeId == type.typeId ? "selected" : ""
+        }>${type.name}</option>\n`;
     }
   });
   detailTable.innerHTML = `
@@ -154,17 +153,15 @@ async function turnOnEditMode(event) {
       <div class="form-group mt-2">
         <label for="price">Sale Price</label>
         <input type="number" class="form-control"
-          name="price" placeholder="Product's sale price" value = "${
-            item.price
-          }"
+          name="price" placeholder="Product's sale price" value = "${item.price
+    }"
           required>
       </div>
       <div class="form-group mt-2">
         <label for="discount">Discount</label>
         <input type="number" class="form-control"
-          name="discount" placeholder="Product's discount" value = "${
-            item.discount
-          }"
+          name="discount" placeholder="Product's discount" value = "${item.discount
+    }"
           required>
       </div>
       <div class="form-group mt-2">
@@ -182,8 +179,8 @@ async function turnOnEditMode(event) {
       <div class="form-group mt-2">
   <label for="releaseDate">Release Date</label>
   <input type="date" class="form-control" value="${handleReleaseDate(
-    item.releaseDate
-  )}"
+      item.releaseDate
+    )}"
     name="releaseDate" required>
 </div>
 
@@ -209,17 +206,15 @@ async function turnOnEditMode(event) {
       <div class="form-group mt-2">
         <label for="fcam">Front Camera</label>
         <input type="text" class="form-control"
-          name="fcam" placeholder="Front Camera Information" value = "${
-            item.cameraFront
-          }"
+          name="fcam" placeholder="Front Camera Information" value = "${item.cameraFront
+    }"
           required>
       </div>
       <div class="form-group mt-2">
         <label for="bcam">Back Camera</label>
         <input type="text" class="form-control"
-          name="bcam" placeholder="Back Camera Information" value = "${
-            item.cameraBehind
-          }"
+          name="bcam" placeholder="Back Camera Information" value = "${item.cameraBehind
+    }"
           required>
       </div>
     </div>
@@ -253,7 +248,7 @@ async function turnOnEditMode(event) {
 
   </div>
   <div class="row mt-3">
-      <div class="col-md text-end p-0">
+      <div class="col-md text-end p-2">
         <div class="hidden-sm hidden-xs btn-group">
           <button type="button" class="btn btn-xs btn-success save-btn" onclick="updateProduct()">
             <i class="ace-icon fa fa-check bigger-120"></i>
@@ -410,7 +405,7 @@ function handleReleaseDate(releaseDate) {
 async function DeactivateItem(event) {
   const productId = event.currentTarget.getAttribute('btnid');
   const active = document.getElementById(productId).querySelector('tr:nth-child(8) td');
-  if(active.textContent === 'false') {
+  if (active.textContent === 'false') {
     alert('Sản phẩm đã bị vô hiệu hóa');
     return;
   }
@@ -421,7 +416,7 @@ async function DeactivateItem(event) {
         "Content-Type": "application/json",
       },
       method: "POST",
-      body: JSON.stringify({productId: productId})
+      body: JSON.stringify({ productId: productId })
     });
     const data = await response.json();
     alert(data);
