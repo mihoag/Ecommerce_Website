@@ -25,14 +25,14 @@ function route(app) {
   app.use("/cart", authMiddleware.mustLogin, require("./sites/cart.r"));
 
 
-  app.use("/news", authMiddleware.mustLogin, require('./common/news.r'));
-  app.use("/contact", authMiddleware.mustLogin, require('./common/contact.r'));
-  app.use("/hiring", authMiddleware.mustLogin, require('./common/hiring.r'));
-  app.use("/maintenance", authMiddleware.mustLogin, require('./common/maintenance.r'));
-  app.use("/about", authMiddleware.mustLogin, require('./common/about.r'));
+  app.use("/news", require('./common/news.r'));
+  app.use("/contact", require('./common/contact.r'));
+  app.use("/hiring", require('./common/hiring.r'));
+  app.use("/maintenance", require('./common/maintenance.r'));
+  app.use("/about", require('./common/about.r'));
   app.use("/login", require('./common/login.r'));
   app.use("/signup", require('./common/signup.r'))
-  app.use("/showall", authMiddleware.mustLogin, require('./common/showallProduct.r'))
+  app.use("/showall", require('./common/showallProduct.r'))
   app.use("/", require('./common/index.r'));
 
   app.use((req, res, next) => {

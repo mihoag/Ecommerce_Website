@@ -1,9 +1,13 @@
 const productM = require('../../models/product.m')
 const productL = require('../../models/productsList.m')
+
 class indexController {
     async showIndex(req, res, next) {
         try {
-            let idUser = req.session.uid;
+            let idUser = req.session.uid || req.session.passport?.user?.userId;
+            if (req.session.passport) {
+                req.session.token = req.session.passport?.user?.token
+            }
             // console.log(idUser);
             // let top5rated = await productM.top5rated();
             // let top5newest = await productM.top5newest();

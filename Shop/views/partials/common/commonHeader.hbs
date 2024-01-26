@@ -55,7 +55,7 @@
           </a>
           <div class="menuMember">
             <a href="/detailUser">Trang người dùng</a>
-            <form action="/auth/logout" method="post"><button type="submit">
+            <form id="logout" action="/auth/logout" method="post"><button onclick="logout()" type="btn">
                 Đăng xuất
               </button></form>
           </div>
@@ -87,6 +87,10 @@
 
 <input type="text" value="{{userId}}" id="ipUser" hidden>
 <script>
+  function logout() {
+    localStorage.clear();
+    document.getElementById("logout").submit();
+  }
   var ipUser = document.getElementById("ipUser");
   let idUser = ipUser.value;
   if (idUser != "") {

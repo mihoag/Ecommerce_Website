@@ -27,6 +27,24 @@ module.exports = {
     ID = ID.max + 1;
     let active = false;
     if (data.active) active = true;
+    if (data.role == 'admin') {
+      const rs = await db.one(
+        'INSERT INTO "User"("userId", "name","phoneNumber","email","password", "avatar", "public_id", "gender", "active","role") VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
+        [
+          ID,
+          data.name,
+          data.phoneNumber,
+          data.email,
+          data.password,
+          data.avatar,
+          data.public_id,
+          data.gender,
+          active,
+          data.role
+        ]
+      );
+      return rs;
+    }
     const rs = await db.one(
       'INSERT INTO "User"("userId", "name","phoneNumber","email","password", "avatar", "public_id", "gender", "active") VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
       [
