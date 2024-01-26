@@ -72,4 +72,8 @@ io.on('connection', async (client) => {
   client.on('channelOrder', async (data) => {
     io.emit('channelOrder', "new order");
   })
+
+  client.on('confirmOrder', async (data) => {
+    io.emit('confirmOrder', data);
+  })
 })

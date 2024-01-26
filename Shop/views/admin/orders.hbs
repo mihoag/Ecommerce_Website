@@ -4,20 +4,16 @@
     <div class="col-md-12">
       <div class="my-2 d-flex justify-content-between align-items-center">
         <div class="position-relative">
-          <span class="position-absolute search"><i
-              class="fa fa-search"></i></span>
-          <input class="form-control w-100 order-table"
-            placeholder="Search by name" id="search-name" />
+          <span class="position-absolute search"><i class="fa fa-search"></i></span>
+          <input class="form-control w-100 order-table" placeholder="Search by name" id="search-name" />
         </div>
       </div>
       <div class="container table-responsive order-table mt-4 pt-2 px-2">
         <div class="row pt-2 mx-2">
-          <table
-            class="table table-responsive table-borderless align-middle table-hover">
+          <table class="table table-responsive table-borderless align-middle table-hover">
             <thead class="table-info">
               <tr class="bg-light">
-                <th scope="col" width="5%"><input class="form-check-input"
-                    type="checkbox" /></th>
+                <th scope="col" width="5%"><input class="form-check-input" type="checkbox" /></th>
                 <th scope="col" width="5%">#</th>
                 <th scope="col" width="15%">Customer</th>
                 <th scope="col" width="30%">Address</th>
@@ -29,20 +25,17 @@
             </thead>
             <tbody id="order-list">
               <tr>
-                <th scope="row"><input class="form-check-input"
-                    type="checkbox" /></th>
+                <th scope="row"><input class="form-check-input" type="checkbox" /></th>
                 <td>12</td>
                 <td>To Phuong Hieu</td>
                 <td>227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, Thành phố Hồ Chí
                   Minh</td>
                 <td class="text-center">13 Dec, 2023</td>
-                <td class="text-center"><span
-                    class="fw-bolder">$5307</span></td>
+                <td class="text-center"><span class="fw-bolder">$5307</span></td>
                 <td class="text-center"><span class="fw-bolder">Paid</span></td>
                 <td class="text-center">
                   <button class="btn btn-xs btn-light detail-btn">
-                    <i class="fa-solid fa-angles-down"
-                      style="color: #a5d737;"></i>
+                    <i class="fa-solid fa-angles-down" style="color: #a5d737;"></i>
                   </button>
                 </td>
               </tr>
@@ -201,12 +194,12 @@
                     </div><!-- end table responsive -->
                     <div class="d-print-none mt-4">
                       <div class="float-end">
-                        ${top.status=='Paid'?`
+                        ${top.status == 'Paid' ? `
                         <button
                         class="btn btn-success me-1"
                           onclick="printBill(event)">
                           <i class="fa fa-print"></i>
-                                                                    </button>`:`
+                                                                    </button>`: `
                                                                     <button
                                                                         type="button"
                                                                         class="btn btn-xs btn-success save-btn" data-bs-toggle="modal" btnid="${top.orderId}"
@@ -310,7 +303,7 @@
                 <td>${orders[i].address}</td>
                 <td class="text-center">${orders[i].timeOrder}</td>
                 <td class="text-center"><span class="fw-bolder">${convertToVND(orders[i].totalCost + 50000)}</span></td>
-                <td class="text-center"><span class="fw-bolder" id=${orders[i].orderId+'status'}>${orders[i].status}</span></td>
+                <td class="text-center"><span class="fw-bolder" id=${orders[i].orderId + 'status'}>${orders[i].status}</span></td>
                 <td class="text-center">
                   <button class="btn btn-xs btn-light detail-btn" data-id=${i} data-order-id=${orders[i].orderId} onclick="toggleDetail(this)">
                     <i class="fa-solid fa-angles-down" style="color: #a5d737;"></i>
@@ -393,26 +386,26 @@
   document.querySelector("#search-name").addEventListener("input", () => searchP())
 
   function printBill(event) {
-  var detailTable = event.currentTarget.closest(".detail-table");
-  detailTable.classList.add("printable-content");
-  event.target.classList.add("hidden");
-  window.print();
-  detailTable.classList.remove("printable-content");
-  event.target.classList.remove("hidden");
-}
+    var detailTable = event.currentTarget.closest(".detail-table");
+    detailTable.classList.add("printable-content");
+    event.target.classList.add("hidden");
+    window.print();
+    detailTable.classList.remove("printable-content");
+    event.target.classList.remove("hidden");
+  }
 
-function activeStatusModal(event) {
-      const orderId = event.currentTarget.getAttribute("btnid");
-      const updateStatusButton = document.getElementById(
-        "updateStatusButton"
-      );
-      updateStatusButton.dataset.orderId = orderId;
-    };
-
-    async function UpdatOrderStatus(event) {
-      const orderId = event.currentTarget.getAttribute("data-order-id");
-      document.getElementById("closeModalButton").dispatchEvent(new Event('click'));
-      try {
+  function activeStatusModal(event) {
+    const orderId = event.currentTarget.getAttribute("btnid");
+    const updateStatusButton = document.getElementById(
+      "updateStatusButton"
+    );
+    updateStatusButton.dataset.orderId = orderId;
+  };
+  const socket = new io();
+  async function UpdatOrderStatus(event) {
+    const orderId = event.currentTarget.getAttribute("data-order-id");
+    document.getElementById("closeModalButton").dispatchEvent(new Event('click'));
+    try {
       const response = await fetch("/admin/orders/updateStatus", {
         headers: {
           Accept: "application/json",
@@ -433,6 +426,11 @@ function activeStatusModal(event) {
         newBtn.innerHTML = '<i class="fa fa-print"></i>';
 
         oldBtn.outerHTML = newBtn.outerHTML;
+
+        socket.emit('confirmOrder', { msg: "ok" });
+
+        // emit to user
+
       }
     } catch (error) {
       console.log(error);

@@ -482,7 +482,7 @@
     let userId = id.split("|")[0];
     let productId = id.split("|")[1];
     let num = document.getElementById(id).value;
-    if (num == 0) {
+    if (num == 1) {
       return;
     }
     num--;
@@ -522,7 +522,7 @@
                     <td class="soluong">
                       <div class="soluongFlex">
                         <button id= "d${listCart[i].userId}|${listCart[i].productId}" onclick="giamSoLuong(this)"><i class="fa fa-minus"></i></button>
-                        <input class="LayID" oninput="capNhatSoLuongFromInput(this)" id= "${listCart[i].userId}|${listCart[i].productId}" value="${listCart[i].quantity} ">
+                        <input class="LayID" readonly oninput="capNhatSoLuongFromInput(this)" id= "${listCart[i].userId}|${listCart[i].productId}" value="${listCart[i].quantity} ">
                 <button id= "u${listCart[i].userId}|${listCart[i].productId}" onclick = "tangSoLuong(this)" > <i class="fa fa-plus"></i></button >
                       </div>
                     </td >
@@ -640,7 +640,7 @@
     if (res.ok) {
       //console.log(resJson);
       sendMesstoAdmin(resJson.data)
-      //xoaHet();
+      xoaHet();
       addAlertBox(resJson.msg, '#17c671', '#fff', 3500);
     }
     else {
@@ -663,7 +663,7 @@
     let resJson = await res.json();
     if (res.ok) {
       //console.log(resJson);
-      //xoaHet();
+
       //addAlertBox(resJson.msg, '#17c671', '#fff', 3500);
       var data1 = resJson.data;
       // xu li thanh toan
@@ -695,6 +695,7 @@
         });
         if (res2.ok) {
           sendMesstoAdmin(resJson.data)
+          xoaHet();
           addAlertBox("Đặt hàng và thanh toán thành công", '#17c671', '#fff', 3500);
         }
       }
@@ -711,16 +712,12 @@
         //idOrder
         addAlertBox(resJson1.msg, '#FF3333', '#fff', 3500);
       }
-
     }
     else {
       //console.log(resJson);
       addAlertBox(resJson.msg, '#FF3333', '#fff', 3500);
     }
-
   }
-
-
   // check du lieu dau vao
   myform.addEventListener("submit", async function (e) {
     e.preventDefault();

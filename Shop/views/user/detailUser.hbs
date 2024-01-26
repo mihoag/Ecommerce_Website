@@ -7,7 +7,7 @@
 
   <title>Thế giới điện thoại</title>
   <link rel="shortcut icon" href="img/favicon.ico" />
-
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
   <!-- Load font awesome icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     crossorigin="anonymous" />
@@ -276,6 +276,7 @@
 </html>
 
 <script>
+  const socket = new io();
   let detailOrder = document.getElementById("detailOrder")
   let lsOrder = document.getElementById("lsOrder");
   function convertToVND(number) {
@@ -346,6 +347,27 @@
 
   })
 
+  function formatDateTime(sqlTimestampString) {
+    // Split the timestamp string into date and time parts
+    var [datePart, timePart] = sqlTimestampString.split(' ');
+
+    // Split the date part into year, month, and day
+    var [year, month, day] = datePart.split('-');
+
+    // Split the time part into hours, minutes, and seconds
+    var [hours, minutes, seconds] = timePart.split(':');
+    var jsDate = new Date(year, month - 1, day, hours, minutes, seconds);
+
+    var currentDate = new Date(jsDate.getTime() + 7 * 60 * 60 * 1000);
+
+    // Convert the Date object to an ISO string
+    var d = currentDate.toString();
+    console.log(d)
+    // Remove milliseconds and format the string for SQL timestamp
+    var sqlTimestamp = d.slice(0, 24)
+    return sqlTimestamp;
+  }
+
   function renderListOrder(listOrders) {
     let content = `<tr>
             <th colspan="6">
@@ -369,7 +391,7 @@
             <td class = "soluong">
               ${listOrders[i].isPayment}
             </td>
-            <td class = "soluong">${listOrders[i].timeOrder.slice(0, 19).replace("T", " ")}</td>
+            <td class = "soluong">${formatDateTime(listOrders[i].timeOrder.slice(0, 19).replace("T", " "))}</td>
             <td style="display: flex; justify-content: center; padding:5px;"> <button class="btn btn-outline-success" class="btn btn-outline-success" data-bs-toggle="modal"
                 data-bs-target="#exampleModal1" data-id="${listOrders[i].orderId}" onclick="showDetail(this)"><i class="ace-icon fa fa-eye bigger-120"></i></button></td>
           </tr>
@@ -397,4 +419,8 @@
 
   }
   loadListOrder();
+  socket.on('confirmOrder', async (data) => {
+    loadListOrder();
+  })
+
 </script>
