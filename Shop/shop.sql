@@ -7036,7 +7036,7 @@ INSERT INTO "User"("userId","name","phoneNumber","email","password","avatar","ge
 INSERT INTO "User"("userId","name","phoneNumber","email","password","avatar","gender","active","timeJoined","lastOnline")VALUES(98,'Lê Quang Hưng','0726004004','lequanghung293@gmail.com','%xe]N;"X3!n,:rqKJ=&-','https://ui-avatars.com/api/?name=hung+le',true,true,'2020-06-20','2021-07-03');
 INSERT INTO "User"("userId","name","phoneNumber","email","password","avatar","gender","active","timeJoined","lastOnline")VALUES(99,'Huỳnh Chuẩn Khoa','0671798440','huynhchuankhoa146@gmail.com','UK87`DTc}wuC4pBxTDR','https://ui-avatars.com/api/?name=khoa+huynh',true,true,'2021-04-07','2022-07-03');
 INSERT INTO "User"("userId","name","phoneNumber","email","password","avatar","gender","active","timeJoined","lastOnline")VALUES(100,'Hoàng Anh Vũ','0928771781','hoanganhvu169@gmail.com','7(J%%"+3oW;.(/yrTJUP','https://ui-avatars.com/api/?name=vu+hoang',true,true,'2021-05-20','2022-08-18');
-insert into "User"("userId","name", "phoneNumber", email, "password", avatar, "role", active) values ('101',N'Lê Minh Hoàng', '0123456789','leminhhoang123456le@gmail.com','6543eee8258b35aa3879804037238a92964f71f2e2e9eca3787e93913f5a58bd18d411b9ad6','https://ui-avatars.com/api/?name=No+Name','admin','true')
+insert into "User"("userId","name", "phoneNumber", email, "password", avatar, "role", active) values ('101',N'Lê Minh Hoàng', '0123456789','leminhhoang123456le@gmail.com','6543eee8258b35aa3879804037238a92964f71f2e2e9eca3787e93913f5a58bd18d411b9ad6','https://ui-avatars.com/api/?name=No+Name','admin','true');
 
 
 INSERT INTO "Order"("orderId","userId","address","reciverName","phoneNumber","totalCost","isPayment","status","timeOrder") VALUES(1,1,'Phường Mỹ Bình, Thành phố Long Xuyên, Tỉnh An Giang','Lý Hữu Trác','0815916428',67327200,true,'Pending','2022-10-23 05:15:00');
@@ -8004,7 +8004,7 @@ SET "timeOrder" = DATE_TRUNC('second', "timeOrder") + INTERVAL '1 year'
 WHERE EXTRACT(YEAR FROM "timeOrder") < 2023;
 UPDATE "Order"
 SET "timeOrder" = DATE_TRUNC('second', "timeOrder") + INTERVAL '1 year' 
-WHERE EXTRACT(YEAR FROM "timeOrder") < 2024 AND EXTRACT(MONTH FROM "timeOrder") = 1;
+WHERE EXTRACT(YEAR FROM "timeOrder") < 2024 AND EXTRACT(MONTH FROM "timeOrder") = 1 AND EXTRACT(DAY FROM "timeOrder") <29;
 
 -- 5 danh mục mặc định ban đầu
 INSERT INTO "ProductsList"("listId", "name", "sortId", "color1", "color2") VALUES 
