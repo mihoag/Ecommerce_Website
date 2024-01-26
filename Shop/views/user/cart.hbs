@@ -522,7 +522,7 @@
                     <td class="soluong">
                       <div class="soluongFlex">
                         <button id= "d${listCart[i].userId}|${listCart[i].productId}" onclick="giamSoLuong(this)"><i class="fa fa-minus"></i></button>
-                        <input oninput="capNhatSoLuongFromInput(this)" id= "${listCart[i].userId}|${listCart[i].productId}" value="${listCart[i].quantity} ">
+                        <input class="LayID" oninput="capNhatSoLuongFromInput(this)" id= "${listCart[i].userId}|${listCart[i].productId}" value="${listCart[i].quantity} ">
                 <button id= "u${listCart[i].userId}|${listCart[i].productId}" onclick = "tangSoLuong(this)" > <i class="fa fa-plus"></i></button >
                       </div>
                     </td >
@@ -573,11 +573,10 @@
 
   function xoaHet() {
     let productIds = [];
-    for (let i = 1; i < document.getElementsByTagName("tr").length - 1; i++) {
-      var productId = document.getElementsByTagName("tr")[i].getElementsByTagName("td")[0].innerText;
+    for (let i = 0; i < document.querySelectorAll('.LayID').length; i++) {
+      let productId = document.querySelectorAll('.LayID')[i].id.split("|")[1];
       productIds.push(productId);
     }
-    //console.log(productIds)
     let userId = document.querySelector("tr:nth-child(2) .soluong input").id.split("|")[0];
     for (let i = 0; i < productIds.length; i++) {
       deleteProductInCart(userId, productIds[i]);
