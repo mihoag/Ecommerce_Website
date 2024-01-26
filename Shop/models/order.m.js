@@ -23,7 +23,7 @@ module.exports = class order {
 
   static async getOrderByUserId(id) {
     try {
-      let data = await db.selectByID("Order", "userID", id)
+      let data = await db.selectByOneField("Order", "userId", id);
       return data;
     }
     catch (error) {
@@ -42,7 +42,7 @@ module.exports = class order {
 
   static async updateOrder(Order) {
     try {
-      let data = await db.update("Order", Order, "orderId", Order.id);
+      let data = await db.update("Order", Order, "orderId", Order.orderId);
       return data;
     } catch (error) {
       throw error
@@ -84,4 +84,20 @@ module.exports = class order {
       throw error;
     }
   }
+  static async getMaxId() {
+    try {
+      let data = await db.selectMax("Order", "orderId");
+      if (!data.max) {
+        return 0;
+      }
+      //console.log(data);
+      //console.log(data[0]);
+      return data.max;
+      //return data[0];
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
 }

@@ -52,7 +52,8 @@ class cartUserController {
             await cartModel.deleteFromCart(deleteCart);
             res.json({ status: "ok" })
         } catch (error) {
-            next(error);
+            // next(error);
+            console.log(error)
         }
     }
 }

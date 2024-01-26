@@ -36,11 +36,14 @@
         <div class="categoryFilter dropdown">
             <button class="dropbtn">Danh mục</button>
             <div class="dropdown-content">
-                <a data-category="rated" data-text="Nổi bật nhất">Nổi bật nhất</a>
+                {{#each listproducts}}
+                    <a data-text="{{name}}">{{name}}</a>
+                {{/each}}
+                {{!-- <a data-category="rated" data-text="Nổi bật nhất">Nổi bật nhất</a>
                 <a data-category="newest" data-text="Sản phẩm mới">Sản phẩm mới</a>
                 <a data-category="modern" data-text="Sản phẩm hiện đại nhất">Sản phẩm hiện đại nhất</a>
                 <a data-category="discount" data-text="Giảm giá lớn">Giảm giá lớn</a>
-                <a data-category="cheapest" data-text="Giá rẻ cho mọi nhà">Giá rẻ cho mọi nhà</a>
+                <a data-category="cheapest" data-text="Giá rẻ cho mọi nhà">Giá rẻ cho mọi nhà</a> --}}
             </div>
         </div>
 

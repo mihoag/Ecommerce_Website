@@ -77,5 +77,21 @@
       border-radius: 10px;
       box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.1);
   }
+
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    .printable-content,
+    .printable-content * {
+      visibility: visible;
+    }
+    .printable-content {
+      font-size: 12px;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
   
   

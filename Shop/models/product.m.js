@@ -97,6 +97,7 @@ module.exports = {
     const rs = await db.any(
       'select p."productId", p."name" , p.price, p.image,  avg((100-p.discount)*p.price)/100 as giagiam , floor(avg(c.rate)) as tb, count(*) as danhgia from "Product" p LEFT join  "Comment" c on p."productId" = c."productId" group by p."productId", p.price order by p.rate desc limit 5'
     );
+    console.log(rs);
     return rs;
   },
   top5discount: async () => {
@@ -139,10 +140,10 @@ module.exports = {
   selectProductByNameandCate: async (keyword) => {
     const rs = await db.any(
       `select p."productId", p."name", p.discount , p.price,p.image, avg((100-p.discount)*p.price)/100 as giagiam , floor(avg(c.rate)) as tb, count(*) as danhgia  from "Product" p LEFT join  "Comment" c on p."productId" = c."productId", "Type" t  where t."typeId" = p."typeId" and (p."name" ilike '%` +
-        keyword +
-        `%' or t."name" ilike '%` +
-        keyword +
-        `%' ) group by p."productId"`
+      keyword +
+      `%' or t."name" ilike '%` +
+      keyword +
+      `%' ) group by p."productId"`
     );
     return rs;
   },
@@ -219,5 +220,12 @@ module.exports = {
       'select p."productId", p."name", p."discount", p."typeId", p."releaseDate", p."releaseDate" , p.price,p.image, avg((100-p.discount)*p.price)/100 as giagiam , floor(avg(c.rate)) as tb, count(*) as danhgia  from "Product" p LEFT join  "Comment" c on p."productId" = c."productId"  group by p."productId", p.price order by p."releaseDate" desc'
     );
     return rs;
+  },
+
+  updateAmount: async (IDproduct, ammount) => {
+    await db.oneOrNone(`update "Product" set total = total - ${ammount}  where "productId" = $1`, [IDproduct])
+  },
+  updateAmount1: async (IDproduct, ammount) => {
+    await db.oneOrNone(`update "Product" set total = total + ${ammount}  where "productId" = $1`, [IDproduct])
   },
 };

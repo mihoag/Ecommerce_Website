@@ -95,6 +95,7 @@ module.exports = {
       req.session.uid = null;
       req.session.email = null;
       req.session.token = null;
+      req.session.passport = null;
       // TODO: redirect to login page
       res.redirect("/auth/login");
     } catch (error) {

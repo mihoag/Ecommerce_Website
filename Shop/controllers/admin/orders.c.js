@@ -96,5 +96,18 @@ class ordersController {
       next(error);
     }
   }
+
+  async update(req, res, next) {
+    try {
+      const result = await orderM.updateOrder({isPayment: true, status: 'Paid', orderId: req.body.orderId});
+      if (result) {
+        res.status(200).json("Cập nhập trạng thái thành công");
+      } else {
+        res.status(406).json("Có lỗi xảy ra");
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 module.exports = new ordersController();

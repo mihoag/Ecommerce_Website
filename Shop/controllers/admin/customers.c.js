@@ -64,8 +64,8 @@ class customersController {
   async addNewCustomer(req, res, next) {
     try {
       //check have data
-      const { name, email, phoneNumber, address } = req.body;
-      if (!email || !phoneNumber || !address || !name)
+      const { name, email, phoneNumber, address, role } = req.body;
+      if (!email || !phoneNumber || !address || !name || !role)
         return res.json({ success: false, message: "Vui lòng điền đầy đủ thông tin" })
       // check email address exists
       const rs = await userM.getByEmail(email)

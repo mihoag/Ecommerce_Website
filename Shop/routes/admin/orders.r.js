@@ -6,5 +6,5 @@ router.get('/', ordersController.showOrders)
 router.get('/getPerpage', ordersController.getOrderPerPage)
 router.get('/getDetail', ordersController.getCustomerDetailPerPage)
 router.get('/searchorder', ordersController.getSearchOrder)
-
+router.post('/updateStatus', ordersController.update)
 module.exports = router;

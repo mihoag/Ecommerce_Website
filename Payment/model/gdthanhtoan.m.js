@@ -19,6 +19,23 @@ module.exports = class gdthanhtoan {
         }
     }
 
+    static async getMaxID() {
+        try {
+            let data = await db.selectMax("gdthanhtoan", "idgiaodich");
+            return data;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    static async updateGDthanhtoan(bill) {
+        try {
+            await db.update("gdthanhtoan", bill);
+        } catch (error) {
+            throw error;
+        }
+    }
+
 
     static async deleteGDByUsername(username) {
         try {
