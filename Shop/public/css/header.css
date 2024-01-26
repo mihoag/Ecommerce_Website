@@ -58,7 +58,7 @@ form.input-search {
   border: none;
   border-radius: 10px 0 0 10px;
   height: 100%;
-  width: calc(100% - 100px - 20px);
+  width: calc(100% - 100px - 0px);/*không cần trừ padding button nhìn hợp lý hơn*/
   /* 100 la width button, 20 la padding button */
 }
 
