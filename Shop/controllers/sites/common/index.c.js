@@ -1,4 +1,5 @@
 const productM = require('../../../models/product.m')
+const userModel = require('../../../models/users.m')
 class indexController {
     async showIndex(req, res, next) {
         try {
@@ -10,9 +11,11 @@ class indexController {
             let top5cheapest = await productM.top5cheapest();
             let top5modern = await productM.top5modern();
 
+
+            let user = await userModel.getByID(idUser);
             //console.log(req.session.token)
             //console.log(top5newest, top5cheapest, top5discount, top5rated);
-            res.render("common/index", { userId: idUser, top5rated: top5rated, top5newest: top5newest, top5discount: top5discount, top5cheapest: top5cheapest, top5modern: top5modern, token: req.session.token, title: "Trang chủ" });
+            res.render("common/index", { userId: idUser, top5rated: top5rated, top5newest: top5newest, top5discount: top5discount, top5cheapest: top5cheapest, top5modern: top5modern, token: req.session.token, title: "Trang chủ", fullname: user[0].name, email: user[0].email });
         } catch (error) {
             next(error);
         }

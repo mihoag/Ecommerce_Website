@@ -18,7 +18,7 @@ module.exports = class orderDetail {
 
     static async getOrderDetailByOrderId(id) {
         try {
-            let data = await db.selectByID("Order", "orderId", id)
+            let data = await db.selectJoinTable("OrderDetail", "Product", "productId", "productId", "orderId", id);
             return data;
         }
         catch (error) {
@@ -55,7 +55,7 @@ module.exports = class orderDetail {
 
     static async deleteOrderDetailByOrderID(id) {
         try {
-            let data = await db.delete("Order", "orderId", id);
+            let data = await db.delete("OrderDetail", "orderId", id);
             return data;
         } catch (error) {
             throw error;

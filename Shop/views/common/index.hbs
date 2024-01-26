@@ -348,10 +348,14 @@
 <i class="fa fa-arrow-up" id="goto-top-page" onclick="gotoTop()"></i>
 <!-- Code injected by live-server -->
 <input hidden type="text" value="{{token}}" id="token">
+<input hidden type="text" value="{{fullname}}" id="fullname">
+<input hidden type="text" value="{{email}}" id="email">
 
 <script>
     let tk = document.getElementById("token");
     localStorage.setItem("token", tk.value);
+    localStorage.setItem("fullname", document.getElementById("fullname").value);
+    localStorage.setItem("email", document.getElementById("email").value);
     function themvaogio(btn) {
         let idProduct = btn.getAttribute("id")
         let idUser = localStorage.getItem("ipUser")

@@ -12,6 +12,7 @@
     crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"
     integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
   <!-- our files -->
   <!-- css -->
   <link rel="stylesheet" href="css/style.css">
@@ -24,6 +25,213 @@
 
   <script src="js/classes.js"></script>
   <script src="js/dungchung.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    #section-wrapper {
+      width: 100%;
+      padding: 10px;
+    }
+
+    .box-wrapper {
+      position: relative;
+      display: none;
+      width: 100%;
+      margin: auto;
+      margin-top: 35px;
+      margin-bottom: 30px;
+      border-radius: 30px;
+    }
+
+
+    .info-title {
+      text-align: left;
+      font-size: 28px;
+      letter-spacing: 0.5px;
+    }
+
+    .info-sub-title {
+      font-size: 18px;
+      font-weight: 300;
+      margin-top: 17px;
+      letter-spacing: 0.5px;
+      line-height: 26px;
+    }
+
+    .info-details {
+      list-style: none;
+      margin: 60px 0px;
+    }
+
+    .info-details li {
+      margin-top: 25px;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .info-details li i {
+      background: #879ddf;
+      padding: 12px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+
+    .info-details li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .info-details li a:hover {
+      color: #75a8cc;
+    }
+
+    .social-icons {
+      list-style: none;
+      text-align: center;
+      margin: 20px 0px;
+    }
+
+    .social-icons li {
+      display: inline-block;
+    }
+
+    .social-icons li i {
+      background: #75a8cc;
+      color: #fff;
+      padding: 15px;
+      font-size: 20px;
+      border-radius: 22%;
+      margin: 0px 5px;
+      cursor: pointer;
+      transition: all .5s;
+    }
+
+    .social-icons li i:hover {
+      background: #fff;
+      color: #000000;
+    }
+
+    .form-wrap {
+      width: 100%;
+      float: right;
+      padding: 40px 25px 35px 25px;
+      border-radius: 30px 30px 30px 30px;
+      background: #ecf0f3;
+    }
+
+    .form-title {
+      text-align: left;
+      margin-left: 23px;
+      font-size: 28px;
+      letter-spacing: 0.5px;
+    }
+
+    .form-fields {
+      display: table;
+      width: 100%;
+      padding: 15px 5px 5px 5px;
+    }
+
+    .form-fields input,
+    .form-fields textarea {
+      border: none;
+      outline: none;
+      background: none;
+      font-size: 18px;
+      color: #555;
+      padding: 20px 10px 20px 5px;
+      width: 100%
+    }
+
+    .form-fields textarea {
+      height: 150px;
+      resize: none;
+    }
+
+    .form-group {
+      width: 96%;
+      float: left;
+      padding: 0px 30px;
+      margin: 14px 12px;
+      border-radius: 25px;
+      box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff;
+    }
+
+    .form-fields .form-group:last-child {
+      width: 96%;
+    }
+
+    .submit-button {
+      width: 40%;
+      height: 60px;
+      margin: 0px 12px;
+      border-radius: 30px;
+      font-size: 20px;
+      ;
+      font-weight: 700;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      color: #fff;
+      text-align: center;
+      background: #75a8cc;
+      box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #ffffff;
+      transition: .5s;
+    }
+
+    .submit-button:hover {
+      background: #31279d;
+    }
+
+    /* Responsive css */
+    @media only screen and (max-width: 767px) {
+      .box-wrapper {
+        width: 100%;
+      }
+
+      .info-wrap,
+      .form-wrap {
+        width: 100%;
+        height: inherit;
+        float: none;
+      }
+
+      .info-wrap {
+        border-radius: 30px 30px 0px 0px;
+      }
+
+      .form-wrap {
+        border-radius: 0px 0px 30px 30px;
+      }
+
+      .form-group {
+        width: 100%;
+        float: none;
+        margin: 25px 0px;
+      }
+
+      .form-fields .form-group:last-child,
+      .submit-button {
+        width: 50%;
+      }
+
+      .submit-button {
+        margin: 10px 0px;
+      }
+
+    }
+
+    .paymethod {
+      font-size: 1.2em;
+      margin: 20px 10px 10px 15px;
+    }
+
+    .paymethod label {
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
@@ -106,33 +314,68 @@
 
     <table class="listSanPham">
       <tbody id="listProductinCart">
-
       </tbody>
     </table>
+    <div class="box-wrapper" id="paymentdetail">
+      <div class="form-wrap">
+        <form name="myform">
+          <h2 class="form-title">Xác nhận thông tin đặt hàng</h2>
+          <div class="form-fields">
+            <div class="form-group">
+              <input type="text" class="fname" id="fullname" name="fullname" required
+                placeholder="Họ và tên người nhận hàng">
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="email" name="address" placeholder="Địa chỉ nhận hàng" required>
+            </div>
+            <div class="form-group">
+              <input type="number" class="phone" name="phone" required placeholder="Số điện thoại người nhận">
+            </div>
+            <div class="form-group">
+              <textarea name="message" id="" required placeholder="Nội dung ghi chú thêm"></textarea>
+            </div>
+            <div class="paymethod">
+              <label>Phương thức thanh toán</label>
+              <input type="radio" name="paymentmethod" value="cash" checked> </input>Tiền mặt
+              <input type="radio" name="paymentmethod" value="online">Online</input>
+            </div>
+            <div class="paymethod">
+              <label><b>Tổng cộng: </b>
+                <b id="total"></b>
+              </label>
+
+            </div>
+          </div>
+          <input type="submit" value="Thanh toán" class="submit-button">
+        </form>
+      </div>
+    </div>
   </section> <!-- End Section -->
 
-  <div class="footer">
-    <!-- ============== Alert Box ============= -->
-    <div id="alert">
-      <span id="closebtn">⊗</span>
-    </div>
-
-    <!-- ============== Footer ============= -->
-    <div class="copy-right">
-      <p><a href="/">Thế giới di động</a> - Đồ án web © 2024 - Được thiết kế bởi
-        <span style="color: #eee; font-weight: bold">nhóm Bee</span>
-      </p>
-    </div>
-  </div>
 
   <i class="fa fa-arrow-up" id="goto-top-page" onclick="gotoTop()"></i>
+  <div id="alert">
+    <span id="closebtn">&otimes;</span>
+  </div>
+
 </body>
 
 </html>
 
+
+
 <script>
   let cartNumber = document.getElementById("cartNumber");
   let listProductinCart = document.getElementById("listProductinCart");
+  let paymentdetail = document.getElementById('paymentdetail');
+  let myform = document.forms['myform'];
+  let fullname = myform.elements['fullname']
+  let total = document.getElementById('total');
+  const socket = new io();
+
+
+
   function updateCartnumber() {
     data = { userId: localStorage.getItem("idUser") }
     $.ajax({
@@ -142,7 +385,7 @@
       contentType: 'application/json',
       dataType: "json",
       success: function (data) {
-        //console.log(data);
+        console.log(data);
         cartNumber.innerHTML = data.listPCart.length;
         renderListProductInCart(data.listPCart)
       },
@@ -151,7 +394,6 @@
       }
     });
   }
-
 
   function convertToVND(number) {
     // Using toLocaleString to format the number as currency in VND
@@ -165,8 +407,10 @@
   function tinhTongtien(listCart) {
     let sum = 0;
     for (let i = 0; i < listCart.length; i++) {
-      sum += (100 - listCart[i].discount) * listCart[i].price * listCart[i].quantity
+      sum += (100 - listCart[i].discount) * listCart[i].price * listCart[i].quantity / 100
     }
+    //console.log(sum)
+    total.innerHTML = convertToVND(sum);
     return sum;
   }
 
@@ -257,7 +501,7 @@
                             <img src="${listCart[i].image}">
                         </a>
                     </td>
-                    <td class="alignRight">${convertToVND((100 - listCart[i].discount) * listCart[i].price)}</td>
+                    <td class="alignRight">${convertToVND((100 - listCart[i].discount) * listCart[i].price / 100)}</td>
                     <td class="soluong">
                       <div class="soluongFlex">
                         <button id= "d${listCart[i].userId}|${listCart[i].productId}" onclick="giamSoLuong(this)"><i class="fa fa-minus"></i></button>
@@ -265,7 +509,7 @@
                 <button id= "u${listCart[i].userId}|${listCart[i].productId}" onclick = "tangSoLuong(this)" > <i class="fa fa-plus"></i></button >
                       </div>
                     </td >
-                    <td class="alignRight">${convertToVND((100 - listCart[i].discount) * listCart[i].price * listCart[i].quantity)}</td>
+                    <td class="alignRight">${convertToVND((100 - listCart[i].discount) * listCart[i].price * listCart[i].quantity / 100)}</td>
                     <td style="text-align: center">${listCart[i].timeAddToCart.substring(0, 10)}</td>
                     <td class="noPadding"> <i class="fa fa-trash" onclick="xoaSanPhamTrongGioHang(this)"></i> </td>
                 </tr > `
@@ -316,9 +560,210 @@
       var productId = document.getElementsByTagName("tr")[i].getElementsByTagName("td")[0].innerText;
       productIds.push(productId);
     }
+    //console.log(productIds)
     let userId = document.querySelector("tr:nth-child(2) .soluong input").id.split("|")[0];
     for (let i = 0; i < productIds.length; i++) {
       deleteProductInCart(userId, productIds[i]);
     }
   }
+
+
+  /// SOcket 
+  async function sendMesstoAdmin(data) {
+    socket.emit('channelOrder', { data: data, toEmail: 'leminhhoang123456le@gmail.com' })
+  }
+
+  // Xử lí hiện modal dialog thanh toán sản phẩm
+
+
+  // When the user clicks the button, open the modal 
+  function thanhToan() {
+    paymentdetail.style.display = "table";
+  }
+
+  function initialDetailPayent() {
+    // console.log(fullname);
+    fullname.value = localStorage.getItem("fullname");
+    // console.log(total);
+  }
+  initialDetailPayent();
+  function checkPhoneNumber(name) {
+    if (name.indexOf(" ") > 0) return 1;
+    if (!/^[0-9]*$/.test(name)) return 2;
+    if (name.charAt(0) != "0") return 3;
+    if (name.length != 10) return 4;
+    return 0;
+  }
+  //
+  function addAlertBox(text, bgcolor, textcolor, time) {
+    var al = document.getElementById('alert');
+    al.childNodes[0].nodeValue = text;
+    al.style.backgroundColor = bgcolor;
+    al.style.opacity = 1;
+    al.style.zIndex = 200;
+
+    if (textcolor) al.style.color = textcolor;
+    if (time)
+      setTimeout(function () {
+        al.style.opacity = 0;
+        al.style.zIndex = 0;
+      }, time);
+  }
+  // process payment
+  async function processPaymentByCash(idUser, address, recievername, phonenumber, time) {
+    let data = { idUser: idUser, address: address, recievername: recievername, phonenumber: phonenumber, time: time }
+    const res = await fetch(`/order/orderpayment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    let resJson = await res.json();
+    if (res.ok) {
+      //console.log(resJson);
+      sendMesstoAdmin(resJson.data)
+      //xoaHet();
+      addAlertBox(resJson.msg, '#17c671', '#fff', 3500);
+    }
+    else {
+      //console.log(resJson);
+      addAlertBox(resJson.msg, '#FF3333', '#fff', 3500);
+    }
+  }
+
+  async function processPaymentOnline(idUser, address, recievername, phonenumber, time, content) {
+    // xu li o he thong phu
+
+    let data = { idUser: idUser, address: address, recievername: recievername, phonenumber: phonenumber, time: time }
+    const res = await fetch(`/order/orderpayment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    let resJson = await res.json();
+    if (res.ok) {
+      //console.log(resJson);
+      //xoaHet();
+      //addAlertBox(resJson.msg, '#17c671', '#fff', 3500);
+      var data1 = resJson.data;
+      // xu li thanh toan
+      //email, total, time, noidung, idhoadon, token
+      let data2 = {
+        email: localStorage.getItem("email"), total: data1.totalCost, time: data1.timeOrder.slice(0, 19).replace("T", " "),
+        noidung: content, idhoadon: data1.orderId, token: localStorage.getItem("token")
+      };
+      console.log(data2);
+      const res1 = await fetch(`https://localhost:3002/gdtt`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data2),
+      });
+      let resJson1 = await res1.json();
+      console.log(resJson1);
+      if (res1.ok) {
+        // cập nhật lại trạng thái đơn hàng là đã thanh toán
+        //updateorder
+        let data3 = { idOrder: data1.orderId }
+        const res2 = await fetch(`/order/updateorder`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data3),
+        });
+        if (res2.ok) {
+          sendMesstoAdmin(resJson.data)
+          addAlertBox("Đặt hàng và thanh toán thành công", '#17c671', '#fff', 3500);
+        }
+      }
+      else {
+        // rollback
+        let data4 = { idOrder: data1.orderId }
+        const res2 = await fetch(`/order/rollbackorder`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data4),
+        });
+        //idOrder
+        addAlertBox(resJson1.msg, '#FF3333', '#fff', 3500);
+      }
+
+    }
+    else {
+      //console.log(resJson);
+      addAlertBox(resJson.msg, '#FF3333', '#fff', 3500);
+    }
+
+  }
+
+
+  // check du lieu dau vao
+  myform.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const data = $(this)
+      .serializeArray()
+      .reduce((obj, field) => ({ ...obj, [field.name]: field.value }), {});
+
+    console.log(data);
+    // Kieerm tra so dien thoai
+    const numError = checkPhoneNumber(data.phone);
+    if (numError === 0) { }
+    else if (numError === 1)
+      addAlertBox('Số điện thoại không được chứa khoảng trống', '#FF3333', '#fff', 3500);
+    else if (numError === 2)
+      addAlertBox('Số điện thoại chỉ được chứa số', '#FF3333', '#fff', 3500);
+    else if (numError === 3)
+      addAlertBox('Số điện thoại phải bắt đầu bằng 0', '#FF3333', '#fff', 3500);
+    else if (numError === 4)
+      addAlertBox('Số điện thoại phải có độ dài là 10', '#FF3333', '#fff', 3500);
+    var currentDateUTC = new Date();
+    var currentDate = new Date(currentDateUTC.getTime() + 7 * 60 * 60 * 1000);
+
+    // Convert the Date object to an ISO string
+    var isoString = currentDate.toISOString();
+
+    // Remove milliseconds and format the string for SQL timestamp
+    var sqlTimestamp = isoString.slice(0, 19).replace("T", " ");
+    //console.log(sqlTimestamp);
+    if (data.paymentmethod == "cash") {
+      await processPaymentByCash(localStorage.getItem("idUser"), data.address, data.fullname, data.phone, sqlTimestamp);
+    }
+    else if (data.paymentmethod == "online") {
+      // console.log(data.noidung)
+      await processPaymentOnline(localStorage.getItem("idUser"), data.address, data.fullname, data.phone, sqlTimestamp, data.message);
+    }
+    else {
+      addAlertBox('Phương thức thanh toán không hợp lệ', '#FF3333', '#fff', 3500);
+    }
+
+    //console.log(data);
+    /* const res = await fetch(`${AuthServerURL}/login`, {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json",
+       },
+       credentials: "include",
+       body: JSON.stringify(data),
+     });
+    */
+
+  })
+
+
+
+
+
+
+
+
+
+
 </script>

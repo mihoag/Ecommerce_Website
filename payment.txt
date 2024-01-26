@@ -24,3 +24,4 @@ CREATE TABLE GDthanhtoan (
     idhoadon INT
 );
 
+insert into taikhoangd(username, balance, active) values ('leminhhoang123456le@gmail.com', '0','true')

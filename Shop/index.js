@@ -6,6 +6,8 @@ const session = require("express-session");
 const path = require("path");
 const app = express();
 const route = require("./routes");
+const http = require('http')
+const socket = require('socket.io')
 
 //Use Session
 app.set("trust proxy", 1); // trust first proxy
@@ -58,8 +60,17 @@ app.use("/product", express.static(path.join(__dirname, "public")));
 
 // routes
 route(app);
-
+const server = http.createServer(app);
 const PORT_SERVER = process.env.PORT_SERVER || 3000;
-app.listen(PORT_SERVER, () => {
+
+server.listen(PORT_SERVER, () => {
   console.log(`Server is running on port ${PORT_SERVER}`);
 });
+
+const io = socket(server);
+io.on('connection', async (client) => {
+  client.on('channelOrder', async (data) => {
+    console.log(data)
+
+  })
+})
