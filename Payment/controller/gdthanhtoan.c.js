@@ -14,7 +14,7 @@ module.exports = {
                 token,
                 process.env.JWT_SECRET_PAYMENT,
             );
-            if (!verify || !verify.email || email != verify.email) {
+            if (!verify || !verify.email) {
                 return res.status(400).json({ msg: "token khong hop le" });
             }
 
