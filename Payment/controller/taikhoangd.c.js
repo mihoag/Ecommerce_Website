@@ -128,6 +128,7 @@ module.exports = {
         token,
         process.env.JWT_SECRET_PAYMENT,
       );
+
       if (!verify || !verify.email) {
         return res.redirect('/');
       }

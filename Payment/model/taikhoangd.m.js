@@ -50,6 +50,7 @@ module.exports = class taikhoangd {
     static async getMoney(username) {
         try {
             let data = await db.selectByID("taikhoangd", "username", username);
+
             return data.balance;
         }
         catch (error) {

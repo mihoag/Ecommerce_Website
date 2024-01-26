@@ -8,31 +8,32 @@
   <h4>Statistics</h4>
   {{!-- detail --}}
   <div class="row mb-5 justify-content-between px-4 mt-4">
-    <div class="col-md-4 text-white rounded fw-bold py-2 bx" style="background-color: #369FFF;">
-      <div class="d-flex justify-content-between">
-        <div class="d-flex flex-column justify-content-between">
+    <div class="col-md-3 text-white rounded fw-bold py-2 bx" style="background-color: #369FFF;">
+      <div class="d-flex flex-column justify-content-between">
+        <div class="d-flex justify-content-between">
           <p>In Stock</p>
-          <p class="fs-4">{{data.products}} Products</p>
+          <i class="fas fa-boxes fs-1 text-black"></i>
         </div>
-        <div class="d-flex flex-column justify-content-center"><i class="fas fa-boxes fs-1 text-black"></i></div>
+        <p class="fs-4">{{data.products}} Products</p>
       </div>
+
     </div>
-    <div class="col-md-3 text-white rounded fw-bold py-2 bx" style="background-color: #8AC53E;">
-      <div class="d-flex justify-content-between">
-        <div class="d-flex flex-column justify-content-between">
+    <div class="col-md-4 text-white rounded fw-bold py-2 bx" style="background-color: #8AC53E;">
+      <div class="d-flex flex-column justify-content-between">
+        <div class="d-flex justify-content-between">
           <p>Todays Revenue</p>
-          <p class="fs-4">{{convertToVND data.today}}</p>
+          <i class="fas fa-coins fs-1 text-warning"></i>
         </div>
-        <div class="d-flex flex-column justify-content-center"><i class="fas fa-coins fs-1 text-warning"></i></div>
+        <p class="fs-4">{{convertToVND data.today}}</p>
       </div>
     </div>
     <div class="col-md-4 text-white rounded fw-bold py-2 bx" style="background-color: #C11A0F;">
-      <div class="d-flex justify-content-between">
-        <div class="d-flex flex-column justify-content-between">
+      <div class="d-flex flex-column justify-content-between">
+        <div class="d-flex justify-content-between">
           <p>Month Revenue</p>
-          <p class="fs-4">{{convertToVND data.month}}</p>
+          <i class="fas fa-coins fs-1 text-warning"></i>
         </div>
-        <div class="d-flex flex-column justify-content-center"><i class="fas fa-coins fs-1 text-warning"></i></div>
+        <p class="fs-4">{{convertToVND data.month}}</p>
       </div>
     </div>
   </div>

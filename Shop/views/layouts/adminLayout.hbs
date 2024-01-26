@@ -54,7 +54,13 @@ https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.min.js
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script>
+        var socket = new io();
+        socket.on('channelOrder', (data) => {
+            if (data === 'new order')
+                showToast('Có đơn hàng mới', "bg-info");
+        })
         function showToast(message, type = "bg-danger", time = 2000) {
             var toast = document.getElementById("toast");
             toast.classList.remove("bg-danger");

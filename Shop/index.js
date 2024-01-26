@@ -70,7 +70,6 @@ server.listen(PORT_SERVER, () => {
 const io = socket(server);
 io.on('connection', async (client) => {
   client.on('channelOrder', async (data) => {
-    console.log(data)
-
+    io.emit('channelOrder', "new order");
   })
 })

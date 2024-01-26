@@ -32,7 +32,6 @@
   <script src="js/dungchung.js"></script>
 
   <script src="js/nguoidung.js"></script>
-
 </head>
 
 <body>
@@ -238,9 +237,8 @@
   </div>
 
 
-  <div class="modal fade bd-example-modal-lg" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
+  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Chi tiết thông tin đơn hàng</h5>
@@ -252,7 +250,7 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Tên sản phẩm</th>
-                <th scope="col">Gía</th>
+                <th scope="col">Giá</th>
                 <th scope="col">Số lượng</th>
                 <th scope="col"></th>
               </tr>
@@ -372,8 +370,8 @@
               ${listOrders[i].isPayment}
             </td>
             <td class = "soluong">${listOrders[i].timeOrder.slice(0, 19).replace("T", " ")}</td>
-            <td style="display: flex; justify-content: center;"> <button class="btn btn-outline-success" class="btn btn-outline-success" data-bs-toggle="modal"
-                data-bs-target="#exampleModal1" data-id="${listOrders[i].orderId}" onclick="showDetail(this)">Chi tiết</button></td>
+            <td style="display: flex; justify-content: center; padding:5px;"> <button class="btn btn-outline-success" class="btn btn-outline-success" data-bs-toggle="modal"
+                data-bs-target="#exampleModal1" data-id="${listOrders[i].orderId}" onclick="showDetail(this)"><i class="ace-icon fa fa-eye bigger-120"></i></button></td>
           </tr>
 `
     }

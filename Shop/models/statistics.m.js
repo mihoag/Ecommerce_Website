@@ -5,7 +5,9 @@ module.exports = {
     try {
       data = await db.one(
         `
-        select SUM(ROUND(p.price * (100-p.discount)/100) * quantity) from "OrderDetail" d, "Product" p, "Order" o where d."productId" = p."productId" and o."orderId" = d."orderId" and CURRENT_DATE=o."timeOrder"
+        select SUM(ROUND(p.price * (100-p.discount)/100) * quantity) from "OrderDetail" d, "Product" p, "Order" o where d."productId" = p."productId" and o."orderId" = d."orderId"
+        and date_part('month', o."timeOrder") = date_part('month',CURRENT_DATE) and date_part('year', o."timeOrder") = date_part('year',CURRENT_DATE)
+        and date_part('day', o."timeOrder") = date_part('day',CURRENT_DATE)
         `
       );
       return data;
