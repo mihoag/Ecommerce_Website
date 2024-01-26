@@ -3,9 +3,12 @@ const passport = require("passport");
 const GoogleStrategy = require("passport-google-oidc");
 const userM = require("../models/users.m");
 const axios = require("axios")
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = process.env.JWT_SECRET_PAYMENT;
+
 //store session
 passport.serializeUser((user, done) => {
-  done(null, { email: user.email, userId: user.userId });
+  done(null, { email: user.email, userId: user.userId, token: jwt.sign({ email: user.email }, JWT_SECRET) });
 });
 
 // check session

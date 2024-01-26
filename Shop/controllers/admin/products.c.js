@@ -1,6 +1,6 @@
-const Product = require("../../../models/product.m");
-const ProductDetail = require("../../../models/productDetail.m");
-const my_cloudinary = require("../../../configs/myCloudinary");
+const Product = require("../../models/product.m");
+const ProductDetail = require("../../models/productDetail.m");
+const my_cloudinary = require("../../configs/myCloudinary");
 
 class productsController {
   async showProducts(req, res, next) {

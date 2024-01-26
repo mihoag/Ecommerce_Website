@@ -1,4 +1,5 @@
 var chart;
+var currentId = null;
 async function chartView(id) {
   id = parseInt(id);
   const res = await fetch(`/admin/brands/${id}`, {
@@ -99,13 +100,101 @@ async function chartView(id) {
 }
 
 function changeTypeId(btn) {
-  chartView($(btn).data("id"));
+  currentId = $(btn).data("id")
+  chartView(currentId);
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
   const btn = document.querySelectorAll('.tabBtn')[0];
   btn.classList.add('active');
   document.querySelectorAll('.tab-pane')[0].classList.add('active');
-
-  chartView($(btn).data("id"));
+  currentId = $(btn).data("id")
+  chartView(currentId);
 })
+
+async function addBrandClick() {
+  let name = document.getElementById('brandName').value;
+  name = name.replace(/\s+/g, '');
+  if (name.length <= 0) {
+    alert('Tên không được rỗng!')
+    return;
+  }
+  // add new brand
+  const res = await fetch(`/admin/brands/add`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ brand: name })
+  })
+
+  const response = await res.json();
+  if (res.status === 200) {
+    $('#addBrandModal').modal('hide');
+    showToast(response.message + '. Refresh sau 2 giây', 'bg-success');
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000)
+  } else {
+    showToast(response.message || "Có lỗi xảy ra hãy thử lại sau!");
+  }
+}
+
+async function deleteBtn() {
+  // add new brand
+  const res = await fetch(`/admin/brands/${currentId}`, {
+    method: "DELETE"
+  })
+  const response = await res.json();
+  if (res.status === 200) {
+    showToast(response.message + '. Refresh sau 2 giây', 'bg-success');
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000)
+  } else {
+    showToast(response.message || "Có lỗi xảy ra hãy thử lại sau!");
+  }
+}
+
+async function editBrandClick() {
+  let name = document.getElementById('brandNameN').value;
+  name = name.replace(/\s+/g, '');
+  if (name.length <= 0) {
+    alert('Tên không được rỗng!')
+    return;
+  }
+
+  // edit name brand
+  const res = await fetch(`/admin/brands/edit`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ typeId: currentId, name: name })
+  })
+
+  const response = await res.json();
+  if (res.status === 200) {
+    $('#editBrandModal').modal('hide');
+    showToast(response.message + '. Refresh sau 2 giây', 'bg-success');
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000)
+  } else {
+    showToast(response.message || "Có lỗi xảy ra hãy thử lại sau!");
+  }
+}
+
+function showName() {
+  const btn = document.querySelectorAll('.tabBtn');
+  btn.forEach(e => {
+    const id = $(e).data("id")
+    if (id === currentId) {
+      const name = $(e).data("bsTarget").slice(1)
+      document.getElementById('brandNameO').value = name
+      document.getElementById('brandNameN').value = name
+      return;
+    }
+  })
+
+}

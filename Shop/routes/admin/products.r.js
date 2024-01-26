@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const productsController = require('../../../controllers/sites/admin/products.c')
-const upload = require("../../../utils/multer");
+const productsController = require('../../controllers/admin/products.c')
+const upload = require("../../utils/multer");
 
 router.get('/products', productsController.showProducts)
 router.get('/', productsController.showProducts)

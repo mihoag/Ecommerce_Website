@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const customersController = require('../../../controllers/sites/admin/customers.c')
+const customersController = require('../../controllers/admin/customers.c')
 
 router.get('/customers', customersController.showCustomers)
 router.get('/one/:email', customersController.getOneCustomer)

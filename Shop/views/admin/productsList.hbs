@@ -4,121 +4,87 @@
         <div class="col-md-12">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <button type="button" class="btn modal-button"
-                        data-bs-toggle="modal"
+                    <button type="button" class="btn modal-button" data-bs-toggle="modal"
                         data-bs-target="#addListModal">
                         New List
                     </button>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="addListModal" tabindex="-1"
-                        aria-labelledby="addListModalLabel"
+                    <div class="modal fade" id="addListModal" tabindex="-1" aria-labelledby="addListModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5"
-                                        id="addListModalLabel">New
+                                    <h1 class="modal-title fs-5" id="addListModalLabel">New
                                         List</h1>
-                                    <button type="button" class="btn-close"
-                                        data-bs-dismiss="modal"
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <label
-                                        for="name">List's Name</label>
-                                    <input id="listName" type="text"
-                                        style="width:30vw">
+                                    <div>
+                                        <label for="name">List's Name</label>
+                                        <input id="listName" type="text" style="width:30vw"
+                                            class="text-center rounded-2">
+                                        <div class="text-end ml-4 d-inline-block">
+                                            <span>Background:</span>
+                                            <input type="color" id="c1" class="border-0" value="#ff9c00">
+                                            <input type="color" id="c2" class="border-0" value="#ec1f1f">
+
+                                        </div>
+                                    </div>
                                     <p class="mt-4">Chọn mặt hàng:</p>
-                                    <div
-                                        class="my-2 d-flex justify-content-between align-items-center">
+                                    <div class="my-2 d-flex justify-content-between align-items-center">
                                         <div class="position-relative">
-                                            <label for="search-name"
-                                                class="position-absolute search"><i
+                                            <label for="search-name" class="position-absolute search"><i
                                                     class="fa fa-search"></i>
                                             </label>
-                                            <input
-                                                class="form-control w-100"
-                                                placeholder="Search by name"
-                                                id="search-name"
-                                                style="padding-left: 30px;">
+                                            <input class="form-control w-100" placeholder="Search by name"
+                                                id="search-name" style="padding-left: 30px;">
                                         </div>
                                         <div class="position-relative">
-                                            <select class="form-select"
-                                                onchange="sortItemsList(event)">
-                                                <option
-                                                    value="default">Default</option>
-                                                <option
-                                                    value="rate">Rate</option>
-                                                <option
-                                                    value="newest">Newest</option>
-                                                <option
-                                                    value="modern">Modest</option>
-                                                <option
-                                                    value="discount">Discount</option>
-                                                <option
-                                                    value="cheapest">Cheapest</option>
+                                            <select class="form-select" onchange="sortItemsList(event)">
+                                                <option value="default">Default</option>
+                                                <option value="rate">Rate</option>
+                                                <option value="newest">Newest</option>
+                                                <option value="modern">Modest</option>
+                                                <option value="discount">Discount</option>
+                                                <option value="cheapest">Cheapest</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div
-                                        class="container table-responsive items-table px-2">
+                                    <div class="container table-responsive items-table px-2">
                                         <div class="row pt-2 mx-2">
-                                            <table
-                                                class="table table-responsive table-borderless align-middle">
-                                                <thead class="table-info"
-                                                    style="position: sticky; top: 0">
+                                            <table class="table table-responsive table-borderless align-middle">
+                                                <thead class="table-info" style="position: sticky; top: 0">
                                                     <tr class="bg-light">
-                                                        <th scope="col"
-                                                            width="5%"><input
-                                                                class="form-check-input"
-                                                                type="checkbox"
-                                                                id="list-check-all"
+                                                        <th scope="col" width="5%"><input class="form-check-input"
+                                                                type="checkbox" id="list-check-all"
                                                                 onchange="listCheckAll(event)"></th>
-                                                        <th scope="col"
-                                                            width="20%">Name</th>
-                                                        <th scope="col"
-                                                            width="10%">Brand</th>
-                                                        <th scope="col"
-                                                            width="10%">Announced</th>
-                                                        <th scope="col"
-                                                            class="text-center"
-                                                            width="10%"><span>Price</span></th>
-                                                        <th
-                                                            class="text-center"
-                                                            scope="col"
-                                                            width="5%">Discount</th>
-                                                        <th
-                                                            class="text-center"
-                                                            scope="col"
-                                                            width="5%">Sale
+                                                        <th scope="col" width="20%">Name</th>
+                                                        <th scope="col" width="10%">Brand</th>
+                                                        <th scope="col" width="10%">Announced</th>
+                                                        <th scope="col" class="text-center" width="10%">
+                                                            <span>Price</span></th>
+                                                        <th class="text-center" scope="col" width="5%">Discount</th>
+                                                        <th class="text-center" scope="col" width="5%">Sale
                                                             Price</th>
-                                                        <th
-                                                            class="10%">Home</th>
+                                                        <th class="10%">Home</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="products-list">
                                                     {{#each items}}
-                                                    <tr class="item"
-                                                        id="{{productId}}">
-                                                        <th
-                                                            scope="row"><input
-                                                                class="form-check-input list-check"
+                                                    <tr class="item" id="{{productId}}">
+                                                        <th scope="row"><input class="form-check-input list-check"
                                                                 type="checkbox"></th>
                                                         <td>{{name}}</td>
                                                         <td>{{type}}</td>
                                                         <td>{{releaseDate}}</td>
-                                                        <td
-                                                            class="text-center">{{price}}</td>
-                                                        <td
-                                                            class="text-center">{{discount}}%</td>
-                                                        <td
-                                                            class="text-center">{{giagiam}}</td>
-                                                        <th scope="col"
-                                                            width="5%"
-                                                            class="text-center"><input
-                                                                class="form-check-input home-check"
-                                                                type="checkbox"></th>
+                                                        <td class="text-center">{{price}}</td>
+                                                        <td class="text-center">{{discount}}%</td>
+                                                        <td class="text-center">{{giagiam}}</td>
+                                                        <th scope="col" width="5%" class="text-center"><input
+                                                                class="form-check-input home-check" type="checkbox">
+                                                        </th>
                                                     </tr>
                                                     {{/each}}
                                                 </tbody>
@@ -127,13 +93,9 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button"
-                                        class="btn btn-secondary"
-                                        data-bs-dismiss="modal"
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                         id="modal-close">Hủy</button>
-                                    <button type="button"
-                                        class="btn btn-primary"
-                                        onclick="addList()">Thêm</button>
+                                    <button type="button" class="btn btn-primary" onclick="addList()">Thêm</button>
                                 </div>
                             </div>
                         </div>
@@ -148,44 +110,33 @@
             {{#each lists}}
             <li>
                 <div class="row">
-                    <div class="khungSanPham" style="border-color: #ff9c00"
-                        id="{{this.listId}}">
+                    <div class="khungSanPham" style="border-color: #ff9c00" id="{{this.listId}}">
                         <h3 class="tenKhung"
-                            style="background-image: linear-gradient(120deg, #ff9c00 0%, #ec1f1f 50%, #ff9c00 100%);">*
+                            style="background-image: linear-gradient(120deg, {{this.color1}} 0%, {{this.color2}} 50%, {{this.color1}} 100%);">
+                            *
                             {{this.name}}
                             *</h3>
                         <div class="list-btn">
-                            <button class="btn btn-xs btn-secondary"
-                                onclick="showListItems(event)">
-                                <i
-                                    class="ace-icon fa fa-eye bigger-120"></i>
+                            <button class="btn btn-xs btn-secondary" onclick="showListItems(event)">
+                                <i class="ace-icon fa fa-eye bigger-120"></i>
                             </button>
-                            <button class="btn btn-xs btn-info edit-button"
-                                btnid="{{this.listId}}"
-                                data-bs-toggle="modal"
-                                data-bs-target="#updateListModal"
+                            <button class="btn btn-xs btn-info edit-button" btnid="{{this.listId}}"
+                                data-bs-toggle="modal" data-bs-target="#updateListModal"
                                 onclick="ActiveUpdateMode(event)">
                                 <i class="ace-icon fa fa-pencil bigger-120"></i>
                             </button>
-                            <button class="btn btn-xs btn-danger delete-button"
-                                data-bs-toggle="modal"
+                            <button class="btn btn-xs btn-danger delete-button" data-bs-toggle="modal"
                                 data-bs-target="#confirmDeleteModal">
-                                <i
-                                    class="ace-icon fa fa-trash-can bigger-120"></i>
+                                <i class="ace-icon fa fa-trash-can bigger-120"></i>
                             </button>
-                            <div class="modal fade" id="confirmDeleteModal"
-                                tabindex="-1"
-                                aria-labelledby="confirmDeleteModalLabel"
-                                aria-hidden="true">
+                            <div class="modal fade" id="confirmDeleteModal" tabindex="-1"
+                                aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title"
-                                                id="confirmDeleteModalLabel">Confirm
+                                            <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm
                                                 Delete</h5>
-                                            <button type="button"
-                                                class="btn-close"
-                                                data-bs-dismiss="modal"
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
@@ -193,11 +144,9 @@
                                             list?
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button"
-                                                class="btn btn-secondary"
+                                            <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Cancel</button>
-                                            <button type="button"
-                                                class="btn btn-danger"
+                                            <button type="button" class="btn btn-danger"
                                                 id="confirmDeleteButton">Delete</button>
                                         </div>
                                     </div>
@@ -208,8 +157,7 @@
                             <ul class="items-list">
                                 {{#each this.home}}
                                 <li class="sanPham">
-                                    <a
-                                        href="/product/detailProducts?id={{productId}}">
+                                    <a href="/product/detailProducts?id={{productId}}">
                                         <img src="{{image}}" alt>
                                         <h3>{{name}}</h3>
                                         <div class="price">
@@ -239,118 +187,72 @@
     </div>
 </div>
 
-<div class="modal fade" id="updateListModal"
-    tabindex="-1"
-    aria-labelledby="updateListModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="updateListModal" tabindex="-1" aria-labelledby="updateListModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5"
-                    id="updateListModalLabel">Update List</h1>
-                <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"></button>
+                <h1 class="modal-title fs-5" id="updateListModalLabel">Update List</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-start">
-                <label
-                    for="update-list-name">List's Name</label>
-                <input id="update-list-name" type="text"
-                    style="width:30vw">
+                <div>
+                    <label for="update-list-name">List's Name</label>
+                    <input id="update-list-name" type="text" style="width:30vw" class="text-center rounded-2">
+                    <div class="text-end ml-4 d-inline-block">
+                        <span>Background:</span>
+                        <input type="color" id="uc1" class="border-0" value="#ff9c00">
+                        <input type="color" id="uc2" class="border-0" value="#ec1f1f">
+                    </div>
+                </div>
                 <p class="mt-4">Chọn mặt hàng:</p>
-                <div
-                    class="my-2 d-flex justify-content-between align-items-center">
+                <div class="my-2 d-flex justify-content-between align-items-center">
                     <div class="position-relative">
-                        <label for="update-search-name"
-                            class="position-absolute search"><i
-                                class="fa fa-search"></i>
+                        <label for="update-search-name" class="position-absolute search"><i class="fa fa-search"></i>
                         </label>
-                        <input
-                            class="form-control w-100"
-                            placeholder="Search by name"
-                            id="update-search-name"
+                        <input class="form-control w-100" placeholder="Search by name" id="update-search-name"
                             style="padding-left: 30px;">
                     </div>
                     <div class="position-relative">
-                        <select class="form-select"
-                            onchange="UpdateSortItemsList(event)">
-                            <option
-                                value="default">Default</option>
-                            <option
-                                value="rate">Rate</option>
-                            <option
-                                value="newest">Newest</option>
-                            <option
-                                value="modern">Modest</option>
-                            <option
-                                value="discount">Discount</option>
-                            <option
-                                value="cheapest">Cheapest</option>
+                        <select class="form-select" onchange="UpdateSortItemsList(event)">
+                            <option value="default">Default</option>
+                            <option value="rate">Rate</option>
+                            <option value="newest">Newest</option>
+                            <option value="modern">Modest</option>
+                            <option value="discount">Discount</option>
+                            <option value="cheapest">Cheapest</option>
                         </select>
                     </div>
                 </div>
-                <div
-                    class="container table-responsive items-table px-2">
+                <div class="container table-responsive items-table px-2">
                     <div class="row pt-2 mx-2">
-                        <table
-                            class="table table-responsive table-borderless align-middle">
-                            <thead
-                                class="table-info"
-                                style="position: sticky; top: 0">
-                                <tr
-                                    class="bg-light">
-                                    <th scope="col"
-                                        width="5%"><input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            id="update-list-check-all"
-                                            onchange="UpdateListCheckAll(event)"></th>
-                                    <th scope="col"
-                                        width="20%">Name</th>
-                                    <th scope="col"
-                                        width="10%">Brand</th>
-                                    <th scope="col"
-                                        width="10%">Announced</th>
-                                    <th scope="col"
-                                        class="text-center"
-                                        width="10%"><span>Price</span></th>
-                                    <th
-                                        class="text-center"
-                                        scope="col"
-                                        width="5%">Discount</th>
-                                    <th
-                                        class="text-center"
-                                        scope="col"
-                                        width="5%">Sale
+                        <table class="table table-responsive table-borderless align-middle">
+                            <thead class="table-info" style="position: sticky; top: 0">
+                                <tr class="bg-light">
+                                    <th scope="col" width="5%"><input class="form-check-input" type="checkbox"
+                                            id="update-list-check-all" onchange="UpdateListCheckAll(event)"></th>
+                                    <th scope="col" width="20%">Name</th>
+                                    <th scope="col" width="10%">Brand</th>
+                                    <th scope="col" width="10%">Announced</th>
+                                    <th scope="col" class="text-center" width="10%"><span>Price</span></th>
+                                    <th class="text-center" scope="col" width="5%">Discount</th>
+                                    <th class="text-center" scope="col" width="5%">Sale
                                         Price</th>
-                                    <th
-                                        class="10%">Home</th>
+                                    <th class="10%">Home</th>
                                 </tr>
                             </thead>
-                            <tbody
-                                id="update-products-list">
+                            <tbody id="update-products-list">
                                 {{#each items}}
-                                <tr class="update-item"
-                                    id="{{productId}}">
-                                    <th
-                                        scope="row"><input
-                                            class="form-check-input update-list-check"
-                                            type="checkbox"></th>
+                                <tr class="update-item" id="{{productId}}">
+                                    <th scope="row"><input class="form-check-input update-list-check" type="checkbox">
+                                    </th>
                                     <td>{{name}}</td>
                                     <td>{{type}}</td>
                                     <td>{{releaseDate}}</td>
-                                    <td
-                                        class="text-center">{{price}}</td>
-                                    <td
-                                        class="text-center">{{discount}}%</td>
-                                    <td
-                                        class="text-center">{{giagiam}}</td>
-                                    <th scope="col"
-                                        width="5%"
-                                        class="text-center"><input
-                                            class="form-check-input update-home-check"
-                                            type="checkbox"></th>
+                                    <td class="text-center">{{price}}</td>
+                                    <td class="text-center">{{discount}}%</td>
+                                    <td class="text-center">{{giagiam}}</td>
+                                    <th scope="col" width="5%" class="text-center"><input
+                                            class="form-check-input update-home-check" type="checkbox"></th>
                                 </tr>
                                 {{/each}}
                             </tbody>
@@ -359,13 +261,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                    id="modal-close">Hủy</button>
-                <button type="button"
-                    class="btn btn-primary update-list-btn"
-                    onclick="updateList()">Cập nhập</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="modal-close">Hủy</button>
+                <button type="button" class="btn btn-primary update-list-btn" onclick="updateList()">Cập nhật</button>
             </div>
         </div>
     </div>

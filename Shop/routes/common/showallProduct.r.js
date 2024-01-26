@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const showallController = require('../../../controllers/sites/common/showall.c');
+const showallController = require('../../controllers/common/showall.c');
 
 
 router.get('/', showallController.showall);

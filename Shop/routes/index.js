@@ -3,7 +3,7 @@ const authMiddleware = require(".././middlewares/auth.mws");
 function route(app) {
   require("../middlewares/passport.mws")(app);
   // Admin routes
-  app.use('/admin', require('./sites/admin/admin.r'))
+  app.use('/admin', require('./admin/admin.r'))
   // Order routes
   app.use('/order', require('./sites/order.r'));
   // Order Detail routes
@@ -25,15 +25,15 @@ function route(app) {
   app.use("/cart", authMiddleware.mustLogin, require("./sites/cart.r"));
 
 
-  app.use("/news", authMiddleware.mustLogin, require('./sites/common/news.r'));
-  app.use("/contact", authMiddleware.mustLogin, require('./sites/common/contact.r'));
-  app.use("/hiring", authMiddleware.mustLogin, require('./sites/common/hiring.r'));
-  app.use("/maintenance", authMiddleware.mustLogin, require('./sites/common/maintenance.r'));
-  app.use("/about", authMiddleware.mustLogin, require('./sites/common/about.r'));
-  app.use("/login", require('./sites/common/login.r'));
-  app.use("/signup", require('./sites/common/signup.r'))
-  app.use("/showall", authMiddleware.mustLogin, require('./sites/common/showallProduct.r'))
-  app.use("/", require('./sites/common/index.r'));
+  app.use("/news", require('./common/news.r'));
+  app.use("/contact", require('./common/contact.r'));
+  app.use("/hiring", require('./common/hiring.r'));
+  app.use("/maintenance", require('./common/maintenance.r'));
+  app.use("/about", require('./common/about.r'));
+  app.use("/login", require('./common/login.r'));
+  app.use("/signup", require('./common/signup.r'))
+  app.use("/showall", require('./common/showallProduct.r'))
+  app.use("/", require('./common/index.r'));
 
   app.use((req, res, next) => {
     res.render("error/404", { layout: false });

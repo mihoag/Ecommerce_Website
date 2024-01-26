@@ -1,5 +1,5 @@
-const Product = require("../../../models/product.m");
-const ProductList = require("../../../models/productsList.m");
+const Product = require("../../models/product.m");
+const ProductList = require("../../models/productsList.m");
 
 function handleReleaseDate(releaseDate) {
   const inputDate = new Date(releaseDate);
