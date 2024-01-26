@@ -50,3 +50,7 @@
   border-radius: 15px;
   border: none;
 }
+
+#chart-line  {
+  max-height: 500px !important;
+}

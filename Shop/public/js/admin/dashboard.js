@@ -1,110 +1,108 @@
-var ctx1 = document.getElementById("chart-line").getContext("2d");
-
-var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
-
-gradientStroke1.addColorStop(1, "rgba(94, 114, 228, 0.2)");
-gradientStroke1.addColorStop(0.2, "rgba(94, 114, 228, 0.0)");
-gradientStroke1.addColorStop(0, "rgba(94, 114, 228, 0)");
-new Chart(ctx1, {
-  type: "line",
-  data: {
-    labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [
-      {
-        label: "Phones sales",
-        tension: 0.4,
-        borderWidth: 0,
-        pointRadius: 0,
-        borderColor: "#5e72e4",
-        backgroundColor: gradientStroke1,
-        borderWidth: 3,
-        fill: true,
-        data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-        maxBarThickness: 6,
-      },
-    ],
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-    interaction: {
-      intersect: false,
-      mode: "index",
-    },
-    scales: {
-      y: {
-        grid: {
-          drawBorder: false,
-          display: true,
-          drawOnChartArea: true,
-          drawTicks: false,
-          borderDash: [5, 5],
-        },
-        ticks: {
-          display: true,
-          padding: 10,
-          color: "#fbfbfb",
-          font: {
-            size: 11,
-            family: "Open Sans",
-            style: "normal",
-            lineHeight: 2,
-          },
-        },
-      },
-      x: {
-        grid: {
-          drawBorder: false,
-          display: false,
-          drawOnChartArea: false,
-          drawTicks: false,
-          borderDash: [5, 5],
-        },
-        ticks: {
-          display: true,
-          color: "#ccc",
-          padding: 20,
-          font: {
-            size: 11,
-            family: "Open Sans",
-            style: "normal",
-            lineHeight: 2,
-          },
-        },
-      },
-    },
-  },
-});
-
-
-var xValues = ["Apple", "Samsung", "Oppo", "Xiaomi", "Realme"];
-var yValues = [2022, 1045, 1233, 1245, 346];
-var barColors = [
-  "#b91d47",
-  "#00aba9",
-  "#2b5797",
-  "#e8c3b9",
-  "#1e7145"
-];
-
-new Chart("chart-pie", {
-  type: "pie",
-  data: {
-    labels: xValues,
-    datasets: [{
-      backgroundColor: barColors,
-      data: yValues
-    }]
-  },
-  options: {
-    title: {
-      display: true,
-      text: "Brands's sales"
-    }
+let chart;
+function viewChart(options) {
+  let labels = [];
+  let revenueSet = [];
+  let profitSet = [];
+  for (let i = 0; i < options.lastDayOfMonth; i++) labels.push(i + 1);
+  for (let i = 0; i < options.lastDayOfMonth; i++) {
+    profitSet.push(0);
+    revenueSet.push(0);
   }
-});
+  for (let i = 0; i < options.data.length; i++) {
+    revenueSet[parseInt(options.data[i].day) - 1] = options.data[i].sum;
+    profitSet[parseInt(options.data[i].day) - 1] = options.data[i].profit;
+  }
+
+  //for export excel file
+  dataSetExport = {
+    labels,
+    revenueSet,
+    profitSet,
+    month: options.month,
+    year: options.year,
+  };
+  //----
+
+  const ctx = document.getElementById("chart-line");
+  if (chart) chart.destroy();
+  chart = new Chart(ctx, {
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          type: "bar",
+          label: "Doanh thu",
+          backgroundColor: "#369FFF",
+          data: revenueSet,
+          borderWidth: 1,
+        },
+        {
+          type: "bar",
+          label: "Lợi nhuận",
+          backgroundColor: "#FFA732",
+          data: profitSet,
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: `Doanh thu trong tháng ${options.month} năm ${options.year}`,
+          color: "#161A30",
+          font: { size: 40 },
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: "VNĐ",
+            color: "#EF4040",
+            font: {
+              family: "Times",
+              size: 30,
+              style: "normal",
+              lineHeight: 1.2,
+            },
+          },
+        },
+        x: {
+          title: {
+            display: true,
+            text: "Ngày",
+            color: "#161A30",
+            font: {
+              size: 25,
+            },
+          },
+        },
+      },
+    },
+  });
+}
+
+async function showViewChart(month, year, lastDayOfMonth) {
+  filterMonth = month;
+  filterYear = year;
+  const res = await fetch(`/admin/statistics/revenue/${month}/${year}`, {
+    method: "GET",
+  });
+
+  const response = await res.json();
+  //get last day in this month
+  viewChart({
+    lastDayOfMonth,
+    data: response,
+    month,
+    year,
+  });
+}
+
+var today = new Date();
+var lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+lastDayOfMonth = today.getDate();
+
+showViewChart(today.getMonth() + 1, today.getFullYear(), lastDayOfMonth);

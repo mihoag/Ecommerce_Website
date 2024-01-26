@@ -53,21 +53,21 @@ CREATE TABLE "ProductDetail" (
 );
 
 
-DROP TABLE IF EXISTS "Product";
-CREATE TABLE "Product" (
-    "productId" serial NOT NULL,
-    "name" character varying(255),
-    "total" int4,
-    "typeId" int4 NOT NULL,
-    "image" character varying(255),
-	"public_id" character varying(255) DEFAULT NULL,
-    "active" boolean DEFAULT true,
-    "cost" int4,
-    "price" int4,
-	"discount" float default 0,
-	"rate" float default -1,
-	"releaseDate" Date
-);
+	DROP TABLE IF EXISTS "Product";
+	CREATE TABLE "Product" (
+		"productId" serial NOT NULL,
+		"name" character varying(255),
+		"total" int4,
+		"typeId" int4 NOT NULL,
+		"image" character varying(255),
+		"public_id" character varying(255) DEFAULT NULL,
+		"active" boolean DEFAULT true,
+		"cost" int4,
+		"price" int4,
+		"discount" float default 0,
+		"rate" float default -1,
+		"releaseDate" Date
+	);
 
 DROP TABLE IF EXISTS "Slide";
 CREATE TABLE "Slide" (
@@ -131,6 +131,7 @@ CREATE TABLE "ProductsList" (
 	"color1" character varying(255),
 	"color2" character varying(255)
 );
+
 
 
 ALTER TABLE "Cart" ADD CONSTRAINT "Cart_pkey" PRIMARY KEY ("userId", "productId");
@@ -7981,3 +7982,19 @@ INSERT INTO "OrderDetail"("orderId","productId","timeAddToCart","quantity") VALU
 INSERT INTO "OrderDetail"("orderId","productId","timeAddToCart","quantity") VALUES (275,11,'2023-09-16 02:25:00',4);
 INSERT INTO "OrderDetail"("orderId","productId","timeAddToCart","quantity") VALUES (275,36,'2023-09-16 02:32:00',3);
 INSERT INTO "OrderDetail"("orderId","productId","timeAddToCart","quantity") VALUES (275,35,'2023-09-14 10:53:00',1);
+
+UPDATE "Order"
+SET "timeOrder" = DATE_TRUNC('second', "timeOrder") + INTERVAL '4 year' 
+WHERE EXTRACT(YEAR FROM "timeOrder") < 2020;
+UPDATE "Order"
+SET "timeOrder" = DATE_TRUNC('second', "timeOrder") + INTERVAL '3 year' 
+WHERE EXTRACT(YEAR FROM "timeOrder") < 2021;
+UPDATE "Order"
+SET "timeOrder" = DATE_TRUNC('second', "timeOrder") + INTERVAL '2 year' 
+WHERE EXTRACT(YEAR FROM "timeOrder") < 2022;
+UPDATE "Order"
+SET "timeOrder" = DATE_TRUNC('second', "timeOrder") + INTERVAL '1 year' 
+WHERE EXTRACT(YEAR FROM "timeOrder") < 2023;
+UPDATE "Order"
+SET "timeOrder" = DATE_TRUNC('second', "timeOrder") + INTERVAL '1 year' 
+WHERE EXTRACT(YEAR FROM "timeOrder") < 2024 AND EXTRACT(MONTH FROM "timeOrder") = 1;
