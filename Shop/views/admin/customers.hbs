@@ -42,11 +42,6 @@
                           <input type="text" class="form-control" name="email" placeholder="Địa chỉ email" required>
                         </div>
                         <div class="form-group mt-2">
-                          <label for="address">Address</label>
-                          <input type="text" class="form-control" name="address"
-                            placeholder="Địa chỉ nhận hàng mặc định" required>
-                        </div>
-                        <div class="form-group mt-2">
                           <label for="phoneNumber">Số điện thoại</label>
                           <input type="text" class="form-control" name="phoneNumber" placeholder="Số điện thoại"
                             required>
@@ -148,11 +143,6 @@
                 <label for="name">Email</label>
                 <input type="text" id="uEmail" class="form-control text-body-secondary" name="email"
                   placeholder="Địa chỉ email" readonly disabled="disabled">
-              </div>
-              <div class="form-group mt-2">
-                <label for="name">Address</label>
-                <input type="text" id="uAddress" class="form-control" name="address"
-                  placeholder="Địa chỉ nhận hàng mặc định" required>
               </div>
               <div class="form-group mt-2">
                 <label for="name">Số điện thoại</label>
@@ -274,16 +264,6 @@
                               <td>${customers[i].email}</td>
                             </tr>
                             <tr>
-                              <th width="20%">Address</th>
-                              <td>227 Đ. Nguyễn
-                                Văn
-                                Cừ, Phường 4,
-                                Quận
-                                5, Thành phố Hồ
-                                Chí
-                                Minh</td>
-                            </tr>
-                            <tr>
                               <th width="20%">Phone</th>
                               <td>${customers[i].phoneNumber}</td>
                             </tr>
@@ -311,10 +291,6 @@
 
                                   <button class="btn btn-xs btn-danger" onclick="deleteUser(this)" data-email="${customers[i].email}">
                                     <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                  </button>
-
-                                  <button class="btn btn-xs btn-warning">
-                                    <i class="ace-icon fa fa-flag bigger-120"></i>
                                   </button>
                                 </div>
                               </td>

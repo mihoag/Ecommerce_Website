@@ -25,7 +25,6 @@ class indexController {
             else {
                 res.render("common/index", { userId: idUser, listproducts: listproducts, token: req.session.token, title: "Trang chủ", fullname: user[0].name, email: user[0].email });
             }
-
         } catch (error) {
             next(error);
         }
