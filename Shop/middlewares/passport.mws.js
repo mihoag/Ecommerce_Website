@@ -8,7 +8,7 @@ const JWT_SECRET = process.env.JWT_SECRET_PAYMENT;
 
 //store session
 passport.serializeUser((user, done) => {
-  done(null, { email: user.email, userId: user.userId, token: jwt.sign({ email: user.email }, JWT_SECRET) });
+  done(null, { email: user.email, userId: user.userId, token: jwt.sign({ email: user.email }, JWT_SECRET), role: user.role });
 });
 
 // check session

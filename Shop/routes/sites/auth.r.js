@@ -24,9 +24,16 @@ router.get("/federated/google", passport.authenticate("google"));
 router.get(
   "/oauth2/redirect/google",
   passport.authenticate("google", {
-    successRedirect: "/",
     failureRedirect: "/auth/login",
-  })
+    failureFlash: true
+  }),
+  function (req, res) {
+    let redirectTo = '/';
+    if (req.session?.passport?.user?.role == 'admin') {
+      redirectTo = '/admin';
+    }
+    res.redirect(redirectTo);
+  }
 );
 
 router.post("/signup", authMiddleware.dontLogin, controller.signup);
