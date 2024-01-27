@@ -82,7 +82,7 @@ module.exports = {
       let tmnCode = config["vnp_TmnCode"];
       let secretKey = config["vnp_HashSecret"];
       let vnpUrl = config["vnp_Url"];
-      let returnUrl = config["vnp_ReturnUrl"] + `/${token}`;
+      let returnUrl = process.env.vnp_ReturnUrl + `/${token}`;
 
       const { v4: uuidv4 } = require('uuid');
       let orderId = uuidv4();
