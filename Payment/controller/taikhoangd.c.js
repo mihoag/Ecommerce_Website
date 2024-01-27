@@ -44,7 +44,7 @@ module.exports = {
           const account = await taikhoanModel.getTaiKhoanByUsername(verify.email);
           account.balance = (parseInt(account.balance) || 0) + amount / 100;
           await taikhoanModel.updateTaiKhoanByUsername(account);
-          await gdnaptienM.insertGDnaptien({ username: verify.email, sotiennap: amount })
+          await gdnaptienM.insertGDnaptien({ username: verify.email, sotiennap: amount / 100 })
 
           return res.redirect(`${process.env.ROOT_SERVER}/detailUser`);
         } else return res.redirect(`${process.env.ROOT_SERVER}/detailUser`);
