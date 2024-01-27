@@ -63,7 +63,7 @@ class orderController {
     try {
       var check = false;
       const data = req.body;
-      console.log(data);
+      //console.log(data);
       // update so luong san pham
       var listCart = await cartModel.selectByUserId(data.idUser);
 

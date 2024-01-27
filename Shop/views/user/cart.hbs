@@ -655,7 +655,7 @@
 
   async function processPaymentOnline(idUser, address, recievername, phonenumber, time, content) {
     // xu li o he thong phu
-
+    console.log(time);
     let data = { idUser: idUser, address: address, recievername: recievername, phonenumber: phonenumber, time: time }
     const res = await fetch(`/order/orderpayment`, {
       method: "POST",
@@ -673,7 +673,7 @@
       // xu li thanh toan
       //email, total, time, noidung, idhoadon, token
       let data2 = {
-        email: localStorage.getItem("email"), total: data1.totalCost, time: data1.timeOrder.slice(0, 19).replace("T", " "),
+        email: localStorage.getItem("email"), total: data1.totalCost, time: time,
         noidung: content, idhoadon: data1.orderId, token: localStorage.getItem("token")
       };
       console.log(data2);
