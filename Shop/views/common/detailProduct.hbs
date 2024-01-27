@@ -195,13 +195,8 @@
                 </div>
             </div>
         </div>
-        <div class="pagination" id="page">
-            <a href="#"><i class="fa fa-angle-left"></i></a>
-            <a href="#">1</a>
-            <a href="#" class="current">2</a>
-            <a href="#">3</a>
-            <a href="#"><i class="fa fa-angle-right"></i></a>
-        </div>
+        <ul class="pagination" id="page">
+        </ul>
         <div class="postCmt">
             <form>
                 <div class="form">
@@ -300,32 +295,37 @@
     function handleClick(page) {
         //console.log(page.getAttribute("id"))
         //console.log(ip);
-        currentPage = page.getAttribute("id");
+        currentPage = parseInt(page);
         getCommentPerpage(currentPage);
     }
 
     function renderPagination(totalPage, currentPage) {
-        let pages = '';
-        if (currentPage != 1) {
-            pages += `<a href="#"><i class="fa fa-angle-left"></i></a>`
-        }
-        for (let i = 1; i <= totalPage; i++) {
-            if (i == currentPage) {
-                pages += `<a id='${i}'  class="current" onclick="handleClick(this)">${i}</a>`;
-            }
-            else {
-                pages += `<a id='${i}'   onclick="handleClick(this)">${i}</a>`;
-            }
-        }
 
-        if (currentPage != totalPage) {
-            pages += `<a href="#"><i class="fa fa-angle-right"></i></a>`
-        }
+        let $pagination = $('#page');
+        let defaultOpts = {
+            totalPages: totalPage,
+            startPage: currentPage,
+            visiblePages: 6,
+            first: totalPage <= 6 ? null : "First",
+            prev: totalPage <= 6 ? null : 'Previous',
+            next: totalPage <= 6 ? null : 'Next',
+            last: totalPage <= 6 ? null : 'Last',
 
-        //console.log(pages);
-        //console.log(page);
-        page.innerHTML = pages;
+
+            onPageClick: function (event, page) {
+                handleClick(page);
+            }
+        };
+        $pagination.twbsPagination(defaultOpts);
+        if ($('#page li.page-item.active').length === 0) {
+            if ($($('#page li.page-item')[0]).text() === '1') {
+                $($('#page li.page-item')[0]).addClass('active');
+            } else {
+                $($('#page li.page-item')[2]).addClass('active');
+            }
+        }
     }
+
     function showRating(tb) {
         let content = '';
         var i = 0;
@@ -340,8 +340,6 @@
     }
     function renderComment(data) {
         let content = '';
-        console.log(data);
-        //  console.log(data)
         for (let i = 0; i < data.length; i++) {
             content += `<div class="comment-row">
                 <div style="margin-right: 5px;"><span class="round"><img src="/img/chitietsanpham/avatar.jpg"
@@ -356,22 +354,18 @@
                 </div>
             </div>`;
         }
-        // console.log(content)
         listCmt.innerHTML = content;
     }
     // gia su id product la 1000
     document.addEventListener("DOMContentLoaded", () => {
         getCommentPerpage(1);
-
     })
 
     send.addEventListener("click", (e) => {
         e.preventDefault();
-        //console.log(content.val())
         let content = $("textarea[name='content']").val();
         let name = $("input[name='name']").val();
         let rate = $("input[name='rating']:checked").val();
-        //console.log(rate); 
         //
         var currentDate = new Date();
         // Get the components of the date (year, month, day)
@@ -381,12 +375,9 @@
 
         // Construct the formatted date string
         var formattedDate = year + '-' + month + '-' + day;
-        //console.log(formattedDate);
         // gia su id product la 1000, id nguoi dung la 1000
         let id = $('#proID').val();
         data = { productId: id, name: name, content: content, rate: rate, date: formattedDate }
-        // console.log(new Date())
-        console.log(data);
         $.ajax({
             type: "get",
             url: `/comment/insert`,
@@ -418,7 +409,7 @@
         var day = currentDate.getDate().toString().padStart(2, '0');
         // Construct the formatted date string
         var formattedDate = year + '-' + month + '-' + day;
-        console.log(formattedDate);
+
         let data = { userId: idUser, productId: idProduct, quantity: 1, timeAddToCart: formattedDate };
 
         $.ajax({

@@ -212,7 +212,8 @@
       totalPages: totalPage,
       startPage: currentPage,
       visiblePages: 6,
-
+      first: totalPage <= 6 ? null : "First",
+      last: totalPage <= 6 ? null : 'Last',
       onPageClick: function (event, page) {
         handleClick(page);
       }

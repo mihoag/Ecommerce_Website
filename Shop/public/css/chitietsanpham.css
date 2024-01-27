@@ -1,4 +1,13 @@
 /* Phải thêm .chitietSanpham để không trùng với h1 của taikhoan */
+li{
+    list-style: none;
+}
+
+li.active a{
+    background: #0950E8;
+    color: white;
+}
+
 .chitietSanpham h1 {
     display: block;
     margin: 0 0 0 10px;
