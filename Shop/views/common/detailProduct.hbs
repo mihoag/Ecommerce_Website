@@ -407,7 +407,10 @@
     function themvaogio(btn) {
         let idProduct = btn.getAttribute("id")
         let idUser = localStorage.getItem("idUser")
-        console.log(idUser);
+        if (!idUser || !localStorage.getItem("token")) {
+            addAlertBox('Bạn cần đăng nhập đểthực hiện chức năng này', '#FF3333', '#fff', 3500);
+            return;
+        }
         var currentDate = new Date();
         // Get the components of the date (year, month, day)
         var year = currentDate.getFullYear();

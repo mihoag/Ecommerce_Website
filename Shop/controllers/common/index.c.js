@@ -18,7 +18,11 @@ class indexController {
             let user = await userModel.getByID(idUser);
             //console.log(req.session.token)
             //console.log(top5newest, top5cheapest, top5discount, top5rated);
-            res.render("common/index", { userId: idUser, listproducts: listproducts, token: req.session.token, title: "Trang chủ", fullname: user[0].name, email: user[0].email });
+            if (user.length > 0) {
+                res.render("common/index", { userId: idUser, listproducts: listproducts, token: req.session.token, title: "Trang chủ", fullname: user[0].name, email: user[0].email });
+            } else {
+                res.render("common/index", { listproducts: listproducts, title: "Trang chủ", });
+            }
         } catch (error) {
             next(error);
         }
