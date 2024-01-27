@@ -694,7 +694,7 @@
                         removeFilterCondition("star");
                     } else if (text === "Giá tăng dần" || text === "Giá giảm dần" || text === "Sao tăng dần" || text === "Sao giảm dần" || text === "Tên A-Z" || text === "Tên Z-A") {
                         removeFilterCondition("sort");
-                    } else if (text === "NỔI BẬT NHẤT" || text === "SẢN PHẨM MỚI" || text === "SẢN PHẨM HIỆN ĐẠI NHẤT" || text === "GIẢM GIÁ LỚN" || text === "GIÁ RẺ CHO MỌI NHÀ") {
+                    } else if (categories.includes(text)) {
                         removeFilterCondition("category");
                     }
                     // Sau khi xóa bộ lọc, có thể làm mất đi phần tử đã tạo
