@@ -85,7 +85,7 @@
               </tbody>
             </table>
           </div>
-          <div class="row mx-2 justify-content-end d-flex">
+          <div class="row mx-2 justify-content-center d-flex">
             <nav style="width:auto">
               <ul class="pagination" id="pagination">
               </ul>
@@ -181,7 +181,7 @@
 
   function handleClick(page) {
     let keyword = document.querySelector("#search-name").value;
-    data = { currentPage: $(page).attr("data-id") }
+    data = { currentPage: parseInt(page) }
     if (keyword == "") {
       $.ajax({
         type: "GET",
@@ -207,18 +207,17 @@
   }
 
   function renderPagination(totalPage, currentPage) {
-    let pages = '';
+    let $pagination = $('#pagination');
+    let defaultOpts = {
+      totalPages: totalPage,
+      startPage: currentPage,
+      visiblePages: 6,
 
-    for (let i = 1; i <= totalPage; i++) {
-      if (i == currentPage) {
-        pages += `<li class="page-item active" aria-current="page"><span class="page-link">${i}</span></li>`
+      onPageClick: function (event, page) {
+        handleClick(page);
       }
-      else {
-        pages += `<li class="page-item"><a data-id='${i}' class="page-link" style ="cursor: pointer" onclick="handleClick(this)">${i}</a></li>`;
-      }
-    }
-
-    document.querySelector('#pagination').innerHTML = pages;
+    };
+    $pagination.twbsPagination(defaultOpts);
   }
 
   function renderCustomer(customers, currentPage) {

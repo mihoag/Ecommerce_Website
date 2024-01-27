@@ -4,77 +4,61 @@
     <div class="col-md-12">
       <div class="my-2 d-flex justify-content-between align-items-center">
         <div class="position-relative">
-          <label for="search-name" class="position-absolute search"><i
-              class="fa fa-search"></i>
+          <label for="search-name" class="position-absolute search"><i class="fa fa-search"></i>
           </label>
-          <input class="form-control w-100 order-table"
-            placeholder="Search by name" id="search-name">
+          <input class="form-control w-100 order-table" placeholder="Search by name" id="search-name">
         </div>
         <!-- Button trigger modal -->
         <div>
-          <button type="button" class="btn modal-button" data-bs-toggle="modal"
-            data-bs-target="#addProductModal">
+          <button type="button" class="btn modal-button" data-bs-toggle="modal" data-bs-target="#addProductModal">
             New Product
           </button>
 
           <!-- Modal -->
-          <div class="modal fade" id="addProductModal" tabindex="-1"
-            aria-labelledby="addProductModalLabel"
+          <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
                   <h1 class="modal-title fs-5" id="addProductModalLabel">New
                     Product</h1>
-                  <button type="button" class="btn-close"
-                    data-bs-dismiss="modal" aria-label="Close"></button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <div class="container-fluid" style="height: 100%;">
-                    <form id="addProductForm" action="/admin/products/add"
-                      method="POST" style="height: 100%;">
+                    <form id="addProductForm" action="/admin/products/add" method="POST" style="height: 100%;">
                       <div class="row" style="height: 100%;">
                         <div class="col-md-5">
                           <div class="row" style="min-height: 70%;">
-                            <img id="frame" src class="img-fluid"
-                              style="max-width: 400px;" />
+                            <img id="frame" src class="img-fluid" style="max-width: 400px;" />
                           </div>
                           <div class="row mt-5">
-                            <input name="image" class="form-control-file border"
-                              accept="image/*" required type="file"
-                              id="formFile"
-                              onchange="preview()">
+                            <input name="image" class="form-control-file border" accept="image/*" required type="file"
+                              id="formFile" onchange="preview()">
                           </div>
                         </div>
                         <div class="col-md-7">
                           <div class="form-group mt-2">
                             <label for="name">Name</label>
-                            <input type="text" class="form-control" name="name"
-                              placeholder="Product's name" required>
+                            <input type="text" class="form-control" name="name" placeholder="Product's name" required>
                           </div>
                           <div class="form-group mt-2">
                             <label for="cost">Cost</label>
-                            <input type="number" class="form-control"
-                              name="cost" placeholder="Product's cost"
-                              required>
+                            <input type="number" class="form-control" name="cost" placeholder="Product's cost" required>
                           </div>
                           <div class="form-group mt-2">
                             <label for="price">Sale Price</label>
-                            <input type="number" class="form-control"
-                              name="price" placeholder="Product's sale price"
+                            <input type="number" class="form-control" name="price" placeholder="Product's sale price"
                               required>
                           </div>
                           <div class="form-group mt-2">
                             <label for="discount">Discount</label>
-                            <input type="number" class="form-control"
-                              name="discount" placeholder="Product's discount"
+                            <input type="number" class="form-control" name="discount" placeholder="Product's discount"
                               required>
                           </div>
                           <div class="form-group mt-2">
                             <label for="total">Quantity</label>
-                            <input type="number" class="form-control"
-                              name="total" placeholder="Quantity"
-                              required>
+                            <input type="number" class="form-control" name="total" placeholder="Quantity" required>
                           </div>
                           <div class="form-group mt-2">
                             <label for="typeId">Brand</label>
@@ -83,9 +67,7 @@
                           </div>
                           <div class="form-group mt-2">
                             <label for="releaseDate">Release Date</label>
-                            <input type="date" class="form-control"
-                              name="releaseDate"
-                              required>
+                            <input type="date" class="form-control" name="releaseDate" required>
                           </div>
                         </div>
                       </div>
@@ -95,55 +77,43 @@
                         <div class="col-md-5">
                           <div class="form-group mt-2">
                             <label for="screen">Screen</label>
-                            <input type="text" class="form-control"
-                              name="screen"
-                              placeholder="Display Screen Information"
-                              required>
+                            <input type="text" class="form-control" name="screen"
+                              placeholder="Display Screen Information" required>
                           </div>
                           <div class="form-group mt-2">
                             <label for="os">OS</label>
-                            <input type="text" class="form-control"
-                              name="os" placeholder="Product's OS"
-                              required>
+                            <input type="text" class="form-control" name="os" placeholder="Product's OS" required>
                           </div>
                           <div class="form-group mt-2">
                             <label for="fcam">Front Camera</label>
-                            <input type="text" class="form-control"
-                              name="fcam" placeholder="Front Camera Information"
+                            <input type="text" class="form-control" name="fcam" placeholder="Front Camera Information"
                               required>
                           </div>
                           <div class="form-group mt-2">
                             <label for="bcam">Back Camera</label>
-                            <input type="text" class="form-control"
-                              name="bcam" placeholder="Back Camera Information"
+                            <input type="text" class="form-control" name="bcam" placeholder="Back Camera Information"
                               required>
                           </div>
                         </div>
                         <div class="col-md-5">
                           <div class="form-group mt-2">
                             <label for="cpu">CPU</label>
-                            <input type="text" class="form-control"
-                              name="cpu" placeholder="Chipset"
-                              required>
+                            <input type="text" class="form-control" name="cpu" placeholder="Chipset" required>
                           </div>
                           <div class="form-group mt-2">
                             <label for="ram">RAM (GB)</label>
-                            <input type="number" min="4" max="16"
-                              class="form-control"
-                              name="ram" placeholder="RAM" value="4"
-                              required>
+                            <input type="number" min="4" max="16" class="form-control" name="ram" placeholder="RAM"
+                              value="4" required>
                           </div>
                           <div class="form-group mt-2">
                             <label for="rom">ROM (GB)</label>
-                            <input type="number" min="32" class="form-control"
-                              name="rom" placeholder="RAM" value="128"
+                            <input type="number" min="32" class="form-control" name="rom" placeholder="RAM" value="128"
                               required>
                           </div>
                           <div class="form-group mt-2">
                             <label for="battery">Battery (mAh)</label>
-                            <input type="number" min="2000" class="form-control"
-                              name="battery" placeholder="Battery" value="5000"
-                              required>
+                            <input type="number" min="2000" class="form-control" name="battery" placeholder="Battery"
+                              value="5000" required>
                           </div>
                         </div>
 
@@ -153,10 +123,8 @@
 
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary"
-                    data-bs-dismiss="modal" id="modal-close">Hủy</button>
-                  <button type="button" class="btn btn-primary"
-                    onclick="addProduct()">Thêm</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="modal-close">Hủy</button>
+                  <button type="button" class="btn btn-primary" onclick="addProduct()">Thêm</button>
                 </div>
               </div>
             </div>
@@ -168,14 +136,12 @@
           <table class="table table-responsive table-borderless align-middle table-hover">
             <thead class="table-info">
               <tr class="bg-light">
-                <th scope="col" width="5%"><input class="form-check-input"
-                    type="checkbox"></th>
+                <th scope="col" width="5%"><input class="form-check-input" type="checkbox"></th>
                 <th scope="col" width="5%">#</th>
                 <th scope="col" width="30%">Name</th>
                 <th scope="col" width="10%">Brand</th>
                 <th scope="col" width="10%">Announced</th>
-                <th scope="col" class="text-center"
-                  width="20%"><span>Price</span></th>
+                <th scope="col" class="text-center" width="20%"><span>Price</span></th>
                 <th scope="col" width="10%">Quantity</th>
                 <th scope="col" class="text-center" width="10%">Detail</th>
               </tr>
@@ -184,7 +150,7 @@
             </tbody>
           </table>
         </div>
-        <div class="row mx-2 justify-content-end d-flex">
+        <div class="row mx-2 justify-content-center d-flex">
           <nav style="width:auto">
             <ul class="pagination" id="pagination">
               <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -243,7 +209,7 @@
 
   function handleClick(page) {
     let keyword = document.querySelector("#search-name").value;
-    data = { currentPage: $(page).attr("data-id"), showType: "admin" }
+    data = { currentPage: parseInt(page), showType: "admin" }
     if (keyword == "") {
       $.ajax({
         type: "GET",
@@ -268,24 +234,18 @@
     }
   }
 
-  {{!-- function toggleDetail(data) {
-    let id = $(data).attr("data-id")
-    document.querySelectorAll('.detail-row')[id].classList.toggle('open')
-  } --}}
-
   function renderPagination(totalPage, currentPage) {
-    let pages = '';
+    let $pagination = $('#pagination');
+    let defaultOpts = {
+      totalPages: totalPage,
+      startPage: currentPage,
+      visiblePages: 6,
 
-    for (let i = 1; i <= totalPage; i++) {
-      if (i == currentPage) {
-        pages += `<li class="page-item active" aria-current="page"><span class="page-link">${i}</span></li>`
+      onPageClick: function (event, page) {
+        handleClick(page);
       }
-      else {
-        pages += `<li class="page-item"><a data-id='${i}' class="page-link" style ="cursor: pointer" onclick="handleClick(this)">${i}</a></li>`;
-      }
-    }
-
-    document.querySelector('#pagination').innerHTML = pages;
+    };
+    $pagination.twbsPagination(defaultOpts);
   }
 
   function renderProduct(products, currentPage) {
