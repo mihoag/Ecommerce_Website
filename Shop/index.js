@@ -46,6 +46,13 @@ const handlebars = exphbs.create({
 
       return vndFormatted;
     },
+    // Helper mới để viết hoa tất cả các ký tự của chuỗi
+    uppercase(str) {
+      if (typeof str === 'string') {
+        return str.toUpperCase();
+      }
+      return str;
+    },
   },
 });
 

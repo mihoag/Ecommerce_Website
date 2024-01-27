@@ -221,18 +221,8 @@ module.exports = {
             }
           }
           if (key === "category") {
-            const category = filters[key];
-            if (category === "rated") {
-              data2 = await productM.getProductRated();
-            } else if (category === "newest") {
-              data2 = await productM.getProductNewest();
-            } else if (category === "modern") {
-              data2 = await productM.getProductModern();
-            } else if (category === "discount") {
-              data2 = await productM.getProductDiscount();
-            } else if (category === "cheapest") {
-              data2 = await productM.getProductCheapest();
-            }
+            const name = filters[key];
+            data2 = await productM.getProductByCategory(name);
           }
           if (key === "name") {
             const name = filters[key];
