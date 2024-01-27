@@ -93,7 +93,7 @@ function RenderPayments(payments) {
     tbody.innerHTML += `
         <tr>
                                                     <td>#${tran.idgiaodich}</td>
-                                                    <td>${tran.username1}</td>
+                                                    <td>${tran.name}</td>
                                                     <td
                                                         class="text-center fw-bolder">${convertToVND(
                                                           tran.sotien
@@ -112,7 +112,12 @@ function RenderPayments(payments) {
         
         `;
   }
-  renderPaging('payments-page-list', payments.pages, payments.page, 'PaymentChangePage');
+  renderPaging(
+    "payments-page-list",
+    payments.pages,
+    payments.page,
+    "PaymentChangePage"
+  );
 }
 
 function renderPaging(id, pages, page, functionName) {
@@ -142,41 +147,43 @@ function convertToVND(number) {
 }
 
 function AddsChangePage(event) {
-    GetAddsPage(event.currentTarget.innerText);
+  GetAddsPage(event.currentTarget.innerText);
 }
 
 async function GetAddsPage(pageNum) {
-    const search = document.getElementById("searchPayment").value;
-    const timeFilter = document
-      .getElementById("adds-time-filter")
-      .value.split(" - ");
-    let startDate = moment(`${timeFilter[0]}`, "DD/MM/YYYY hh:mm A")
-      .toDate()
-      .toISOString();
-    let endDate = moment(`${timeFilter[1]}`, "DD/MM/YYYY hh:mm A")
-      .toDate()
-      .toISOString();
-    try {
-      const response = await fetch(
-        `/admin/transactions/getAddMoneyTransactions?search=${search}&start=${startDate}&end=${endDate}&page=${pageNum}`
-      );
-      if (response.ok) {
-        const payments = await response.json();
-        RenderAddMoney(payments);
-      }
-    } catch (error) {
-      console.log(error);
+  const search = document.getElementById("searchPayment").value;
+  const timeFilter = document
+    .getElementById("adds-time-filter")
+    .value.split(" - ");
+  let startDate = moment(`${timeFilter[0]}`, "DD/MM/YYYY hh:mm A")
+    .toDate()
+    .toISOString();
+  let endDate = moment(`${timeFilter[1]}`, "DD/MM/YYYY hh:mm A")
+    .toDate()
+    .toISOString();
+  try {
+    const response = await fetch(
+      `/admin/transactions/getAddMoneyTransactions?search=${search}&start=${startDate}&end=${endDate}&page=${pageNum}`
+    );
+    if (response.ok) {
+      const payments = await response.json();
+      RenderAddMoney(payments);
     }
+  } catch (error) {
+    console.log(error);
   }
-  
-  function RenderAddMoney(payments) {
-    const tbody = document.getElementById("adds-list");
-    tbody.innerHTML = "";
-    for (const tran of payments.trans) {
-      tbody.innerHTML += `
+}
+
+function RenderAddMoney(payments) {
+  const tbody = document.getElementById("adds-list");
+  tbody.innerHTML = "";
+  for (const tran of payments.trans) {
+    tbody.innerHTML += `
           <tr>
-                                                      <td>#${tran.idgiaodich}</td>
-                                                      <td>${tran.username}</td>
+                                                      <td>#${
+                                                        tran.idgiaodich
+                                                      }</td>
+                                                      <td>${tran.name}</td>
                                                       <td
                                                           class="text-center fw-bolder">${convertToVND(
                                                             tran.sotiennap
@@ -189,6 +196,19 @@ async function GetAddsPage(pageNum) {
                                                   </tr>
           
           `;
-    }
-    renderPaging('adds-pages-list', payments.pages, payments.page, 'AddsChangePage');
   }
+  renderPaging(
+    "adds-pages-list",
+    payments.pages,
+    payments.page,
+    "AddsChangePage"
+  );
+}
+
+async function searchingPayments() {
+    await GetPaymentsPage(1);
+}
+
+async function searchingAdds() {
+    await GetAddsPage(1);
+}

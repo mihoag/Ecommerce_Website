@@ -45,7 +45,7 @@
                                                 class="fa fa-search"></i></span>
                                         <input id="searchPayment"
                                             class="form-control w-100 order-table"
-                                            placeholder="Search by name">
+                                            placeholder="Search by name" oninput="searchingPayments()">
                                     </div>
                                     <input class="text-center" id="payment-time-filter" type="text" name="datetimes" style="width: 350px;"/>
                                 </div>
@@ -76,7 +76,7 @@
                                                 {{#each payments.trans}}
                                                 <tr>
                                                     <td>#{{this.idgiaodich}}</td>
-                                                    <td>{{this.username1}}</td>
+                                                    <td>{{this.name}}</td>
                                                     <td
                                                         class="text-center fw-bolder">{{#convertToVND
                                                         this.sotien}}{{/convertToVND}}</td>
@@ -121,7 +121,7 @@
                                             class="position-absolute search"><i
                                                 class="fa fa-search"></i></span>
                                         <input id="searchTxt"
-                                            class="form-control w-100 order-table"
+                                            class="form-control w-100 order-table" oninput="searchingAdds()
                                             placeholder="Search by name">
                                     </div>
                                     <input class="text-center" id="adds-time-filter" type="text" name="datetimes" style="width: 350px;"/>
@@ -150,7 +150,7 @@
                                                 {{#each adds.trans}}
                                                 <tr>
                                                     <td>#{{this.idgiaodich}}</td>
-                                                    <td>{{this.username}}</td>
+                                                    <td>{{this.name}}</td>
                                                     <td
                                                         class="text-center fw-bolder">{{#convertToVND
                                                         this.sotiennap}}{{/convertToVND}}</td>
