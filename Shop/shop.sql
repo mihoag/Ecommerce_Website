@@ -8007,12 +8007,12 @@ SET "timeOrder" = DATE_TRUNC('second', "timeOrder") + INTERVAL '1 year'
 WHERE EXTRACT(YEAR FROM "timeOrder") < 2024 AND EXTRACT(MONTH FROM "timeOrder") = 1 AND EXTRACT(DAY FROM "timeOrder") <29;
 
 -- 5 danh mục mặc định ban đầu
-INSERT INTO "ProductsList"("listId", "name", "sortId", "color1", "color2") VALUES 
-(1,'Nổi bật nhất',1,'#ff9c00','#ec1f1f'),
-(2,'Sản phẩm mới',2,'#42bcf4','#004c70'),
-(3,'Sản phẩm hiện đại nhất',3,'#ff9c00','#ec1f1f'),
-(4,'Giảm giá lớn',4,'#5de272','#007012'),
-(5,'Giá rẻ cho mọi nhà',5,'#42bcf4','#004c70');
+INSERT INTO "ProductsList"("name", "sortId", "color1", "color2") VALUES 
+('Nổi bật nhất',1,'#ff9c00','#ec1f1f'),
+('Sản phẩm mới',2,'#42bcf4','#004c70'),
+('Sản phẩm hiện đại nhất',3,'#ff9c00','#ec1f1f'),
+('Giảm giá lớn',4,'#5de272','#007012'),
+('Giá rẻ cho mọi nhà',5,'#42bcf4','#004c70');
 
 INSERT INTO "ProductsListItems"("listId", "productId", "home") VALUES 
 (1, 18, FALSE),
