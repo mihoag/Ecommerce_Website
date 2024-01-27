@@ -4,6 +4,9 @@
     font-size: 18px;
     font-weight: bold;
     text-align: center;
+    display: flex;
+    margin-left: 10px;
+    overflow-y: scroll;
 }
 
 .pagination a {
