@@ -39,11 +39,6 @@
                 {{#each listproducts}}
                     <a data-text="{{name}}">{{name}}</a>
                 {{/each}}
-                {{!-- <a data-category="rated" data-text="Nổi bật nhất">Nổi bật nhất</a>
-                <a data-category="newest" data-text="Sản phẩm mới">Sản phẩm mới</a>
-                <a data-category="modern" data-text="Sản phẩm hiện đại nhất">Sản phẩm hiện đại nhất</a>
-                <a data-category="discount" data-text="Giảm giá lớn">Giảm giá lớn</a>
-                <a data-category="cheapest" data-text="Giá rẻ cho mọi nhà">Giá rẻ cho mọi nhà</a> --}}
             </div>
         </div>
 
@@ -195,6 +190,16 @@
 <!-- Code injected by live-server -->
 
 <script>
+    var categories = [];
+    $(document).ready(function () {
+        $('.categoryFilter .dropdown-content a').each(function() {
+        // Lấy giá trị data-text của từng phần tử <a>
+        var dataText = $(this).attr('data-text');
+        
+        // Đưa giá trị data-text vào mảng dataTextArray
+        categories.push(dataText);
+        });
+    });
     var page = document.getElementById("page");
     let listproduct = document.getElementById("listproduct");
     var showallproduct = document.getElementById("showallproduct");
@@ -329,9 +334,9 @@
 
     $(document).ready(function () {
         $('.categoryFilter .dropdown-content a').on('click', function () {
-            category = $(this).data('category');
+            category = $(this).data('text');
 
-            removeExistingFilters(["Nổi bật nhất", "Sản phẩm mới", "Sản phẩm hiện đại nhất", "Giảm giá lớn", "Giá rẻ cho mọi nhà"]);
+            removeExistingFilters(categories);
 
             filterText.push($(this).data('text'));
 
@@ -689,7 +694,7 @@
                         removeFilterCondition("star");
                     } else if (text === "Giá tăng dần" || text === "Giá giảm dần" || text === "Sao tăng dần" || text === "Sao giảm dần" || text === "Tên A-Z" || text === "Tên Z-A") {
                         removeFilterCondition("sort");
-                    } else if (text === "Nổi bật nhất" || text === "Sản phẩm mới" || text === "Sản phẩm hiện đại nhất" || text === "Giảm giá lớn" || text === "Giá rẻ cho mọi nhà") {
+                    } else if (text === "NỔI BẬT NHẤT" || text === "SẢN PHẨM MỚI" || text === "SẢN PHẨM HIỆN ĐẠI NHẤT" || text === "GIẢM GIÁ LỚN" || text === "GIÁ RẺ CHO MỌI NHÀ") {
                         removeFilterCondition("category");
                     }
                     // Sau khi xóa bộ lọc, có thể làm mất đi phần tử đã tạo

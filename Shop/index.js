@@ -46,6 +46,13 @@ const handlebars = exphbs.create({
 
       return vndFormatted;
     },
+    // Helper mới để viết hoa tất cả các ký tự của chuỗi
+    uppercase(str) {
+      if (typeof str === 'string') {
+        return str.toUpperCase();
+      }
+      return str;
+    },
   },
 });
 
@@ -71,5 +78,9 @@ const io = socket(server);
 io.on('connection', async (client) => {
   client.on('channelOrder', async (data) => {
     io.emit('channelOrder', "new order");
+  })
+
+  client.on('confirmOrder', async (data) => {
+    io.emit('confirmOrder', data);
   })
 })

@@ -1,4 +1,6 @@
 const taikhoanModel = require("../model/taikhoangd.m");
+const gdnaptienM = require("../model/gdnaptien.m")
+
 const { verifyToken } = require("../Util/helper.token")
 const moment = require("moment");
 const sortObject = require('../Util/sortObject.u')
@@ -42,11 +44,12 @@ module.exports = {
           const account = await taikhoanModel.getTaiKhoanByUsername(verify.email);
           account.balance = (parseInt(account.balance) || 0) + amount / 100;
           await taikhoanModel.updateTaiKhoanByUsername(account);
+          await gdnaptienM.insertGDnaptien({ username: verify.email, sotiennap: amount })
 
-          return res.redirect(`http://localhost:3001/detailUser`);
-        } else return res.redirect(`http://localhost:3001/detailUser`);
+          return res.redirect(`${process.env.ROOT_SERVER}/detailUser`);
+        } else return res.redirect(`${process.env.ROOT_SERVER}/detailUser`);
       } else {
-        return res.redirect(`http://localhost:3001/detailUser`);
+        return res.redirect(`${process.env.ROOT_SERVER}/detailUser`);
       }
     } catch (error) {
       next(error);

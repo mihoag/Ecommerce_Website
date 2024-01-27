@@ -221,7 +221,17 @@ module.exports = {
     );
     return rs;
   },
-
+  getProductByCategory: async (category) => {
+    const rs = await db.any(
+      `SELECT p."productId", p."name", p."discount", p."typeId", p."releaseDate", p."releaseDate" , p.price, p.image, avg((100-p.discount)*p.price)/100 as giagiam, floor(avg(c.rate)) as tb, count(*) as danhgia 
+      FROM "ProductsList" pl 
+      INNER JOIN "ProductsListItems" pli ON pl."listId" = pli."listId" and pl."name" = '${category}' 
+      INNER JOIN "Product" p ON pli."productId" = p."productId" 
+      INNER JOIN "Comment" c ON p."productId" = c."productId"    
+      GROUP BY p."productId"`
+    );
+    return rs;
+  },
   updateAmount: async (IDproduct, ammount) => {
     await db.oneOrNone(`update "Product" set total = total - ${ammount}  where "productId" = $1`, [IDproduct])
   },

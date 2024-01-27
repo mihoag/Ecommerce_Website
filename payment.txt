@@ -11,7 +11,7 @@ CREATE TABLE GDnaptien (
     idgiaodich BIGSERIAL PRIMARY KEY,
     username VARCHAR(255) REFERENCES taikhoanGD(username),
     sotiennap DOUBLE PRECISION,
-    ngaygio TIMESTAMP
+    ngaygio TIMESTAMP default CURRENT_TIMESTAMP
 );
 
 CREATE TABLE GDthanhtoan (
@@ -19,7 +19,7 @@ CREATE TABLE GDthanhtoan (
     username1 VARCHAR(255) REFERENCES taikhoanGD(username),
     username2 VARCHAR(255) REFERENCES taikhoanGD(username),
     sotien DOUBLE PRECISION,
-    ngaygio TIMESTAMP,
+    ngaygio TIMESTAMP default CURRENT_TIMESTAMP,
     noidung VARCHAR(255),
     idhoadon INT
 );
