@@ -3,7 +3,7 @@ const authMiddleware = require(".././middlewares/auth.mws");
 function route(app) {
   require("../middlewares/passport.mws")(app);
   // Admin routes
-  app.use('/admin', require('./admin/admin.r'))
+  app.use('/admin', authMiddleware.mustLogin, require('./admin/admin.r'))
   // Order routes
   app.use('/order', require('./sites/order.r'));
   // Order Detail routes

@@ -643,6 +643,9 @@
       sendMesstoAdmin(resJson.data)
       xoaHet();
       addAlertBox(resJson.msg, '#17c671', '#fff', 3500);
+      setTimeout(function () {
+        window.location.href = '/detailUser'
+      }, 2000)
     }
     else {
       //console.log(resJson);
@@ -698,6 +701,9 @@
           sendMesstoAdmin(resJson.data)
           xoaHet();
           addAlertBox("Đặt hàng và thanh toán thành công", '#17c671', '#fff', 3500);
+          setTimeout(function () {
+            window.location.href = '/detailUser'
+          }, 2000)
         }
       }
       else {

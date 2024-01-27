@@ -82,8 +82,7 @@
 							</div>
 						</div>
 						<div class="col-3 justify-content-center align-items-center d-flex">
-							<i class="fa-solid fa-mobile-screen-button fa-2xl"
-								style="color: #12799b;"></i>
+							<i class="fa-solid fa-mobile-screen-button fa-2xl" style="color: #12799b;"></i>
 						</div>
 					</div>
 				</div>
@@ -106,8 +105,7 @@
 		<div class="container table-responsive order-table mt-4 pt-2 px-2">
 			<div class="row pt-2 mx-2">
 				<h6 class="text-capitalize mb-4">Newest Orders</h6>
-				<table
-					class="table table-responsive table-borderless align-middle table-hover">
+				<table class="table table-responsive table-borderless align-middle table-hover">
 					<thead class="table-info">
 						<tr class="bg-light">
 							<th scope="col" width="5%">#</th>
@@ -125,10 +123,8 @@
 							<td>{{name}}</td>
 							<td>{{address}}</td>
 							<td class="text-center">{{timeOrder}}</td>
-							<td class="text-center"><span
-									class="fw-bolder">{{totalCost}}</span></td>
-							<td class="text-center"><span
-									class="fw-bolder">{{status}}</span></td>
+							<td class="text-center"><span class="fw-bolder">{{totalCost}}</span></td>
+							<td class="text-center"><span class="fw-bolder">{{status}}</span></td>
 						</tr>
 						{{/each}}
 					</tbody>
@@ -138,3 +134,11 @@
 
 	</div>
 </div>
+<input hidden type="text" value="{{token}}" id="token">
+<input hidden type="text" value="{{fullname}}" id="fullname">
+<input hidden type="text" value="{{email}}" id="email">
+<script>
+	localStorage.setItem("token", document.getElementById("token").value);
+	localStorage.setItem("fullname", document.getElementById("fullname").value);
+	localStorage.setItem("email", document.getElementById("email").value);
+</script>
