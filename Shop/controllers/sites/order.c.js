@@ -28,7 +28,8 @@ class orderController {
     try {
       let id = req.params.id;
       // console.log(id);
-      let listOrders = await order.getOrderByUserId(id);
+      // let listOrders = await order.getOrderByUserId(id);
+      let listOrders = await db.any(`select * from "Order" where "userId" = $1 order by "timeOrder" DESC`, id);
       return res.status(200).json({ listOrders: listOrders })
     } catch (error) {
       next(error);
@@ -66,6 +67,9 @@ class orderController {
       // update so luong san pham
       var listCart = await cartModel.selectByUserId(data.idUser);
 
+      if (listCart.length == 0) {
+        return res.status(400).json({ msg: "Chưa có sản phẩm nào trong giỏ hàng" })
+      }
       //console.log(listCart);
       for (let i = 0; i < listCart.length; i++) {
         await productM.updateAmount(listCart[i].productId, listCart[i].quantity);
