@@ -26,7 +26,7 @@ $("#payment-time-filter").daterangepicker({
   },
 });
 
-$("#add-time-filter").daterangepicker({
+$("#adds-time-filter").daterangepicker({
   timePicker: true,
   timePicker24Hour: true,
   timePickerIncrement: 30,
@@ -112,10 +112,10 @@ function RenderPayments(payments) {
         
         `;
   }
-  renderPaging('payments-page-list', payments.pages, payments.page);
+  renderPaging('payments-page-list', payments.pages, payments.page, 'PaymentChangePage');
 }
 
-function renderPaging(id, pages, page) {
+function renderPaging(id, pages, page, functionName) {
   const list = document.getElementById(id);
   list.innerHTML = "";
   for (let i = 1; i <= pages; i++) {
@@ -125,7 +125,7 @@ function renderPaging(id, pages, page) {
                                                           i == page
                                                             ? "active"
                                                             : ""
-                                                        }" onclick="PaymentChangePage(event)"
+                                                        }" onclick="${functionName}(event)"
                                                         href="#">${i}</a>
         `;
   }
@@ -170,7 +170,7 @@ async function GetAddsPage(pageNum) {
   }
   
   function RenderAddMoney(payments) {
-    const tbody = document.getElementById("payments-list");
+    const tbody = document.getElementById("adds-list");
     tbody.innerHTML = "";
     for (const tran of payments.trans) {
       tbody.innerHTML += `
@@ -190,5 +190,5 @@ async function GetAddsPage(pageNum) {
           
           `;
     }
-    renderPaging('adds-pages-list', payments.pages, payments.page);
+    renderPaging('adds-pages-list', payments.pages, payments.page, 'AddsChangePage');
   }
