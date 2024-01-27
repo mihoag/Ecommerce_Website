@@ -166,6 +166,7 @@
 </div>
 
 <script>
+  let ttpage = -1;
   function convertToVND(number) {
     // Using toLocaleString to format the number as currency in VND
     let vndFormatted = number.toLocaleString('vi-VN', {
@@ -230,18 +231,31 @@
 
     }
     else {
-      searchByKeyword(keyword, $(page).attr("data-id"))
+      searchByKeyword(keyword, page);
     }
   }
 
   function renderPagination(totalPage, currentPage) {
     let $pagination = $('#pagination');
+    currentPage = parseInt(currentPage);
+    if (totalPage == 0) {
+      $pagination.twbsPagination('destroy');
+      ttpage = -1;
+      $('#pagination').html('<div class="text-danger fw-bold">*Không tìm thấy kết quả phù hợp</div>')
+      return;
+    }
+    if (ttpage != totalPage) {
+      $pagination.twbsPagination('destroy');
+    }
+    ttpage = totalPage;
     let defaultOpts = {
       totalPages: totalPage,
       startPage: currentPage,
       visiblePages: 6,
       first: totalPage <= 6 ? null : "First",
       last: totalPage <= 6 ? null : 'Last',
+      prev: totalPage <= 1 ? null : 'Prev',
+      next: totalPage <= 1 ? null : 'Next',
 
       onPageClick: function (event, page) {
         handleClick(page);
