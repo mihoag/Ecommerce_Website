@@ -401,7 +401,7 @@
     );
     updateStatusButton.dataset.orderId = orderId;
   };
-  const socket = new io();
+
   async function UpdateOrderStatus(event) {
     const orderId = event.currentTarget.getAttribute("data-order-id");
     document.getElementById("closeModalButton").dispatchEvent(new Event('click'));
