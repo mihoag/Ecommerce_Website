@@ -21,7 +21,7 @@ async function getData(url) {
 }
 
 module.exports = {
-  getPaymentTransactions: async function (pageNum=1, search, start, end) {
+  getPaymentTransactions: async function (pageNum = 1, search, start, end) {
     const items = await getData("/api/get-payment-trans");
     let totalItems;
     let numberOfPages;
@@ -30,9 +30,29 @@ module.exports = {
       user = user[0];
       item.name = user.name;
     }
-    const filteredItems = items.filter((item) => {
+    var filteredItems = items;
+
+    if (start != null && end != null) {
+      filteredItems = filteredItems.filter((item) => {
+        const ngaygio = new Date(item.ngaygio);
+        return ngaygio >= new Date(start) && ngaygio <= new Date(end);
+      });
+    }
+
+    filteredItems = filteredItems.filter((item) => {
       const itemName = item.name.toLowerCase();
-      return itemName.includes(search?search.toLowerCase():'');
+      const date = new Date(item.ngaygio);
+        const options = {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        };
+        const formattedDateTime = date.toLocaleDateString("vi-VN", options);
+        item.ngaygio = formattedDateTime;
+      return itemName.includes(search ? search.toLowerCase() : "");
     });
 
     totalItems = filteredItems.length;
@@ -42,7 +62,7 @@ module.exports = {
     return { trans: trans, pages: numberOfPages, page: pageNum };
   },
 
-  getAddMoneyTransactions: async function (pageNum=1, search, start, end) {
+  getAddMoneyTransactions: async function (pageNum = 1, search, start, end) {
     const items = await getData("/api/get-add-trans");
     let totalItems;
     let numberOfPages;
@@ -51,9 +71,29 @@ module.exports = {
       user = user[0];
       item.name = user.name;
     }
-    const filteredItems = items.filter((item) => {
+    var filteredItems = items;
+
+    if (start != null && end != null) {
+      filteredItems = filteredItems.filter((item) => {
+        const ngaygio = new Date(item.ngaygio);
+        return ngaygio >= new Date(start) && ngaygio <= new Date(end);
+      });
+    }
+
+    filteredItems = filteredItems.filter((item) => {
       const itemName = item.name.toLowerCase();
-      return itemName.includes(search?search.toLowerCase():'');
+      const date = new Date(item.ngaygio);
+        const options = {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        };
+        const formattedDateTime = date.toLocaleDateString("vi-VN", options);
+        item.ngaygio = formattedDateTime;
+      return itemName.includes(search ? search.toLowerCase() : "");
     });
 
     totalItems = filteredItems.length;

@@ -62,23 +62,7 @@ module.exports = class gdthanhtoan {
       let trans = await dbcn.any(
         `SELECT * FROM GDthanhtoan ORDER BY "ngaygio" DESC`
       );
-      const listTrans = await Promise.all(
-        trans.map(async (tran) => {
-          const date = new Date(tran.ngaygio);
-          const options = {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-          };
-          const formattedDateTime = date.toLocaleDateString("vi-VN", options);
-          tran.ngaygio = formattedDateTime;
-          return tran;
-        })
-      );
-      return listTrans;
+      return trans;
     } catch (error) {
       throw error;
     }

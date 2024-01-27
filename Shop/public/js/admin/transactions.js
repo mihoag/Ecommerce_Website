@@ -19,8 +19,6 @@ $("#payment-time-filter").daterangepicker({
   },
   startDate: "01/01/2023",
   endDate: "28/01/2024",
-  minDate: "01/01/2023",
-  maxDate: "01/31/2024",
   locale: {
     format: "DD/MM/YYYY hh:mm A",
   },
@@ -55,8 +53,12 @@ $("#adds-time-filter").daterangepicker({
 });
 
 $("#payment-time-filter").on("change", function () {
-  const date = $("#payment-time-filter").val().split(" - ");
+  GetPaymentsPage(1);
 });
+
+$("#adds-time-filter").on("change", function () {
+    GetAddsPage(1);
+  });
 
 function PaymentChangePage(event) {
   GetPaymentsPage(event.currentTarget.innerText);
@@ -151,7 +153,7 @@ function AddsChangePage(event) {
 }
 
 async function GetAddsPage(pageNum) {
-  const search = document.getElementById("searchPayment").value;
+  const search = document.getElementById("searchAdds").value;
   const timeFilter = document
     .getElementById("adds-time-filter")
     .value.split(" - ");
