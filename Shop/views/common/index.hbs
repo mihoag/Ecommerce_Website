@@ -149,16 +149,6 @@
             <div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><span
                         aria-label="Previous">‹</span></button><button type="button" role="presentation"
                     class="owl-next"><span aria-label="Next">›</span></button></div>
-            <div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button role="button"
-                    class="owl-dot"><span></span></button><button role="button"
-                    class="owl-dot"><span></span></button><button role="button"
-                    class="owl-dot"><span></span></button><button role="button"
-                    class="owl-dot"><span></span></button><button role="button"
-                    class="owl-dot"><span></span></button><button role="button"
-                    class="owl-dot"><span></span></button><button role="button"
-                    class="owl-dot active"><span></span></button><button role="button"
-                    class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button>
-            </div>
         </div>
     </div> <!-- End Banner -->
 
@@ -201,165 +191,6 @@
         </div>
         <hr>
         {{/each}}
-
-        {{!-- <div class="khungSanPham" style="border-color: #ff9c00">
-            <h3 class="tenKhung"
-                style="background-image: linear-gradient(120deg, #ff9c00 0%, #ec1f1f 50%, #ff9c00 100%);">*
-                NỔI BẬT NHẤT
-                *</h3>
-            <div class="listSpTrongKhung flexContain">
-                {{#each top5rated}}
-                <li class="sanPham">
-                    <a href="/product/detailProducts?id={{productId}}">
-                        <img src="{{image}}" alt="">
-                        <h3>{{name}}</h3>
-                        <div class="price">
-                            <strong>{{convertToVND giagiam}}</strong>
-                            <span>{{convertToVND price}}</span>
-                        </div>
-                        <div class="ratingresult">
-                            {{{showRating tb}}}
-                            <span>{{danhgia}} đánh giá</span>
-                        </div>
-
-
-                    </a>
-                </li>
-                {{/each}}
-            </div>
-            <a class="xemTatCa" href="/showall" style="	border-left: 2px solid #ff9c00;
-					border-right: 2px solid #ff9c00;">
-                Xem tất cả các sản phẩm
-            </a>
-        </div>
-        <hr> --}}
-        {{!-- <div class="khungSanPham" style="border-color: #42bcf4">
-            <h3 class="tenKhung"
-                style="background-image: linear-gradient(120deg, #42bcf4 0%, #004c70 50%, #42bcf4 100%);">*
-                SẢN PHẨM MỚI
-                *</h3>
-            <div class="listSpTrongKhung flexContain">
-                {{#each top5newest}}
-                <li class="sanPham">
-                    <a href="/product/detailProducts?id={{productId}}">
-                        <img src="{{image}}" alt="">
-                        <h3>{{name}}</h3>
-                        <div class="price">
-                            <strong>{{convertToVND giagiam}}</strong>
-                            <span>{{convertToVND price}}</span>
-                        </div>
-                        <div class="ratingresult">
-                            {{{showRating tb}}}
-                            <span>{{danhgia}} đánh giá</span>
-                        </div>
-
-
-                    </a>
-                </li>
-                {{/each}}
-
-            </div>
-            <a class="xemTatCa" href="/showall" style="	border-left: 2px solid #42bcf4;
-					border-right: 2px solid #42bcf4;">
-                Xem tất cả các sản phẩm
-            </a>
-        </div>
-        <hr>
-        <div class="khungSanPham" style="border-color: #42bcf4">
-            <h3 class="tenKhung"
-                style="background-image: linear-gradient(120deg, #ff9c00 0%, #ec1f1f 50%, #ff9c00 100%);">*
-                SẢN PHẨM HIỆN ĐẠI NHẤT
-                *</h3>
-            <div class="listSpTrongKhung flexContain">
-                {{#each top5modern}}
-                <li class="sanPham">
-                    <a href="/product/detailProducts?id={{productId}}">
-                        <img src="{{image}}" alt="">
-                        <h3>{{name}}</h3>
-                        <div class="price">
-                            <strong>{{convertToVND giagiam}}</strong>
-                            <span>{{convertToVND price}}</span>
-                        </div>
-                        <div class="ratingresult">
-                            {{{showRating tb}}}
-                            <span>{{danhgia}} đánh giá</span>
-                        </div>
-
-
-                    </a>
-                </li>
-                {{/each}}
-
-            </div>
-            <a class="xemTatCa" href="/showall" style="	border-left: 2px solid #42bcf4;
-					border-right: 2px solid #42bcf4;">
-                Xem tất cả các sản phẩm
-            </a>
-        </div>
-
-        <hr>
-        <div class="khungSanPham" style="border-color: #ff9c00">
-            <h3 class="tenKhung"
-                style="background-image: linear-gradient(120deg, #ff9c00 0%, #ec1f1f 50%, #ff9c00 100%);">*
-                GIẢM GIÁ LỚN
-                *</h3>
-            <div class="listSpTrongKhung flexContain">
-                {{#each top5discount}}
-                <li class="sanPham">
-                    <a href="/product/detailProducts?id={{productId}}">
-                        <img src="{{image}}" alt="">
-                        <h3>{{name}}</h3>
-                        <div class="price">
-                            <strong>{{convertToVND giagiam}}</strong>
-                            <span>{{convertToVND price}}</span>
-                        </div>
-                        <div class="ratingresult">
-                            {{{showRating tb}}}
-                            <span>{{danhgia}} đánh giá</span>
-                        </div>
-
-
-                    </a>
-                </li>
-                {{/each}}
-            </div>
-            <a class="xemTatCa" href="/showall" style="	border-left: 2px solid #ff9c00;
-					border-right: 2px solid #ff9c00;">
-                Xem tất cả các sản phẩm
-            </a>
-        </div>
-        <hr>
-        <div class="khungSanPham" style="border-color: #5de272">
-            <h3 class="tenKhung"
-                style="background-image: linear-gradient(120deg, #5de272 0%, #007012 50%, #5de272 100%);">*
-                GIÁ RẺ CHO
-                MỌI NHÀ *</h3>
-            <div class="listSpTrongKhung flexContain">
-                {{#each top5cheapest}}
-                <li class="sanPham">
-                    <a href="/product/detailProducts?id={{productId}}">
-                        <img src="{{image}}" alt="">
-                        <h3>{{name}}</h3>
-                        <div class="price">
-                            <strong>{{convertToVND giagiam}}</strong>
-                            <span>{{convertToVND price}}</span>
-                        </div>
-                        <div class="ratingresult">
-                            {{{showRating tb}}}
-                            <span>{{danhgia}} đánh giá</span>
-                        </div>
-
-
-                    </a>
-                </li>
-                {{/each}}
-            </div>
-            <a class="xemTatCa" href="/showall" style="	border-left: 2px solid #5de272;
-					border-right: 2px solid #5de272;">
-                Xem tất các sản phẩm
-            </a>
-        </div>
-        <hr> --}}
     </div>
 </section>
 
@@ -416,4 +247,17 @@
             }
         });
     }
+
+    $(document).ready(function(){
+    var owl = $('.owl-carousel');
+    owl.owlCarousel({
+        items: 1.5,
+        margin: 100,
+        center: true,
+        loop: true,
+        smartSpeed: 450,
+        autoplay: true,
+        autoplayTimeout: 3500
+    });
+});
 </script>
