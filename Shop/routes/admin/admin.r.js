@@ -14,6 +14,6 @@ router.use('/brands', require('./brands.r'))
 router.get('/products', require('./products.r'))
 router.use('/orders', require('./orders.r'))
 router.use('/statistics', require('./statistics.r'))
-router.get('/settings', require('./settings.r'))
+router.use('/transactions', require('./transactions.r'))
 
 module.exports = router;

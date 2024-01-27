@@ -46,7 +46,7 @@ module.exports = {
         [rs.listId]
       );
       for (const item of items) {
-        await DB.delete("ProductsListItems", "productId", item.productId);
+        await DB.delete("ProductsListItems", "listId", rs.listId);
       }
       await DB.delete("ProductsList", "listId", rs.listId);
     }

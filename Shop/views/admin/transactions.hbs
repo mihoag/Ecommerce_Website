@@ -1,0 +1,187 @@
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+<section>
+    <div class="d-flex justify-content-between align-items-center">
+        <h4>Transactions</h4>
+        <div class="d-flex align-items-center">
+            <p id="account-balance">Account Balance: <strong>{{#convertToVND
+                    adminBalance}}{{/convertToVND}}</strong></p>
+        </div>
+    </div>
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link tabBtn active"
+                            data-bs-toggle="tab" data-bs-target="#payment"
+                            type="button" role="tab" aria-controls="payment"
+                            id="payment-tab"
+                            aria-selected="true">Payment Transactions</button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link tabBtn"
+                            data-bs-toggle="tab" data-bs-target="#add-money"
+                            type="button" role="tab" aria-controls="add-monet"
+                            id="add-money-tab"
+                            aria-selected="true">Add Money Transactions</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="payment"
+                        role="tabpanel"
+                        aria-labelledby="payment-tab">
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <div
+                                    class="my-2 d-flex justify-content-between align-items-center">
+                                    <div class="position-relative">
+                                        <span
+                                            class="position-absolute search"><i
+                                                class="fa fa-search"></i></span>
+                                        <input id="searchPayment"
+                                            class="form-control w-100 order-table"
+                                            placeholder="Search by name">
+                                    </div>
+                                    <input class="text-center" id="payment-time-filter" type="text" name="datetimes" style="width: 350px;"/>
+                                </div>
+                                <div
+                                    class="container table-responsive order-table mt-4 pt-2 px-2">
+                                    <div class="row mx-2">
+                                        <table
+                                            class="table table-responsive table-borderless align-middle table-hover">
+                                            <thead class="table-info">
+                                                <tr class="bg-light py-2">
+                                                    <th scope="col"
+                                                        width="5%">#</th>
+                                                    <th scope="col"
+                                                        width="10%">Customer</th>
+                                                    <th scope="col"
+                                                        class="text-center"
+                                                        width="20%">Amount</th>
+                                                    <th scope="col"
+                                                        class="text-center"
+                                                        width="20%">Time</th>
+                                                    <th scope="col"
+                                                        class="text-center"
+                                                        width="10%">Order
+                                                        No.</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="payments-list">
+                                                {{#each payments.trans}}
+                                                <tr>
+                                                    <td>#{{this.idgiaodich}}</td>
+                                                    <td>{{this.username1}}</td>
+                                                    <td
+                                                        class="text-center fw-bolder">{{#convertToVND
+                                                        this.sotien}}{{/convertToVND}}</td>
+                                                    <td
+                                                        class="text-center"><span
+                                                            class="fw-bolder">{{this.ngaygio}}</span></td>
+                                                    <td
+                                                        class="text-center"><span
+                                                            class="fw-bolder">#{{this.idhoadon}}</span></td>
+                                                </tr>
+                                                {{/each}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div
+                                        class="row mx-2 justify-content-end d-flex">
+                                        <nav style="width:auto">
+                                            <ul class="pagination py-2"
+                                                id="payments-page-list">
+                                                {{#times payments.pages}}
+                                                <li class="page-item"><a
+                                                        class="page-link paging-btn{{#ifEquals this @root.payments.page}} active{{/ifEquals}}" onclick="PaymentChangePage(event)"
+                                                        href="#">{{this}}</a></li>
+                                                {{/times}}
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade show" id="add-money"
+                        role="tabpanel"
+                        aria-labelledby="payment-tab">
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <div
+                                    class="my-2 d-flex justify-content-between align-items-center">
+                                    <div class="position-relative">
+                                        <span
+                                            class="position-absolute search"><i
+                                                class="fa fa-search"></i></span>
+                                        <input id="searchTxt"
+                                            class="form-control w-100 order-table"
+                                            placeholder="Search by name">
+                                    </div>
+                                    <input class="text-center" id="adds-time-filter" type="text" name="datetimes" style="width: 350px;"/>
+
+                                </div>
+                                <div
+                                    class="container table-responsive order-table mt-4 pt-2 px-2">
+                                    <div class="row mx-2">
+                                        <table
+                                            class="table table-responsive table-borderless align-middle table-hover">
+                                            <thead class="table-info">
+                                                <tr class="bg-light">
+                                                    <th scope="col"
+                                                        width="5%">#</th>
+                                                    <th scope="col"
+                                                        width="10%">Customer</th>
+                                                    <th scope="col"
+                                                        class="text-center"
+                                                        width="20%">Amount</th>
+                                                    <th scope="col"
+                                                        class="text-center"
+                                                        width="10%">Time</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="orders-list">
+                                                {{#each adds.trans}}
+                                                <tr>
+                                                    <td>#{{this.idgiaodich}}</td>
+                                                    <td>{{this.username}}</td>
+                                                    <td
+                                                        class="text-center fw-bolder">{{#convertToVND
+                                                        this.sotiennap}}{{/convertToVND}}</td>
+                                                    <td
+                                                        class="text-center"><span
+                                                            class="fw-bolder">{{this.ngaygio}}</span></td>
+                                                </tr>
+                                                {{/each}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div
+                                        class="row mx-2 justify-content-end d-flex">
+                                        <nav style="width:auto">
+                                            <ul class="pagination"
+                                                id="adds-pages-list">
+                                                {{#times adds.pages}}
+                                                <li class="page-item"><a
+                                                        class="page-link paging-btn{{#ifEquals this @root.adds.page}} active{{/ifEquals}}" onclick="AddsChangePage(event)"
+                                                        href="#">{{this}}</a></li>
+                                                {{/times}}
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
