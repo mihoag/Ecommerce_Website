@@ -81,7 +81,11 @@ module.exports = {
           req.session.uid = rs[0].userId;
           req.session.email = rs[0].email;
           req.session.token = jwt.sign({ email: rs[0].email }, JWT_SECRET);
+
           // TODO: redirect to home page
+          if (rs[0].role == "admin") {
+            return res.redirect("/admin");
+          }
           return res.redirect("/");
           // return res.json({ message: "Login successful" });
         }

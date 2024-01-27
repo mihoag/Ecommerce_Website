@@ -54,7 +54,7 @@ module.exports = {
         userM.getByID(req.session.uid).then((user) => {
           if (user.length < 0 || user[0].email != req.session.email) {
             return res.redirect("/auth/login");
-          } else if (!user[0].role) {
+          } else if (user[0].role == 'user') {
             return res.redirect("/");
           } else next();
         });

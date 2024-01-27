@@ -109,7 +109,7 @@ function exportExcel() {
   }
   XLSX.utils.book_append_sheet(workbook, worksheet, "Thống kê doanh thu");
 
-  XLSX.writeFile(workbook, `Thống kê doanh thụ tháng ${month} năm ${year}.xlsx`, { cellStyles: true });
+  XLSX.writeFile(workbook, `Thống kê doanh thu tháng ${month} năm ${year}.xlsx`, { cellStyles: true });
 }
 
 function LineChart(options) {
@@ -160,7 +160,7 @@ function LineChart(options) {
           beginAtZero: true, title: {
             display: true, text: 'VNĐ', color:
               '#EF4040', font: {
-                family: 'Times', size: 30, style: 'normal', lineHeight: 1.2
+                family: 'Times', size: 20, style: 'normal', lineHeight: 1.2
               },
           }
         }
@@ -220,7 +220,7 @@ function viewChart(options) {
           beginAtZero: true, title: {
             display: true, text: 'VNĐ', color:
               '#EF4040', font: {
-                family: 'Times', size: 30, style: 'normal', lineHeight: 1.2
+                family: 'Times', size: 20, style: 'normal', lineHeight: 1.2
               },
           }
         }, x: {

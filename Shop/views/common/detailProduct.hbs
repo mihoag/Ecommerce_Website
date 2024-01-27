@@ -182,8 +182,8 @@
         <div class="comment-widgets m-b-20" id="listCmt">
 
             <div class="comment-row">
-                <div style="margin-right: 5px;"><span class="round"><img src="https://i.imgur.com/uIgDDDd.jpg"
-                            alt="user" width="50"></span></div>
+                <div style="margin-right: 5px;"><span class="round"><img src="/img/chitietsanpham/avatar.jpg" alt="user"
+                            width="50"></span></div>
                 <div class="comment-text w-100">
                     <div class="comment-footer">
                         <span class="date" style="margin-right: 10px;">April 14, 2019</span>
@@ -205,7 +205,7 @@
         <div class="postCmt">
             <form>
                 <div class="form">
-                    <span class="round"><img src="https://i.imgur.com/RpzrMR2.jpg" width="50"></span>
+                    <span class="round"><img src="/img/chitietsanpham/avatar.jpg" width="50"></span>
                     <input type="text" class="text-name" name="name" placeholder="Nhập tên của bạn">
                     <textarea class="txt-area" name="content" placeholder="Nhập nội dung đánh giá"></textarea>
                 </div>
@@ -344,7 +344,7 @@
         //  console.log(data)
         for (let i = 0; i < data.length; i++) {
             content += `<div class="comment-row">
-                <div style="margin-right: 5px;"><span class="round"><img src="https://i.imgur.com/uIgDDDd.jpg"
+                <div style="margin-right: 5px;"><span class="round"><img src="/img/chitietsanpham/avatar.jpg"
                             alt="user" width="50"></span></div>
                 <div class="comment-text w-100">
                     <h5>${data[i].name}</h5>
@@ -407,7 +407,10 @@
     function themvaogio(btn) {
         let idProduct = btn.getAttribute("id")
         let idUser = localStorage.getItem("idUser")
-        console.log(idUser);
+        if (!idUser || !localStorage.getItem("token")) {
+            addAlertBox('Bạn cần đăng nhập để thực hiện chức năng này', '#FF3333', '#fff', 3500);
+            return;
+        }
         var currentDate = new Date();
         // Get the components of the date (year, month, day)
         var year = currentDate.getFullYear();

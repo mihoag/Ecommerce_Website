@@ -15,7 +15,7 @@ module.exports = {
                 token,
                 process.env.JWT_SECRET_PAYMENT,
             );
-            if (!verify || !verify.email) {
+            if (!verify || !verify.email || verify.email != email) {
                 return res.status(400).json({ msg: "token khong hop le" });
             }
 
@@ -40,11 +40,12 @@ module.exports = {
             /// ghi thong tin giao dich
             let maxId = await gdttModel.getMaxID();
             let gdtt;
+            //  console.log(time);
             if (!maxId) {
                 gdtt = new gdttModel(1, email, process.env.email_admin, total, time, noidung, idhoadon);
             }
             else {
-                gdtt = new gdttModel(maxId.max + 1, email, process.env.email_admin, total, time, noidung, idhoadon);
+                gdtt = new gdttModel(parseInt(maxId.max) + 1, email, process.env.email_admin, total, time, noidung, idhoadon);
             }
 
             await gdttModel.insertGDthanhtoan(gdtt);

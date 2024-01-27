@@ -44,7 +44,7 @@ module.exports = {
           const account = await taikhoanModel.getTaiKhoanByUsername(verify.email);
           account.balance = (parseInt(account.balance) || 0) + amount / 100;
           await taikhoanModel.updateTaiKhoanByUsername(account);
-          await gdnaptienM.insertGDnaptien({ username: verify.email, sotiennap: amount })
+          await gdnaptienM.insertGDnaptien({ username: verify.email, sotiennap: amount / 100 })
 
           return res.redirect(`${process.env.ROOT_SERVER}/detailUser`);
         } else return res.redirect(`${process.env.ROOT_SERVER}/detailUser`);
@@ -82,7 +82,7 @@ module.exports = {
       let tmnCode = config["vnp_TmnCode"];
       let secretKey = config["vnp_HashSecret"];
       let vnpUrl = config["vnp_Url"];
-      let returnUrl = config["vnp_ReturnUrl"] + `/${token}`;
+      let returnUrl = process.env.vnp_ReturnUrl + `/${token}`;
 
       const { v4: uuidv4 } = require('uuid');
       let orderId = uuidv4();

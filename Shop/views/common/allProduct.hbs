@@ -219,6 +219,26 @@
     var filters = {};
     var filterText = [];
 
+$(document).ready(function () {
+        category = localStorage.getItem('data123');
+        localStorage.setItem('data123', "null");
+        if (category === "null") {
+            renderAll();
+        } else {
+            removeExistingFilters(categories);
+
+            filterText.push(category);
+
+            showallproduct.classList.add("hidden");
+            searchproduct.classList.add("hidden");
+            filterproduct.classList.remove("hidden");
+
+            addFilterCondition("category", category);
+            searchByFilter(filters, 1);
+            renderFilter();
+        } 
+    });
+
     function addFilterCondition(key, value) {
         filters[key] = value;
     }
@@ -229,6 +249,7 @@
 
     function clearAllFilters() {
         filters = {};
+        localStorage.setItem('data123', null);
     }
 
     function searchByFilter(filters, page) {
@@ -371,14 +392,17 @@
     }
     function searchP() {
         let keyword = searchbox.value;
-
-        showallproduct.classList.add("hidden");
-        searchproduct.classList.add("hidden");
-        filterproduct.classList.remove("hidden");
-        
-        addFilterCondition("search", keyword);
-        searchByFilter(filters, 1);
-        renderFilter();
+        if (keyword === "" && filterText.length === 0) {
+            renderAll();
+        } else {
+            showallproduct.classList.add("hidden");
+            searchproduct.classList.add("hidden");
+            filterproduct.classList.remove("hidden");
+            
+            addFilterCondition("search", keyword);
+            searchByFilter(filters, 1);
+            renderFilter();
+        }
     }
 
     searchbox.addEventListener('input', function () {
@@ -619,7 +643,7 @@
 
     }
 
-    document.addEventListener("DOMContentLoaded", renderAll())
+    //document.addEventListener("DOMContentLoaded", renderAll())
 
     function renderFilter() {
 
@@ -629,6 +653,7 @@
         }
         deleteAll.addEventListener("click", function () {
             clearAllFilters();
+            localStorage.setItem('data123', "null");
             deleteAll.style.display = "none";
             filterText = [];
             let filterElements = Array.from(chooseFilter.children);
@@ -641,7 +666,11 @@
             }
 
             //render lại trang hiển thị tất cả sản phẩm
-            renderAll();
+            if (searchbox.value === "") {
+                renderAll();
+            } else {
+                searchByFilter(filters, 1);
+            }
         });
 
         // Xoá hết để render lại
@@ -694,20 +723,21 @@
                         removeFilterCondition("star");
                     } else if (text === "Giá tăng dần" || text === "Giá giảm dần" || text === "Sao tăng dần" || text === "Sao giảm dần" || text === "Tên A-Z" || text === "Tên Z-A") {
                         removeFilterCondition("sort");
-                    } else if (text === "NỔI BẬT NHẤT" || text === "SẢN PHẨM MỚI" || text === "SẢN PHẨM HIỆN ĐẠI NHẤT" || text === "GIẢM GIÁ LỚN" || text === "GIÁ RẺ CHO MỌI NHÀ") {
+                    } else if (categories.includes(text)) {
                         removeFilterCondition("category");
+                        localStorage.setItem('data123', "null");
                     }
                     // Sau khi xóa bộ lọc, có thể làm mất đi phần tử đã tạo
                     filterElement.remove();
                     // Xoá luôn trong filterText
                     filterText = filterText.filter(item => item !== text);
                     // nếu filterText không còn item nào thì ẩn nút xoá tất cả và render all products
-                    if (filterText.length === 0) {
+                    if (filterText.length === 0 && searchbox.value === "") {
                         deleteAll.style.display = "none";
-                        if (searchbox.value === "")
-                            renderAll();
-                        else
-                            searchByFilter(filters, 1);
+                        renderAll();
+                    } else if (filterText.length === 0 && searchbox.value !== "") {
+                        deleteAll.style.display = "none";
+                        searchByFilter(filters, 1);
                     } else {
                         searchByFilter(filters, 1);
                     }

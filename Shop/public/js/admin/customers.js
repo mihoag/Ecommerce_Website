@@ -28,9 +28,6 @@ async function addUser() {
   } else if (!validateEmail(data.email)) {
     err += "<li>Địa chỉ email không hợp lệ</li>"
   }
-  if (data.address.length == 0) {
-    err += "<li>Phải điền địa chỉ nhận hàng mặc định</li>"
-  }
   if (data.phoneNumber.length == 0) {
     err += "<li>Phải điền số điện thoại</li>"
   } else {
@@ -78,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 async function updateUser(btn) {
+  let err = "";
   let email = $(btn).attr("data-email");
   if (email.length == 0) return;
   const res = await fetch(`/admin/customers/one/${email}`, {
@@ -86,10 +84,8 @@ async function updateUser(btn) {
 
   const response = await res.json();
   let data = response.data
-  console.log(data);
   document.getElementById("uEmail").value = email;
   document.getElementById("uName").value = data.name;
-  document.getElementById("uAddress").value = "Không có";
   document.getElementById("uPhoneNumber").value = data.phoneNumber;
 
   let myModal = new bootstrap.Modal(document.getElementById('updateModal'));
@@ -98,8 +94,8 @@ async function updateUser(btn) {
     const data = $("#updateUserForm")
       .serializeArray()
       .reduce((obj, field) => ({ ...obj, [field.name]: field.value }), {});
+    data.email = email;
 
-    let err = ""
     if (data.name.length == 0) {
       err += "<li>Phải điền tên khách hàng</li>"
     }
@@ -107,9 +103,6 @@ async function updateUser(btn) {
       err += "<li>Phải điền địa chỉ email</li>"
     } else if (!validateEmail(data.email)) {
       err += "<li>Địa chỉ email không hợp lệ</li>"
-    }
-    if (data.address.length == 0) {
-      err += "<li>Phải điền địa chỉ nhận hàng mặc định</li>"
     }
     if (data.phoneNumber.length == 0) {
       err += "<li>Phải điền số điện thoại</li>"

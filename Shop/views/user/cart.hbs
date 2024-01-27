@@ -32,6 +32,7 @@
       box-sizing: border-box;
     }
 
+
     #section-wrapper {
       width: 100%;
       padding: 10px;
@@ -362,7 +363,7 @@
 
             </div>
           </div>
-          <input type="submit" value="Thanh toán" class="submit-button">
+          <input type="submit" value="Đặt hàng" class="submit-button">
         </form>
       </div>
     </div>
@@ -539,7 +540,7 @@
     content += `  <tr tr style = "font-weight:bold; text-align:center" >
                     <td colspan="4">TỔNG TIỀN: </td>
                     <td class="alignRight">${convertToVND(sum)}</td>
-                    <td class="thanhtoan" onclick="thanhToan()"> Thanh Toán </td>
+                    <td class="thanhtoan" onclick="thanhToan()"> Đặt Hàng </td>
                     <td class="xoaHet" onclick="xoaHet()"> Xóa hết </td>
                 </tr >`
 
@@ -642,6 +643,9 @@
       sendMesstoAdmin(resJson.data)
       xoaHet();
       addAlertBox(resJson.msg, '#17c671', '#fff', 3500);
+      setTimeout(function () {
+        window.location.href = '/detailUser'
+      }, 2000)
     }
     else {
       //console.log(resJson);
@@ -651,7 +655,7 @@
 
   async function processPaymentOnline(idUser, address, recievername, phonenumber, time, content) {
     // xu li o he thong phu
-
+    console.log(time);
     let data = { idUser: idUser, address: address, recievername: recievername, phonenumber: phonenumber, time: time }
     const res = await fetch(`/order/orderpayment`, {
       method: "POST",
@@ -669,7 +673,7 @@
       // xu li thanh toan
       //email, total, time, noidung, idhoadon, token
       let data2 = {
-        email: localStorage.getItem("email"), total: data1.totalCost, time: data1.timeOrder.slice(0, 19).replace("T", " "),
+        email: localStorage.getItem("email"), total: data1.totalCost, time: time,
         noidung: content, idhoadon: data1.orderId, token: localStorage.getItem("token")
       };
       console.log(data2);
@@ -697,6 +701,9 @@
           sendMesstoAdmin(resJson.data)
           xoaHet();
           addAlertBox("Đặt hàng và thanh toán thành công", '#17c671', '#fff', 3500);
+          setTimeout(function () {
+            window.location.href = '/detailUser'
+          }, 2000)
         }
       }
       else {

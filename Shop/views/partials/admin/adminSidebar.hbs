@@ -68,13 +68,22 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active ps-4 py-3" href="/login">
+        <form class="nav-link active ps-4 py-3" method="post" action="/auth/logout" style="cursor: pointer;"
+          onclick="logout()" id="logout">
           <div class="nav-icon">
             <i class="fa-solid fa-arrow-right-from-bracket" style="color: #3cc376; max-width:20px;"></i>
           </div>
           <span class="nav-link-text ms-3">Sign out</span>
-        </a>
+        </form>
       </li>
     </ul>
   </div>
 </aside>
+
+
+<script>
+  function logout() {
+    localStorage.clear();
+    document.getElementById("logout").submit();
+  }
+</script>

@@ -41,13 +41,7 @@ module.exports = {
         list.sortId--;
         await DB.update("ProductsList", list, "listId", list.listId);
       });
-      const items = await db.any(
-        'SELECT * FROM "ProductsListItems" WHERE "listId" = $1',
-        [rs.listId]
-      );
-      for (const item of items) {
-        await DB.delete("ProductsListItems", "listId", rs.listId);
-      }
+      await DB.delete("ProductsListItems", "listId", rs.listId);
       await DB.delete("ProductsList", "listId", rs.listId);
     }
     return rs;

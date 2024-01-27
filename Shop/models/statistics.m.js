@@ -5,7 +5,7 @@ module.exports = {
     try {
       data = await db.one(
         `
-        select SUM(ROUND(p.price * (100-p.discount)/100) * quantity) from "OrderDetail" d, "Product" p, "Order" o where d."productId" = p."productId" and o."orderId" = d."orderId"
+        select SUM(ROUND(p.price * (100-p.discount)/100) * quantity) from "OrderDetail" d, "Product" p, "Order" o where d."productId" = p."productId" and o."isPayment" = true and o."orderId" = d."orderId"
         and date_part('month', o."timeOrder") = date_part('month',CURRENT_DATE) and date_part('year', o."timeOrder") = date_part('year',CURRENT_DATE)
         and date_part('day', o."timeOrder") = date_part('day',CURRENT_DATE)
         `
@@ -19,7 +19,7 @@ module.exports = {
     try {
       data = await db.one(
         `
-        select SUM(ROUND(p.price * (100-p.discount)/100) * quantity) from "OrderDetail" d, "Product" p, "Order" o where d."productId" = p."productId" and o."orderId" = d."orderId"
+        select SUM(ROUND(p.price * (100-p.discount)/100) * quantity) from "OrderDetail" d, "Product" p, "Order" o where d."productId" = p."productId" and o."orderId" = d."orderId" and o."isPayment" = true
         and date_part('month', o."timeOrder") = date_part('month',CURRENT_DATE) and date_part('year', o."timeOrder") = date_part('year',CURRENT_DATE)
         `
       );
@@ -43,10 +43,10 @@ module.exports = {
 
   getRevenueWeek: async function (from, to) {
     try {
-
+      to = to + ' 23:59:59';
       data = await db.any(
         `
-        select SUM((ROUND(p.price * (100-p.discount)/100) - p.cost) * d.quantity) as profit, SUM(ROUND(p.price * (100-p.discount)/100) * quantity) as sum, extract('day' from o."timeOrder") as day from "Order" o, "OrderDetail" d, "Product" p where o."orderId" = d."orderId" and d."productId" = p."productId" and o."timeOrder">='${from}' and o."timeOrder"<= '${to}'  group by extract('day' from o."timeOrder")
+        select SUM((ROUND(p.price * (100-p.discount)/100) - p.cost) * d.quantity) as profit, SUM(ROUND(p.price * (100-p.discount)/100) * quantity) as sum, extract('day' from o."timeOrder") as day from "Order" o, "OrderDetail" d, "Product" p where o."orderId" = d."orderId" and o."isPayment" = true and d."productId" = p."productId" and o."timeOrder">='${from}' and o."timeOrder"<= '${to}'  group by extract('day' from o."timeOrder")
         `
       );
       return data
@@ -58,7 +58,7 @@ module.exports = {
   getRevenue: async function (month, year) {
     try {
       const data = await db.any(`
-      select SUM((ROUND(p.price * (100-p.discount)/100) - p.cost) * d.quantity) as profit, SUM(ROUND(p.price * (100-p.discount)/100) * quantity) as sum, extract('day' from o."timeOrder") as day from "Order" o, "OrderDetail" d, "Product" p where o."orderId" = d."orderId" and d."productId" = p."productId" and date_part('year', o."timeOrder") = ${year} and date_part('month', o."timeOrder") = ${month} group by extract('day' from o."timeOrder")
+      select SUM((ROUND(p.price * (100-p.discount)/100) - p.cost) * d.quantity) as profit, SUM(ROUND(p.price * (100-p.discount)/100) * quantity) as sum, extract('day' from o."timeOrder") as day from "Order" o, "OrderDetail" d, "Product" p where o."orderId" = d."orderId" and o."isPayment" = true and d."productId" = p."productId" and date_part('year', o."timeOrder") = ${year} and date_part('month', o."timeOrder") = ${month} group by extract('day' from o."timeOrder")
       `)
       return data;
     } catch (error) {
