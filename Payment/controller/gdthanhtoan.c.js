@@ -7,6 +7,7 @@ const { verifyToken } = require("../Util/helper.token")
 module.exports = {
     processPayment: async (req, res, next) => {
         try {
+            console.log(req.body);
             var check = false;
             const { email, total, time, noidung, idhoadon } = req.body;
             const token = req.body.token;
@@ -14,7 +15,7 @@ module.exports = {
                 token,
                 process.env.JWT_SECRET_PAYMENT,
             );
-            if (!verify || !verify.email || email != verify.email) {
+            if (!verify || !verify.email) {
                 return res.status(400).json({ msg: "token khong hop le" });
             }
 

@@ -230,7 +230,7 @@
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal" id="closeModalButton">Hủy</button>
                                             <button type="button" class="btn btn-danger"
-                                                id="updateStatusButton" onclick="UpdatOrderStatus(event)">Xác nhận</button>
+                                                id="updateStatusButton" onclick="UpdateOrderStatus(event)">Xác nhận</button>
                                         </div>
                                     </div>
                                 </div>
@@ -409,7 +409,7 @@ function activeStatusModal(event) {
       updateStatusButton.dataset.orderId = orderId;
     };
 
-    async function UpdatOrderStatus(event) {
+    async function UpdateOrderStatus(event) {
       const orderId = event.currentTarget.getAttribute("data-order-id");
       document.getElementById("closeModalButton").dispatchEvent(new Event('click'));
       try {

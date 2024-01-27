@@ -388,6 +388,8 @@
 <script>
     let tk = document.getElementById("token");
     localStorage.setItem("token", tk.value);
+    localStorage.setItem("fullname", document.getElementById("fullname").value);
+    localStorage.setItem("email", document.getElementById("email").value);
     function themvaogio(btn) {
         let idProduct = btn.getAttribute("id")
         let idUser = localStorage.getItem("ipUser")
