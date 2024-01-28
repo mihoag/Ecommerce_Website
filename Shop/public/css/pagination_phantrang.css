@@ -7,6 +7,8 @@
     display: flex;
     margin-left: 10px;
     overflow-y: scroll;
+    justify-content: center; /* Căn giữa theo trục ngang */
+    align-items: center; /* Căn giữa theo trục dọc */
 }
 
 .pagination a {
