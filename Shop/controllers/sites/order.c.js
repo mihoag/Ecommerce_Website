@@ -63,6 +63,7 @@ class orderController {
     try {
       var check = false;
       const data = req.body;
+      let flag = data.flag;
       //console.log(data);
       // update so luong san pham
       var listCart = await cartModel.selectByUserId(data.idUser);
@@ -90,8 +91,15 @@ class orderController {
 
       // them mot hoa don vao ...
 
-      let rs = await db.one(`insert into "Order"("orderId","userId", address, "reciverName", "phoneNumber", "totalCost", "isPayment", status, "timeOrder")
-       values ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *`, [idOrder, data.idUser, data.address, data.recievername, data.phonenumber, totalCost, false, "Pending", data.time]);
+      if (flag == "cash") {
+        var rs = await db.one(`insert into "Order"("orderId","userId", address, "reciverName", "phoneNumber", "totalCost", "isPayment", status, "timeOrder")
+        values ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *`, [idOrder, data.idUser, data.address, data.recievername, data.phonenumber, totalCost, false, "Processing", data.time]);
+      }
+      else if (flag == "online") {
+        var rs = await db.one(`insert into "Order"("orderId","userId", address, "reciverName", "phoneNumber", "totalCost", "isPayment", status, "timeOrder")
+        values ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *`, [idOrder, data.idUser, data.address, data.recievername, data.phonenumber, totalCost, false, "Paid", data.time]);
+      }
+
 
 
       // Them vao detailOrder

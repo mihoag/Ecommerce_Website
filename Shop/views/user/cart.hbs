@@ -628,7 +628,7 @@
   }
   // process payment
   async function processPaymentByCash(idUser, address, recievername, phonenumber, time) {
-    let data = { idUser: idUser, address: address, recievername: recievername, phonenumber: phonenumber, time: time }
+    let data = { flag: "cash", idUser: idUser, address: address, recievername: recievername, phonenumber: phonenumber, time: time }
     const res = await fetch(`/order/orderpayment`, {
       method: "POST",
       headers: {
@@ -656,7 +656,7 @@
   async function processPaymentOnline(idUser, address, recievername, phonenumber, time, content) {
     // xu li o he thong phu
     console.log(time);
-    let data = { idUser: idUser, address: address, recievername: recievername, phonenumber: phonenumber, time: time }
+    let data = { flag: "online", idUser: idUser, address: address, recievername: recievername, phonenumber: phonenumber, time: time }
     const res = await fetch(`/order/orderpayment`, {
       method: "POST",
       headers: {

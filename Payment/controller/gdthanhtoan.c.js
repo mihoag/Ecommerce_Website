@@ -18,14 +18,13 @@ module.exports = {
             if (!verify || !verify.email || verify.email != email) {
                 return res.status(400).json({ msg: "token khong hop le" });
             }
-
-
             var acc = await taikhoangd.getTaiKhoanByUsername(email);
             var accAdmin = await taikhoangd.getTaiKhoanByUsername(process.env.email_admin);
-
+            console.log(acc)
             if (acc.balance < total) {
                 return res.status(400).json({ msg: "Số dư tài khoản không đủ" });
             }
+
             var oldBalance = acc.balance;
             var oldBalanceAdmin = accAdmin.balance;
             acc.balance -= total;
