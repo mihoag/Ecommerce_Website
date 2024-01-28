@@ -99,7 +99,7 @@ class ordersController {
 
   async update(req, res, next) {
     try {
-      const result = await orderM.updateOrder({isPayment: true, status: 'Paid', orderId: req.body.orderId});
+      const result = await orderM.updateOrder({isPayment: true, status: 'Completed', orderId: req.body.orderId});
       if (result) {
         res.status(200).json("Cập nhập trạng thái thành công");
       } else {

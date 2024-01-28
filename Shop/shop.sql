@@ -7315,6 +7315,9 @@ INSERT INTO "Order"("orderId","userId","address","reciverName","phoneNumber","to
 INSERT INTO "Order"("orderId","userId","address","reciverName","phoneNumber","totalCost","isPayment","status","timeOrder") VALUES(274,99,'Xã Đắk Sôr, Huyện Krông Nô, Tỉnh Đắk Nông','Huỳnh Chuẩn Khoa','0671798440',22136200,true,'Pending','2019-10-12 06:23:00');
 INSERT INTO "Order"("orderId","userId","address","reciverName","phoneNumber","totalCost","isPayment","status","timeOrder") VALUES(275,100,'Xã Đại Hợp, Huyện Tứ Kỳ, Tỉnh Hải Dương','Hoàng Anh Vũ','0928771781',50676500,true,'Paid','2023-09-16 03:02:00');
 
+
+
+
 INSERT INTO "OrderDetail"("orderId","productId","timeAddToCart","quantity") VALUES (1,56,'2022-10-21 09:48:00',4);
 INSERT INTO "OrderDetail"("orderId","productId","timeAddToCart","quantity") VALUES (1,10,'2022-10-22 02:52:00',1);
 INSERT INTO "OrderDetail"("orderId","productId","timeAddToCart","quantity") VALUES (1,60,'2022-10-23 03:33:00',3);
@@ -8110,3 +8113,7 @@ INSERT INTO "ProductsListItems"("listId", "productId", "home") VALUES
 (5, 14, FALSE),
 (5, 41, FALSE),
 (5, 47, FALSE);
+
+UPDATE "Order" SET "isPayment" = true, "status" = 'Completed' Where "timeOrder" < '2024-01-20 00:00:00';
+UPDATE "Order" SET "status" = 'Processing' WHERE "isPayment" = false;
+UPDATE "Order" SET "status" = 'Paid' WHERE "isPayment" = true AND "status" <> 'Completed';

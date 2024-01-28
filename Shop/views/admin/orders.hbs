@@ -195,7 +195,7 @@
                     </div><!-- end table responsive -->
                     <div class="d-print-none mt-4">
                       <div class="float-end">
-                        ${top.status == 'Paid' ? `
+                        ${top.status == 'Completed' ? `
                         <button
                         class="btn btn-success me-1"
                           onclick="printBill(event)">
@@ -436,7 +436,7 @@
       alert(rs);
       if (response.status === 200) {
         const status = document.getElementById(`${orderId}status`);
-        status.innerText = 'Paid'
+        status.innerText = 'Completed'
         const oldBtn = document.querySelector('[btnid="' + orderId + '"]');
         const newBtn = document.createElement('button');
         newBtn.setAttribute('class', 'btn btn-success me-1');

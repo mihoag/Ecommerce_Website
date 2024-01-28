@@ -49,7 +49,6 @@ class orderController {
 
   async delete(req, res, next) {
     try {
-      console.log(req.params);
       let id = req.params.id;
       let rs = await order.delete(id);
       return res.status(200).json({ msg: "Delete Successfully" })

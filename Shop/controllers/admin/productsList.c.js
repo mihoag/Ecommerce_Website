@@ -96,7 +96,7 @@ class productsListController {
     try {
       const type = req.query.type;
       var data;
-      if (type === 'default') {
+      if (type === "default") {
         data = await Product.getMoreInfo();
       } else if (type === "rate") {
         data = await Product.getProductRated();
